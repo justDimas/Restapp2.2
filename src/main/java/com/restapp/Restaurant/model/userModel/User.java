@@ -3,6 +3,7 @@ package com.restapp.Restaurant.model.userModel;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,6 +11,7 @@ public class User {
     private String userName;
     private String userPassword;
     @ManyToOne
+    @JoinColumn(name = "access")
     private Access access;
 
     public User() {

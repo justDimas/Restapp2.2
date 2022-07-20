@@ -11,6 +11,7 @@ public class Product {
     private Integer productId;
     private String productName;
     @ManyToOne
+    @JoinColumn(name = "unit")
     private Unit unit;
     private Double productCount;
     private Double productPrice;

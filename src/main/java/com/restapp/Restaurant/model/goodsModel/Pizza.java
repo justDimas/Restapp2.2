@@ -1,5 +1,7 @@
 package com.restapp.Restaurant.model.goodsModel;
 
+import com.restapp.Restaurant.model.stockModel.PizzaSize;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +11,10 @@ public class Pizza {
     private Boolean isVegetarian;
     private Boolean isSpicy;
     @OneToOne
+    @JoinColumn(name = "good")
     private Good good;
     @ManyToOne
+    @JoinColumn(name = "size")
     private PizzaSize pizzaSize;
 
     public Pizza() {

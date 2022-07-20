@@ -12,6 +12,7 @@ public class Drink {
     private Boolean isGazed;
     private Boolean hasCaffeine;
     @OneToOne
+    @JoinColumn(name = "good")
     private Good good;
 
     public Drink() {

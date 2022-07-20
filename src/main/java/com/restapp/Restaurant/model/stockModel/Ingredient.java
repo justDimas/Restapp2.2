@@ -1,5 +1,6 @@
-package com.restapp.Restaurant.model.goodsModel;
+package com.restapp.Restaurant.model.stockModel;
 
+import com.restapp.Restaurant.model.goodsModel.Good;
 import com.restapp.Restaurant.model.stockModel.Product;
 
 import javax.persistence.*;
@@ -12,8 +13,12 @@ public class Ingredient {
     private Double weight;
 
     @ManyToOne
+    private Unit unit;
+    @ManyToOne
+    @JoinColumn(name = "product")
     private Product product;
     @ManyToOne
+    @JoinColumn(name = "good")
     private Good good;
 
     public Ingredient() {
@@ -25,6 +30,22 @@ public class Ingredient {
 
     public void setIngredientId(Integer ingredientId) {
         this.ingredientId = ingredientId;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
     public Product getProduct() {
@@ -41,13 +62,5 @@ public class Ingredient {
 
     public void setGood(Good good) {
         this.good = good;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
     }
 }

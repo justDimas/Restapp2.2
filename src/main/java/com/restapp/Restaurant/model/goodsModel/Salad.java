@@ -10,5 +10,6 @@ public class Salad {
     private Boolean isVegetarian;
     private Boolean isCold;
     @OneToOne
+    @JoinColumn(name = "good")
     private Good good;
 }
