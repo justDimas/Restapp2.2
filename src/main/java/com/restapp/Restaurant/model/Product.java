@@ -1,6 +1,4 @@
-package com.restapp.Restaurant.model.stockModel;
-
-import com.restapp.Restaurant.model.stockModel.Unit;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.*;
 

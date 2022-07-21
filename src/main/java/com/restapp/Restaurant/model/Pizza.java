@@ -1,6 +1,4 @@
-package com.restapp.Restaurant.model.goodsModel;
-
-import com.restapp.Restaurant.model.stockModel.PizzaSize;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.*;
 
@@ -8,11 +6,11 @@ import javax.persistence.*;
 public class Pizza {
     @Id
     private Integer pizzaId;
-    private Boolean isVegetarian;
-    private Boolean isSpicy;
     @OneToOne
     @JoinColumn(name = "good")
     private Good good;
+    private Boolean isVegetarian;
+    private Boolean isSpicy;
     @ManyToOne
     @JoinColumn(name = "size")
     private PizzaSize pizzaSize;

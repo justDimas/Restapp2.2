@@ -1,9 +1,9 @@
-package com.restapp.Restaurant.model.userModel;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "t_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.restapp.Restaurant.model.goodsModel;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

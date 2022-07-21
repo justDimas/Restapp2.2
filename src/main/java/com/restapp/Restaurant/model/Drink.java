@@ -1,4 +1,4 @@
-package com.restapp.Restaurant.model.goodsModel;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.*;
 
@@ -7,13 +7,13 @@ public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer drinkId;
+    @OneToOne
+    @JoinColumn(name = "good")
+    private Good good;
     private Boolean isAlcohol;
     private Boolean isCold;
     private Boolean isGazed;
     private Boolean hasCaffeine;
-    @OneToOne
-    @JoinColumn(name = "good")
-    private Good good;
 
     public Drink() {
     }

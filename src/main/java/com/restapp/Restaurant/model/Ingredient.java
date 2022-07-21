@@ -1,7 +1,4 @@
-package com.restapp.Restaurant.model.stockModel;
-
-import com.restapp.Restaurant.model.goodsModel.Good;
-import com.restapp.Restaurant.model.stockModel.Product;
+package com.restapp.Restaurant.model;
 
 import javax.persistence.*;
 
