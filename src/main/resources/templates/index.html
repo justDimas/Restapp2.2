@@ -3,32 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Restapp</title>
-    <style>
-        div{
-            padding: 1px 20px 1px 20px ;
-            margin:0.5%;
-            background-color:blue;
-            border-width:1px;
-            border-color:blue;
-            border-radius:20px;
-        }
-        p{
-            font-size:20px;
-            font-family: cursive;
-            color:yellow;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div><p>лого</p></div>
-    <div><p>инфо</p></div>
-    <div><p>логин</p></div>
-    <div><p>корзина</p></div>
+<div>
     <div>
-        <div class="pizza"></div>
-        <div class="salad"></div>
-        <div class="drink"></div>
+        <div class="header"><p>LOGO</p></div>
+        <div class="header"><p>инфо</p></div>
+        <div class="header"><p>логин</p></div>
+        <div class="header"><p>корзина</p></div>
     </div>
-
+    <div>
+        <div class="goods" th:each="pizza:${pizzas}">
+            <div><p th:text="${pizza.getName()}"></p></div>
+            <div><p th:text="${pizza.getPrice()}"></p></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

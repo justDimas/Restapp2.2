@@ -5,12 +5,17 @@ import javax.persistence.*;
 @Entity
 public class Pizza {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pizzaId;
     @OneToOne
     @JoinColumn(name = "good")
     private Good good;
     private Boolean isVegetarian;
     private Boolean isSpicy;
+    @Transient
+    private String name;
+    @Transient
+    private Double price;
     @ManyToOne
     @JoinColumn(name = "size")
     private PizzaSize pizzaSize;
@@ -58,4 +63,19 @@ public class Pizza {
         this.pizzaSize = pizzaSize;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }
