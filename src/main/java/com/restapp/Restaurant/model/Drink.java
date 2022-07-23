@@ -14,6 +14,9 @@ public class Drink {
     private Boolean isCold;
     private Boolean isGazed;
     private Boolean hasCaffeine;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    private String drinkImg;
 
     public Drink() {
     }
@@ -64,5 +67,13 @@ public class Drink {
 
     public void setHasCaffeine(Boolean hasCaffeine) {
         this.hasCaffeine = hasCaffeine;
+    }
+
+    public String getDrinkImg() {
+        return drinkImg;
+    }
+
+    public void setDrinkImg(String drinkImg) {
+        this.drinkImg = drinkImg;
     }
 }

@@ -7,17 +7,23 @@
 </head>
 <body>
 <div>
-    <div>
-        <div class="header"><p>LOGO</p></div>
-        <div class="header"><p>инфо</p></div>
-        <div class="header"><p>логин</p></div>
-        <div class="header"><p>корзина</p></div>
+    <div class="header">
+        <div><a href="/"><p>LOGO</p></a></div>
+        <div><p>инфо</p></div>
+        <div><p>логин</p></div>
+        <div><p>корзина</p></div>
     </div>
-    <div>
-        <div class="goods" th:each="pizza:${pizzas}">
-            <div><p th:text="${pizza.getName()}"></p></div>
-            <div><p th:text="${pizza.getPrice()}"></p></div>
+    <div class="goods">
+        <div class="chapter"><p>Пицца</p></div>
+        <div class="pizza">
+            <div th:each="pizza:${pizzas}">
+                <img th:src="@{${'images/' + pizza.getPizzaImg()}}">
+                <p th:text="${pizza.getName()}"></p>
+                <p th:text="${pizza.getPrice()}"></p>
+            </div>
         </div>
+        <div class="chapter"><p>Салаты</p></div>
+        <div class="chapter"><p>Напитки</p></div>
     </div>
 </div>
 </body>

@@ -12,13 +12,13 @@ public class Pizza {
     private Good good;
     private Boolean isVegetarian;
     private Boolean isSpicy;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    private String pizzaImg;
     @Transient
     private String name;
     @Transient
     private Double price;
-    @ManyToOne
-    @JoinColumn(name = "size")
-    private PizzaSize pizzaSize;
 
     public Pizza() {
     }
@@ -55,14 +55,6 @@ public class Pizza {
         this.good = good;
     }
 
-    public PizzaSize getPizzaSize() {
-        return pizzaSize;
-    }
-
-    public void setPizzaSize(PizzaSize pizzaSize) {
-        this.pizzaSize = pizzaSize;
-    }
-
     public String getName() {
         return name;
     }
@@ -77,5 +69,13 @@ public class Pizza {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getPizzaImg() {
+        return pizzaImg;
+    }
+
+    public void setPizzaImg(String pizzaImg) {
+        this.pizzaImg = pizzaImg;
     }
 }

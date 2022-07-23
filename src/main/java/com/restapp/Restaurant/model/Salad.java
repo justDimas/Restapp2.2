@@ -12,6 +12,9 @@ public class Salad {
     private Good good;
     private Boolean isVegetarian;
     private Boolean isCold;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    private String saladImg;
 
     public Salad() {
     }
@@ -46,5 +49,13 @@ public class Salad {
 
     public void setCold(Boolean cold) {
         isCold = cold;
+    }
+
+    public String getSaladImg() {
+        return saladImg;
+    }
+
+    public void setSaladImg(String saladImg) {
+        this.saladImg = saladImg;
     }
 }
