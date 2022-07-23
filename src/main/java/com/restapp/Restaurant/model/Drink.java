@@ -17,6 +17,10 @@ public class Drink {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "character varying default 'noimg.jpg'")
     private String drinkImg;
+    @Transient
+    private String name;
+    @Transient
+    private Double price;
 
     public Drink() {
     }
@@ -75,5 +79,21 @@ public class Drink {
 
     public void setDrinkImg(String drinkImg) {
         this.drinkImg = drinkImg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

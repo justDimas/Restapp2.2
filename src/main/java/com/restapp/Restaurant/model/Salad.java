@@ -15,6 +15,10 @@ public class Salad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "character varying default 'noimg.jpg'")
     private String saladImg;
+    @Transient
+    private String name;
+    @Transient
+    private Double price;
 
     public Salad() {
     }
@@ -57,5 +61,21 @@ public class Salad {
 
     public void setSaladImg(String saladImg) {
         this.saladImg = saladImg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

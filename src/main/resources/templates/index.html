@@ -13,17 +13,40 @@
         <div><p>логин</p></div>
         <div><p>корзина</p></div>
     </div>
-    <div class="goods">
-        <div class="chapter"><p>Пицца</p></div>
-        <div class="pizza">
+    <div class="goodsList">
+        <div class="chapter">
+            <div><p>Пицца</p></div>
+            <div><p>Изменить</p></div>
+        </div>
+        <div class="good">
             <div th:each="pizza:${pizzas}">
                 <img th:src="@{${'images/' + pizza.getPizzaImg()}}">
                 <p th:text="${pizza.getName()}"></p>
                 <p th:text="${pizza.getPrice()}"></p>
             </div>
         </div>
-        <div class="chapter"><p>Салаты</p></div>
-        <div class="chapter"><p>Напитки</p></div>
+        <div class="chapter">
+            <div><p>Салаты</p></div>
+            <div><p>Изменить</p></div>
+        </div>
+        <div class="good">
+            <div th:each="salad:${salads}">
+                <img th:src="@{${'images/' + salad.getSaladImg()}}">
+                <p th:text="${salad.getName()}"></p>
+                <p th:text="${salad.getPrice()}"></p>
+            </div>
+        </div>
+        <div class="chapter">
+            <div><p>Напитки</p></div>
+            <div><p>Изменить</p></div>
+        </div>
+        <div class="good">
+            <div th:each="drink:${drinks}">
+                <img th:src="@{${'images/' + drink.getDrinkImg()}}">
+                <p th:text="${drink.getName()}"></p>
+                <p th:text="${drink.getPrice()}"></p>
+            </div>
+        </div>
     </div>
 </div>
 </body>
