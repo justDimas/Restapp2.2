@@ -3,48 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>Restapp</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+        function showAdd(form){
+            let block = document.querySelector(form);
+            block.style.display = (block.style.display=='none')?'inline':'none';
+        }
+    </script>
 </head>
 <body>
 <div>
     <div class="header">
-        <div><a href="/"><p>LOGO</p></a></div>
-        <div><p>инфо</p></div>
-        <div><p>логин</p></div>
-        <div><p>корзина</p></div>
+        <div><a href="/"><h3>LOGO</h3></a></div>
+        <div><p>Информация для посетителей</p></div>
+        <div><p>Log in</p></div>
+        <div><p>Корзина</p></div>
     </div>
-    <div class="goodsList">
+    <div class="goodsBlock">
         <div class="chapter">
             <div><p>Пицца</p></div>
-            <div><p>Изменить</p></div>
         </div>
-        <div class="good">
-            <div th:each="pizza:${pizzas}">
+        <div class="goodList">
+            <div class="good" th:each="pizza:${pizzas}">
                 <img th:src="@{${'images/' + pizza.getPizzaImg()}}">
                 <p th:text="${pizza.getName()}"></p>
                 <p th:text="${pizza.getPrice()}"></p>
+                <div class="update">
+                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
+                    <div><img src="images/cross-icon.png" alt="cross"></div>
+                </div>
+            </div>
+            <form class="pizzaForm" method="post" action="addPizza" style="display:none;">
+                <div class="inputDiv">
+                    <p>Название:</p>
+                    <input type="text">
+                </div>
+                <div class="inputDiv">
+                    <p>Цена:</p>
+                    <input type="number" step="0.01">
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox">
+                    <p>Острый?</p>
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox">
+                    <p>Вегетарианский?</p>
+                </div>
+                <div class="btnDiv">
+                    <button>Отменить</button>
+                    <button>Применить</button>
+                </div>
+            </form>
+            <div class="addBtn" onclick="showAdd('.pizzaForm')">
+                <div><img src="images/plus-img.png"></div>
             </div>
         </div>
         <div class="chapter">
             <div><p>Салаты</p></div>
-            <div><p>Изменить</p></div>
         </div>
-        <div class="good">
-            <div th:each="salad:${salads}">
+        <div class="goodList">
+            <div class="good" th:each="salad:${salads}">
                 <img th:src="@{${'images/' + salad.getSaladImg()}}">
                 <p th:text="${salad.getName()}"></p>
                 <p th:text="${salad.getPrice()}"></p>
+                <div class="update">
+                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
+                    <div><img src="images/cross-icon.png" alt="cross"></div>
+                </div>
+            </div>
+            <form class="saladForm" method="post" action="addSalad" style="display:none;">
+                <div class="inputDiv">
+                    <p>Название:</p>
+                    <input type="text">
+                </div>
+                <div class="inputDiv">
+                    <p>Цена</p>
+                    <input type="number" step="0.01">
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox">
+                    <p>Теплый?</p>
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox">
+                    <p>Вегетарианский?</p>
+                </div>
+                <div class="btnDiv">
+                    <button>Отменить</button>
+                    <button>Применить</button>
+                </div>
+            </form>
+            <div class="addBtn" action="" onclick="showAdd('.saladForm')">
+                <div><img src="images/plus-img.png"></div>
             </div>
         </div>
         <div class="chapter">
             <div><p>Напитки</p></div>
-            <div><p>Изменить</p></div>
         </div>
-        <div class="good">
-            <div th:each="drink:${drinks}">
+        <div class="goodList">
+            <div class="good" th:each="drink:${drinks}">
                 <img th:src="@{${'images/' + drink.getDrinkImg()}}">
                 <p th:text="${drink.getName()}"></p>
                 <p th:text="${drink.getPrice()}"></p>
+                <div class="update">
+                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
+                    <div><img src="images/cross-icon.png" alt="cross"></div>
+                </div>
+            </div>
+            <form class="drinkForm" method="post" action="/" style="display:none;">
+                <div class="inputDiv">
+                    <p>Название:</p>
+                    <input type="text" name="drinkName">
+                </div>
+                <div class="inputDiv">
+                    <p>Цена</p>
+                    <input type="number" step="0.01" name="drinkPrice">
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox" name="hasCoff">
+                    <p>Содержит кофеин?</p>
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox" name="isAlc">
+                    <p>Алкогольный</p>
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox" name="isHot">
+                    <p>Теплый?</p>
+                </div>
+                <div class="checkDiv">
+                    <input type="checkbox" name="isGazed">
+                    <p>Газированый?</p>
+                </div>
+                <div class="btnDiv">
+                    <button>Отменить</button>
+                    <button>Применить</button>
+                </div>
+            </form>
+            <div class="addBtn" onclick="showAdd('.drinkForm')">
+                <div><img src="images/plus-img.png"></div>
             </div>
         </div>
     </div>

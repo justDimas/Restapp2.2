@@ -16,6 +16,11 @@ public class Good {
     public Good() {
     }
 
+    public Good(String goodName, Double goodPrice) {
+        this.goodName = goodName;
+        this.goodPrice = goodPrice;
+    }
+
     public Integer getGoodId() {
         return goodId;
     }

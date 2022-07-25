@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class IndexController {
     SaladDAO salad;
     @Autowired
     DrinkDAO drink;
+
     @GetMapping("/")
     public String index(Model model){
         List<Good> goods = good.findAll();
@@ -63,5 +66,19 @@ public class IndexController {
         model.addAttribute("salads", salads);
         model.addAttribute("drinks", drinks);
         return "index";
+    }
+
+    @PostMapping("/")
+    public String addDrink(@RequestParam String drinkName,
+                           @RequestParam Double drinkPrice,
+                           @RequestParam Boolean hasCoff,
+                           @RequestParam Boolean isAlc,
+                           @RequestParam Boolean isHot,
+                           @RequestParam Boolean isGazed){
+        System.out.print("asdasdasdasdASDSADSADASD");
+
+        Good saved = good.save(new Good(drinkName, drinkPrice));
+        drink.save(new Drink(saved, isAlc, isHot, isGazed, hasCoff));
+        return "redirect:/";
     }
 }
