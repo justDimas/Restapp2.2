@@ -15,7 +15,7 @@
 <div>
     <div class="header">
         <div><a href="/"><h3>LOGO</h3></a></div>
-        <div><p>Информация для посетителей</p></div>
+        <div><p>Информация для гостей</p></div>
         <div><p>Log in</p></div>
         <div><p>Корзина</p></div>
     </div>
@@ -33,7 +33,7 @@
                     <div><img src="images/cross-icon.png" alt="cross"></div>
                 </div>
             </div>
-            <form class="pizzaForm" method="post" action="addPizza" style="display:none;">
+            <form class="pizzaForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
                     <input type="text">
@@ -51,7 +51,7 @@
                     <p>Вегетарианский?</p>
                 </div>
                 <div class="btnDiv">
-                    <button>Отменить</button>
+                    <button type="reset">Отменить</button>
                     <button>Применить</button>
                 </div>
             </form>
@@ -72,7 +72,7 @@
                     <div><img src="images/cross-icon.png" alt="cross"></div>
                 </div>
             </div>
-            <form class="saladForm" method="post" action="addSalad" style="display:none;">
+            <form class="saladForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
                     <input type="text">
@@ -90,11 +90,11 @@
                     <p>Вегетарианский?</p>
                 </div>
                 <div class="btnDiv">
-                    <button>Отменить</button>
+                    <button type="reset">Отменить</button>
                     <button>Применить</button>
                 </div>
             </form>
-            <div class="addBtn" action="" onclick="showAdd('.saladForm')">
+            <div class="addBtn" onclick="showAdd('.saladForm')">
                 <div><img src="images/plus-img.png"></div>
             </div>
         </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="checkDiv">
                     <input type="checkbox" name="isAlc">
-                    <p>Алкогольный</p>
+                    <p>Алкогольный?</p>
                 </div>
                 <div class="checkDiv">
                     <input type="checkbox" name="isHot">
@@ -137,7 +137,7 @@
                     <p>Газированый?</p>
                 </div>
                 <div class="btnDiv">
-                    <button>Отменить</button>
+                    <button type="reset">Отменить</button>
                     <button>Применить</button>
                 </div>
             </form>

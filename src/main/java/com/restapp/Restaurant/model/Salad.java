@@ -12,8 +12,7 @@ public class Salad {
     private Good good;
     private Boolean isVegetarian;
     private Boolean isCold;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    @Column(columnDefinition = "character varying(255) DEFAULT 'noimg.jpg'")
     private String saladImg;
     @Transient
     private String name;

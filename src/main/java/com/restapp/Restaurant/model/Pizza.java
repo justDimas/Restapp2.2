@@ -12,8 +12,7 @@ public class Pizza {
     private Good good;
     private Boolean isVegetarian;
     private Boolean isSpicy;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    @Column(columnDefinition = "character varying(255) DEFAULT 'noimg.jpg'")
     private String pizzaImg;
     @Transient
     private String name;

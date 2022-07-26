@@ -109,14 +109,8 @@ body{
     display:flex;
 }
 
-.checkDiv{
-    justify-content: flex-start;
-}
+.checkDiv{ justify-content: flex-start; }
 
-.btnDiv{
-    justify-content: space-around;
-}
+.btnDiv{ justify-content: space-around; }
 
-.inputDiv{
-    justify-content: space-between;
-}
+.inputDiv{ justify-content: space-between; }

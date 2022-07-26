@@ -1,5 +1,7 @@
 package com.restapp.Restaurant.model;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,7 +16,7 @@ public class Drink {
     private Boolean isCold;
     private Boolean isGazed;
     private Boolean hasCaffeine;
-    @Column(columnDefinition = "character varying default 'noimg.jpg'")
+    @Column(columnDefinition = "character varying(255) default 'noimg.jpg'")
     private String drinkImg;
     @Transient
     private String name;
@@ -27,10 +29,10 @@ public class Drink {
         this.isCold = isCold;
         this.isGazed = isGazed;
         this.hasCaffeine = hasCaffeine;
+        drinkImg="noimg.jpg";
     }
 
-    public Drink() {
-    }
+    public Drink() { }
 
     public Integer getDrinkId() {
         return drinkId;

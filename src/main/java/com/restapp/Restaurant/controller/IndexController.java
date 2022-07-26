@@ -6,6 +6,7 @@ import com.restapp.Restaurant.model.Pizza;
 import com.restapp.Restaurant.dao.*;
 import com.restapp.Restaurant.model.Salad;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,14 +69,23 @@ public class IndexController {
         return "index";
     }
 
+    //TODO
+    /*public String addPizza(){
+        return "redirect:/";
+    }
+
+    @PostMapping("/")
+    public String addSalad(){
+        return "redirect:/";
+    }*/
+
     @PostMapping("/")
     public String addDrink(@RequestParam String drinkName,
                            @RequestParam Double drinkPrice,
-                           @RequestParam Boolean hasCoff,
-                           @RequestParam Boolean isAlc,
-                           @RequestParam Boolean isHot,
-                           @RequestParam Boolean isGazed){
-        System.out.print("asdasdasdasdASDSADSADASD");
+                           @RequestParam(required = false, defaultValue = "false") Boolean hasCoff,
+                           @RequestParam(required = false, defaultValue = "false") Boolean isAlc,
+                           @RequestParam(required = false, defaultValue = "false") Boolean isHot,
+                           @RequestParam(required = false, defaultValue = "false") Boolean isGazed){
 
         Good saved = good.save(new Good(drinkName, drinkPrice));
         drink.save(new Drink(saved, isAlc, isHot, isGazed, hasCoff));
