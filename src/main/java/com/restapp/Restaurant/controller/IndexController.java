@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
@@ -69,26 +70,70 @@ public class IndexController {
         return "index";
     }
 
-    //TODO
-    /*public String addPizza(){
+    @PostMapping("/")
+    public String index(@RequestParam(required = false) String pizzaAdd,
+                        @RequestParam(required = false) String drinkAdd,
+                        @RequestParam(required = false) String saladAdd,
+
+                        @RequestParam(required = false) String pizzaName,
+                        @RequestParam(required = false) Double pizzaPrice,
+                        @RequestParam(required = false, defaultValue = "false") Boolean pizzaIsSpicy,
+                        @RequestParam(required = false, defaultValue = "false") Boolean pizzaIsVegan,
+                        @RequestParam(required = false, defaultValue = "noimg.jpg") String pizzaImg,
+
+                        @RequestParam(required = false) String saladName,
+                        @RequestParam(required = false) Double saladPrice,
+                        @RequestParam(required = false, defaultValue = "false") Boolean saladIsWarm,
+                        @RequestParam(required = false, defaultValue = "false") Boolean saladIsVegan,
+                        @RequestParam(required = false, defaultValue = "noimg.jpg") String saladImg,
+
+                        @RequestParam(required = false) String drinkName,
+                        @RequestParam(required = false) Double drinkPrice,
+                        @RequestParam(required = false, defaultValue = "false") Boolean drinkHasCoff,
+                        @RequestParam(required = false, defaultValue = "false") Boolean drinkIsAlc,
+                        @RequestParam(required = false, defaultValue = "false") Boolean drinkIsWarm,
+                        @RequestParam(required = false, defaultValue = "false") Boolean drinkIsGazed,
+                        @RequestParam(required = false, defaultValue = "noimg.jpg") String drinkImg)
+    {
+        if(pizzaAdd != null)
+            addPizza( pizzaName, pizzaPrice, pizzaIsSpicy, pizzaIsVegan, pizzaImg);
+        else if(saladAdd != null)
+            addSalad(saladName, saladPrice, saladIsWarm, saladIsVegan, saladImg);
+        else if(drinkAdd != null)
+            addDrink(drinkName, drinkPrice, drinkHasCoff, drinkIsAlc, drinkIsWarm, drinkIsGazed, drinkImg);
         return "redirect:/";
     }
 
-    @PostMapping("/")
-    public String addSalad(){
-        return "redirect:/";
-    }*/
+    private void addPizza(String pizzaName,
+                          Double pizzaPrice,
+                          Boolean pizzaIsSpicy,
+                          Boolean pizzaIsVegan,
+                          String pizzaImg)
+    {
+        Good saved = good.save(new Good(pizzaName, pizzaPrice));
+        pizza.save(new Pizza(saved, pizzaIsSpicy, pizzaIsVegan, pizzaImg));
+    }
 
-    @PostMapping("/")
-    public String addDrink(@RequestParam String drinkName,
-                           @RequestParam Double drinkPrice,
-                           @RequestParam(required = false, defaultValue = "false") Boolean hasCoff,
-                           @RequestParam(required = false, defaultValue = "false") Boolean isAlc,
-                           @RequestParam(required = false, defaultValue = "false") Boolean isHot,
-                           @RequestParam(required = false, defaultValue = "false") Boolean isGazed){
+    private void addSalad(String saladName,
+                          Double saladPrice,
+                          Boolean saladIsWarm,
+                          Boolean saladIsVegan,
+                          String saladImg)
+    {
+        Good saved = good.save(new Good(saladName, saladPrice));
+        salad.save(new Salad(saved, saladIsWarm, saladIsVegan, saladImg));
+    }
 
+    private void addDrink(String drinkName,
+                          Double drinkPrice,
+                          Boolean hasCoff,
+                          Boolean isAlc,
+                          Boolean isWarm,
+                          Boolean isGazed,
+                          String drinkImg)
+    {
         Good saved = good.save(new Good(drinkName, drinkPrice));
-        drink.save(new Drink(saved, isAlc, isHot, isGazed, hasCoff));
-        return "redirect:/";
+        drink.save(new Drink(saved, isAlc, isWarm, isGazed, hasCoff, drinkImg));
     }
+
 }

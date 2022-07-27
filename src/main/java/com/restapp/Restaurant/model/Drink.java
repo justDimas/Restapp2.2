@@ -16,20 +16,21 @@ public class Drink {
     private Boolean isCold;
     private Boolean isGazed;
     private Boolean hasCaffeine;
-    @Column(columnDefinition = "character varying(255) default 'noimg.jpg'")
     private String drinkImg;
     @Transient
     private String name;
     @Transient
     private Double price;
 
-    public Drink(Good good, Boolean isAlcohol, Boolean isCold, Boolean isGazed, Boolean hasCaffeine) {
+    public Drink(Good good, Boolean hasCaffeine,
+                 Boolean isAlcohol, Boolean isCold,
+                 Boolean isGazed, String drinkImg) {
         this.good = good;
+        this.hasCaffeine = hasCaffeine;
         this.isAlcohol = isAlcohol;
         this.isCold = isCold;
         this.isGazed = isGazed;
-        this.hasCaffeine = hasCaffeine;
-        drinkImg="noimg.jpg";
+        this.drinkImg = drinkImg;
     }
 
     public Drink() { }

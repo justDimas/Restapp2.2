@@ -36,23 +36,27 @@
             <form class="pizzaForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
-                    <input type="text">
+                    <input type="text" name="pizzaName">
                 </div>
                 <div class="inputDiv">
                     <p>Цена:</p>
-                    <input type="number" step="0.01">
+                    <input type="number" step="0.01" name="pizzaPrice">
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox">
+                    <input type="checkbox" name="pizzaIsSpicy">
                     <p>Острый?</p>
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox">
+                    <input type="checkbox" name="pizzaIsVegan">
                     <p>Вегетарианский?</p>
+                </div>
+                <div class="imgDiv">
+                    <p>Вставить картинку</p>
+                    <input type="file" name="pizzaImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
-                    <button>Применить</button>
+                    <button name="pizzaAdd" value="pizzaAdd">Применить</button>
                 </div>
             </form>
             <div class="addBtn" onclick="showAdd('.pizzaForm')">
@@ -75,23 +79,27 @@
             <form class="saladForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
-                    <input type="text">
+                    <input type="text" name="saladName">
                 </div>
                 <div class="inputDiv">
                     <p>Цена</p>
-                    <input type="number" step="0.01">
+                    <input type="number" step="0.01" name="saladPrice">
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox">
+                    <input type="checkbox" name="saladIsWarm">
                     <p>Теплый?</p>
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox">
+                    <input type="checkbox" name="saladIsVegan">
                     <p>Вегетарианский?</p>
+                </div>
+                <div class="imgDiv">
+                    <p>Вставить картинку</p>
+                    <input type="file" name="saladImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
-                    <button>Применить</button>
+                    <button name="saladAdd" value="saladAdd">Применить</button>
                 </div>
             </form>
             <div class="addBtn" onclick="showAdd('.saladForm')">
@@ -121,24 +129,28 @@
                     <input type="number" step="0.01" name="drinkPrice">
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox" name="hasCoff">
+                    <input type="checkbox" name="drinkHasCoff">
                     <p>Содержит кофеин?</p>
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox" name="isAlc">
+                    <input type="checkbox" name="drinkIsAlc">
                     <p>Алкогольный?</p>
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox" name="isHot">
+                    <input type="checkbox" name="drinkIsWarm">
                     <p>Теплый?</p>
                 </div>
                 <div class="checkDiv">
-                    <input type="checkbox" name="isGazed">
+                    <input type="checkbox" name="drinkIsGazed">
                     <p>Газированый?</p>
+                </div>
+                <div class="imgDiv">
+                    <p>Вставить картинку</p>
+                    <input type="file" name="drinkImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
-                    <button>Применить</button>
+                    <button name="drinkAdd" value="drinkAdd">Применить</button>
                 </div>
             </form>
             <div class="addBtn" onclick="showAdd('.drinkForm')">

@@ -1,5 +1,7 @@
 package com.restapp.Restaurant.model;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +13,7 @@ public class Salad {
     @JoinColumn(name = "good")
     private Good good;
     private Boolean isVegetarian;
-    private Boolean isCold;
-    @Column(columnDefinition = "character varying(255) DEFAULT 'noimg.jpg'")
+    private Boolean isWarm;
     private String saladImg;
     @Transient
     private String name;
@@ -20,6 +21,13 @@ public class Salad {
     private Double price;
 
     public Salad() {
+    }
+
+    public Salad(Good good, Boolean isVegetarian, Boolean isWarm, String saladImg) {
+        this.good = good;
+        this.isVegetarian = isVegetarian;
+        this.isWarm = isWarm;
+        this.saladImg = saladImg;
     }
 
     public Integer getSaladId() {
@@ -46,12 +54,12 @@ public class Salad {
         isVegetarian = vegetarian;
     }
 
-    public Boolean getCold() {
-        return isCold;
+    public Boolean getWarm() {
+        return isWarm;
     }
 
-    public void setCold(Boolean cold) {
-        isCold = cold;
+    public void setWarm(Boolean cold) {
+        isWarm = cold;
     }
 
     public String getSaladImg() {

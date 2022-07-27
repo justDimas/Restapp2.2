@@ -114,3 +114,5 @@ body{
 .btnDiv{ justify-content: space-around; }
 
 .inputDiv{ justify-content: space-between; }
+
+.imgDiv{ display: inline; }
