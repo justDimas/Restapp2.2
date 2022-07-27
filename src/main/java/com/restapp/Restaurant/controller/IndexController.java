@@ -6,13 +6,11 @@ import com.restapp.Restaurant.model.Pizza;
 import com.restapp.Restaurant.dao.*;
 import com.restapp.Restaurant.model.Salad;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
@@ -72,23 +70,35 @@ public class IndexController {
 
     @PostMapping("/")
     public String index(@RequestParam(required = false) String pizzaAdd,
-                        @RequestParam(required = false) String drinkAdd,
+                        @RequestParam(required = false) String pizzaUpdate,
+                        @RequestParam(required = false) String pizzaDelete,
                         @RequestParam(required = false) String saladAdd,
+                        @RequestParam(required = false) String saladUpdate,
+                        @RequestParam(required = false) String saladDelete,
+                        @RequestParam(required = false) String drinkAdd,
+                        @RequestParam(required = false) String drinkUpdate,
+                        @RequestParam(required = false) String drinkDelete,
 
+                        @RequestParam(required = false) Integer pizzaId,
                         @RequestParam(required = false) String pizzaName,
                         @RequestParam(required = false) Double pizzaPrice,
+                        @RequestParam(required = false) Integer pizzaGoodId,
                         @RequestParam(required = false, defaultValue = "false") Boolean pizzaIsSpicy,
                         @RequestParam(required = false, defaultValue = "false") Boolean pizzaIsVegan,
                         @RequestParam(required = false, defaultValue = "noimg.jpg") String pizzaImg,
 
+                        @RequestParam(required = false) Integer saladId,
                         @RequestParam(required = false) String saladName,
                         @RequestParam(required = false) Double saladPrice,
+                        @RequestParam(required = false) Integer saladGoodId,
                         @RequestParam(required = false, defaultValue = "false") Boolean saladIsWarm,
                         @RequestParam(required = false, defaultValue = "false") Boolean saladIsVegan,
                         @RequestParam(required = false, defaultValue = "noimg.jpg") String saladImg,
 
+                        @RequestParam(required = false) Integer drinkId,
                         @RequestParam(required = false) String drinkName,
                         @RequestParam(required = false) Double drinkPrice,
+                        @RequestParam(required = false) Integer drinkGoodId,
                         @RequestParam(required = false, defaultValue = "false") Boolean drinkHasCoff,
                         @RequestParam(required = false, defaultValue = "false") Boolean drinkIsAlc,
                         @RequestParam(required = false, defaultValue = "false") Boolean drinkIsWarm,
@@ -97,10 +107,23 @@ public class IndexController {
     {
         if(pizzaAdd != null)
             addPizza( pizzaName, pizzaPrice, pizzaIsSpicy, pizzaIsVegan, pizzaImg);
+        else if(pizzaUpdate != null)
+            ;//pizzaUpdate
+        else if(pizzaDelete != null)
+            pizzaDelete(pizzaId, pizzaGoodId);
         else if(saladAdd != null)
             addSalad(saladName, saladPrice, saladIsWarm, saladIsVegan, saladImg);
+        else if(saladUpdate != null)
+            ;//saladUpdate
+        else if(saladDelete != null)
+            saladDelete(saladId, saladGoodId);
         else if(drinkAdd != null)
             addDrink(drinkName, drinkPrice, drinkHasCoff, drinkIsAlc, drinkIsWarm, drinkIsGazed, drinkImg);
+        else if(drinkUpdate != null)
+            ;//drinkUpdate
+        else if(drinkDelete != null)
+            drinkDelete(drinkId, drinkGoodId);
+
         return "redirect:/";
     }
 
@@ -134,6 +157,21 @@ public class IndexController {
     {
         Good saved = good.save(new Good(drinkName, drinkPrice));
         drink.save(new Drink(saved, isAlc, isWarm, isGazed, hasCoff, drinkImg));
+    }
+
+    private void pizzaDelete(Integer pizzaId, Integer pizzaGoodId){
+        pizza.deleteById(pizzaId);
+        good.deleteById(pizzaGoodId);
+    }
+
+    private void saladDelete(Integer saladId, Integer saladGoodId){
+        salad.deleteById(saladId);
+        good.deleteById(saladGoodId);
+    }
+
+    private void drinkDelete(Integer drinkId, Integer drinkGoodId){
+        drink.deleteById(drinkId);
+        good.deleteById(drinkGoodId);
     }
 
 }

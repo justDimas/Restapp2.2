@@ -25,22 +25,24 @@
         </div>
         <div class="goodList">
             <div class="good" th:each="pizza:${pizzas}">
-                <img th:src="@{${'images/' + pizza.getPizzaImg()}}">
+                <img th:src="@{${'images/' + pizza.getPizzaImg()}}" alt="image">
                 <p th:text="${pizza.getName()}"></p>
                 <p th:text="${pizza.getPrice()}"></p>
-                <div class="update">
-                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
-                    <div><img src="images/cross-icon.png" alt="cross"></div>
-                </div>
+                <form method="post" class="update">
+                    <input type="hidden" name="pizzaId" th:value="${pizza.getPizzaId()}">
+                    <input type="hidden" name="pizzaGoodId" th:value="${pizza.getGood().getGoodId()}">
+                    <button action="/" name="pizzaUpdate" value="pizzaUpdate">Обновить</button>
+                    <button action="/" name="pizzaDelete" value="pizzaDelete">Удалить</button>
+                </form>
             </div>
             <form class="pizzaForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
-                    <input type="text" name="pizzaName">
+                    <input type="text" minlength="3" maxlength="20" name="pizzaName">
                 </div>
                 <div class="inputDiv">
                     <p>Цена:</p>
-                    <input type="number" step="0.01" name="pizzaPrice">
+                    <input type="number" step="0.01" min="0" max="100" name="pizzaPrice">
                 </div>
                 <div class="checkDiv">
                     <input type="checkbox" name="pizzaIsSpicy">
@@ -52,7 +54,7 @@
                 </div>
                 <div class="imgDiv">
                     <p>Вставить картинку</p>
-                    <input type="file" name="pizzaImg">
+                    <input type="file" accept="image/png, image/jpg, image/gif, image/jpeg" name="pizzaImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
@@ -68,22 +70,24 @@
         </div>
         <div class="goodList">
             <div class="good" th:each="salad:${salads}">
-                <img th:src="@{${'images/' + salad.getSaladImg()}}">
+                <img th:src="@{${'images/' + salad.getSaladImg()}}" alt="image">
                 <p th:text="${salad.getName()}"></p>
                 <p th:text="${salad.getPrice()}"></p>
-                <div class="update">
-                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
-                    <div><img src="images/cross-icon.png" alt="cross"></div>
-                </div>
+                <form method="post" class="update">
+                    <input type="hidden" name="saladId" th:value="${salad.getSaladId()}">
+                    <input type="hidden" name="saladGoodId" th:value="${salad.getGood().getGoodId()}">
+                    <button action="/" name="saladUpdate" value="saladUpdate">Обновить</button>
+                    <button action="/" name="saladDelete" value="saladDelete">Удалить</button>
+                </form>
             </div>
             <form class="saladForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
-                    <input type="text" name="saladName">
+                    <input type="text" minlength="3" maxlength="20" name="saladName">
                 </div>
                 <div class="inputDiv">
                     <p>Цена</p>
-                    <input type="number" step="0.01" name="saladPrice">
+                    <input type="number" step="0.01" min="0" max="100" name="saladPrice">
                 </div>
                 <div class="checkDiv">
                     <input type="checkbox" name="saladIsWarm">
@@ -95,7 +99,7 @@
                 </div>
                 <div class="imgDiv">
                     <p>Вставить картинку</p>
-                    <input type="file" name="saladImg">
+                    <input type="file" accept="image/png, image/jpg, image/gif, image/jpeg" name="saladImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
@@ -111,22 +115,24 @@
         </div>
         <div class="goodList">
             <div class="good" th:each="drink:${drinks}">
-                <img th:src="@{${'images/' + drink.getDrinkImg()}}">
+                <img th:src="@{${'images/' + drink.getDrinkImg()}}" alt="image">
                 <p th:text="${drink.getName()}"></p>
                 <p th:text="${drink.getPrice()}"></p>
-                <div class="update">
-                    <div><img src="images/pencil-icon.png" alt="pencil"></div>
-                    <div><img src="images/cross-icon.png" alt="cross"></div>
-                </div>
+                <form method="post" class="update">
+                    <input type="hidden" name="drinkId" th:value="${drink.getDrinkId()}">
+                    <input type="hidden" name="drinkGoodId" th:value="${drink.getGood().getGoodId()}">
+                    <button action="/" name="drinkUpdate" value="drinkUpdate">Обновить</button>
+                    <button action="/" name="drinkDelete" value="drinkDelete">Удалить</button>
+                </form>
             </div>
             <form class="drinkForm" method="post" action="/" style="display:none;">
                 <div class="inputDiv">
                     <p>Название:</p>
-                    <input type="text" name="drinkName">
+                    <input type="text" minlength="3" maxlength="20" name="drinkName">
                 </div>
                 <div class="inputDiv">
                     <p>Цена</p>
-                    <input type="number" step="0.01" name="drinkPrice">
+                    <input type="number" step="0.01" min="0" max="100" name="drinkPrice">
                 </div>
                 <div class="checkDiv">
                     <input type="checkbox" name="drinkHasCoff">
@@ -146,7 +152,7 @@
                 </div>
                 <div class="imgDiv">
                     <p>Вставить картинку</p>
-                    <input type="file" name="drinkImg">
+                    <input type="file" accept="image/png, image/jpg, image/gif, image/jpeg" name="drinkImg">
                 </div>
                 <div class="btnDiv">
                     <button type="reset">Отменить</button>
