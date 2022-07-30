@@ -9,7 +9,7 @@ public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer drinkId;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "good")
     private Good good;
     private Boolean isAlcohol;

@@ -10,7 +10,7 @@ body{
 }
 
 .header{
-    background-color:#9696ff;
+    background-color: #7259a7;
     display: flex;
     justify-content: space-around;
 }
@@ -21,7 +21,7 @@ body{
 }
 
 .goodsBlock{
-    background: linear-gradient(270deg, #9696ff 20%, #ff96ff 100%);
+    background-color: #8579d6;
     margin:0 15% 0 15%;
     padding:0;
 }
@@ -40,6 +40,7 @@ body{
     display:flex;
     justify-content:flex-start;
     flex-wrap:wrap;
+    align-items:flex-start;
 }
 
 .goodList p{
@@ -58,7 +59,7 @@ body{
     border-radius:10px 10px 0px 0px;
 }
 
-.update div:hover, .addBtn div:hover{
+.update div:hover, .addBtn:hover, button:hover{
     box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
 }
 
@@ -66,36 +67,52 @@ body{
     display:flex;
     margin: auto 1% auto 1%;
     padding:10px;
-}
-
-.addBtn div{
-    padding:10px;
     border-radius:50%;
 }
 
-.update{
-    display:flex;
-    justify-content:space-around;
-    padding:0 2% 5% 2%;
-}
-
-.addBtn div img{
+.addBtn img{
     width:100%;
     height:100%;
     object-fit:contain;
 }
 
-.pizzaForm, .saladForm, .drinkForm{
-    padding:3%;
-    margin:1% 1% auto 1%;
-    border-radius:10px;
-    box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
-    justify-content: center;
-    flex-wrap: wrap;
+.updateForm{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    padding:0 2% 5% 2%;
 }
 
-.pizzaForm div, .saladForm div, .drinkForm div {
+button{
+    background-color:#644084;
+    padding:5px;
+    border:0px;
+    border-radius:5px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.addForm:invalid{ box-shadow:1px 1px 10px rgba(255, 0 , 0, 1); }
+.addForm:valid{ box-shadow:1px 1px 10px rgba(0, 255 , 0, 1); }
+
+.addForm{
+    padding:7px;
+    margin:1% 1% 1% 1%;
+    border-radius:10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction:column;
+}
+
+.addForm div {
+    margin:7px;
     display:flex;
+}
+
+.imgDiv{
+    align-items:flex-start;
+    flex-direction:column;
 }
 
 .checkDiv{ justify-content: flex-start; }
