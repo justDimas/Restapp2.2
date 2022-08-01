@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Restapp</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/script.js"></script>
+</head>
+<body>
+<div class="head">
+    <div><a href="/"><p>Restapp</p></a></div>
+    <div><p>Информация для гостей</p></div>
+    <div>
+        <p>Вход</p>
+        <a href="/registration"><p>Регистрация</p></a>
+    </div>
+</div>
+<div class="body">
+    <div class="title">
+        <p>Пицца</p>
+    </div>
+    <div class="good-block">
+        <div class="good-data" th:each="pizza:${pizzas}">
+            <img th:src="@{'images/' + ${pizza.pizzaImg}}" alt="image">
+            <p th:text="${pizza.name}"></p>
+            <p th:text="${pizza.price}"></p>
+            <form action="/" method="post" class="settingForm">
+                <input type="hidden" name="pizzaId" th:value="${pizza.pizzaId}">
+                <button type="button">Обновить</button>
+                <button name="pizzaDelete" value="pizzaDelete">Удалить</button>
+            </form>
+        </div>
+        <form class="good-data" id="pizza-form" method="post" action="/">
+            <div class="inputDiv">
+                <p>Название:</p>
+                <input type="text" minlength="3" maxlength="20" name="pizzaName" required>
+            </div>
+            <div class="inputDiv">
+                <p>Цена:</p>
+                <input type="number" step="0.01" min="0" max="100" name="pizzaPrice" required>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="pizzaIsSpicy">
+                <p>Острый?</p>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="pizzaIsVegan">
+                <p>Вегетарианский?</p>
+            </div>
+            <div class="imgDiv">
+                <p>Вставить картинку</p>
+                <input type="file" accept="image/*" name="pizzaImg" required>
+            </div>
+            <div class="btnDiv">
+                <button type="reset" onclick="showAdd('pizza-show', 'pizza-form')">Отменить</button>
+                <button name="pizzaAdd" value="pizzaAdd">Применить</button>
+            </div>
+        </form>
+        <div class="good-data" id="pizza-show" onclick="showAdd('pizza-show', 'pizza-form')">
+            <img src="images/plusImg.png">
+        </div>
+    </div>
+    <div class="title">
+        <p>Салаты</p>
+    </div>
+    <div class="good-block">
+        <div class="good-data" th:each="salad:${salads}">
+            <img th:src="@{'images/' + ${salad.saladImg}}" alt="image">
+            <p th:text="${salad.name}"></p>
+            <p th:text="${salad.price}"></p>
+            <form action="/" method="post" class="settingForm">
+                <input type="hidden" name="saladId" th:value="${salad.saladId}">
+                <button type="button">Обновить</button>
+                <button name="saladDelete" value="saladDelete">Удалить</button>
+            </form>
+        </div>
+        <form class="good-data" id="salad-form" method="post" action="/">
+            <div class="inputDiv">
+                <p>Название:</p>
+                <input type="text" minlength="3" maxlength="20" name="saladName" required>
+            </div>
+            <div class="inputDiv">
+                <p>Цена</p>
+                <input type="number" step="0.01" min="0" max="100" name="saladPrice" required>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="saladIsWarm">
+                <p>Теплый?</p>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="saladIsVegan">
+                <p>Вегетарианский?</p>
+            </div>
+            <div class="imgDiv">
+                <p>Вставить картинку</p>
+                <input type="file" accept="image/*" name="saladImg" required>
+            </div>
+            <div class="btnDiv">
+                <button type="reset" onclick="showAdd('salad-show', 'salad-form')">Отменить</button>
+                <button name="saladAdd" value="saladAdd">Применить</button>
+            </div>
+        </form>
+        <div class="good-data" id="salad-show" onclick="showAdd('salad-show', 'salad-form')">
+            <img src="images/plusImg.png">
+        </div>
+    </div>
+    <div class="title">
+        <p>Напитки</p>
+    </div>
+    <div class="good-block">
+        <div class="good-data" th:each="drink:${drinks}">
+            <img th:src="@{'images/' + ${drink.drinkImg}}" alt="image">
+            <p th:text="${drink.name}"></p>
+            <p th:text="${drink.price}"></p>
+            <form action="/" method="post" class="settingForm">
+                <input type="hidden" name="drinkId" th:value="${drink.drinkId}">
+                <button type="button">Обновить</button>
+                <button name="drinkDelete" value="drinkDelete">Удалить</button>
+            </form>
+        </div>
+        <form class="good-data" id="drink-form" method="post" action="/">
+            <div class="inputDiv">
+                <p>Название:</p>
+                <input type="text" minlength="3" maxlength="20" name="drinkName" required>
+            </div>
+            <div class="inputDiv">
+                <p>Цена</p>
+                <input type="number" step="0.01" min="0" max="100" name="drinkPrice" required>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="drinkHasCoff">
+                <p>Содержит кофеин?</p>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="drinkIsAlc">
+                <p>Алкогольный?</p>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="drinkIsWarm">
+                <p>Теплый?</p>
+            </div>
+            <div class="checkDiv">
+                <input type="checkbox" name="drinkIsGazed">
+                <p>Газированый?</p>
+            </div>
+            <div class="imgDiv">
+                <p>Вставить картинку</p>
+                <input type="file" accept="image/*" name="drinkImg" required>
+            </div>
+            <div class="btnDiv">
+                <button type="reset" onclick="showAdd('drink-show', 'drink-form')">Отменить</button>
+                <button name="drinkAdd" value="drinkAdd">Применить</button>
+            </div>
+        </form>
+        <div class="good-data" id="drink-show" onclick="showAdd('drink-show', 'drink-form')">
+            <img src="images/plusImg.png">
+        </div>
+    </div>
+</div>
+</body>
+</html>

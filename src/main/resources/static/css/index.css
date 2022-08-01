@@ -1,88 +1,141 @@
 a{text-decoration: none;}
 
-body{
-    margin:0;
-    color: #ffffff;
-    font-size:20px;
-    font-weight:bold;
-    text-align:center;
-    background-color:rgb(246, 235, 255);
+div{display: flex;}
+
+body{background-color: #ffffff;}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
 }
+
+p{
+    line-height: 25px;
+    color: #864044;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+button{
+    padding:5px;
+    background-color: #ffffff;
+    border-width: 0;
+    border-radius: inherit;
+}
+
+button:hover{
+    background-color: #e6dfd8;
+}
+
+.head{
+    justify-content: space-around;
+    background-color: #fff1e1;
+}
+
+.head div{
+    margin: 10px 0 10px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.body{
+    background-color: #fff8f0;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 10% 0 10%;
+}
+
+.title{
+    justify-content: flex-start;
+    padding: 10px 0 10px 1%;
+}
+
+.good-block{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.good-data{
+    border-radius: 10px;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px rgba(0, 0 , 0, 1);
+    width: 23%;
+    margin: 1%;
+}
+
+.good-data img{
+    width: 100%;
+    border-radius: inherit;
+}
+
+/*
+	#A7F4E7 back
+	#B18645 item
+	#97D026 body
 
 .header{
     background-color: #7259a7;
     display: flex;
     justify-content: space-around;
 }
-
 .header div{
     padding:0 20px 0 20px;
     height:100%;
 }
-
 .goodsBlock{
     background-color: #8579d6;
     margin:0 15% 0 15%;
     padding:0;
 }
-
 .chapter{
     display:flex;
     justify-content: space-between;
 }
-
 .chapter div{
     padding:0 2% 0 2%;
     margin:1% 1% 1% 1%;
 }
-
 .goodList{
     display:flex;
     justify-content:flex-start;
     flex-wrap:wrap;
     align-items:flex-start;
 }
-
-.goodList p{
-    margin:6px;
-}
-
+.goodList p{ margin:6px; }
 .good{
     margin:1%;
     width:23%;
     border-radius:10px;
     box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
 }
-
 .good img{
     max-width:100%;
     border-radius:10px 10px 0px 0px;
 }
-
 .update div:hover, .addBtn:hover, button:hover{
     box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
 }
-
 .addBtn{
     display:flex;
     margin: auto 1% auto 1%;
     padding:10px;
     border-radius:50%;
 }
-
 .addBtn img{
     width:100%;
     height:100%;
     object-fit:contain;
 }
-
-.updateForm{
+.settingForm{
     display:flex;
     flex-wrap:wrap;
     justify-content:space-around;
     padding:0 2% 5% 2%;
 }
-
 button{
     background-color:#644084;
     padding:5px;
@@ -92,31 +145,25 @@ button{
     font-size: 16px;
     color: white;
 }
-
-.addForm:invalid{ box-shadow:1px 1px 10px rgba(255, 0 , 0, 1); }
-.addForm:valid{ box-shadow:1px 1px 10px rgba(0, 255 , 0, 1); }
-
-.addForm{
-    padding:7px;
+.updateAddForm:invalid{ box-shadow:1px 1px 10px rgba(255, 0 , 0, 1); }
+.updateAddForm:valid{ box-shadow:1px 1px 10px rgba(0, 255 , 0, 1); }
+.updateAddForm{
+    width:23%;
     margin:1% 1% 1% 1%;
     border-radius:10px;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction:column;
 }
-
-.addForm div {
+.updateAddForm div {
     margin:7px;
     display:flex;
 }
-
 .imgDiv{
     align-items:flex-start;
     flex-direction:column;
 }
-
 .checkDiv{ justify-content: flex-start; }
-
 .btnDiv{ justify-content: space-around; }
-
 .inputDiv{ justify-content: space-between; }
+*/
