@@ -13,7 +13,7 @@ public class Drink {
     @JoinColumn(name = "good")
     private Good good;
     private Boolean isAlcohol;
-    private Boolean isCold;
+    private Boolean isWarm;
     private Boolean isGazed;
     private Boolean hasCaffeine;
     private String drinkImg;
@@ -23,12 +23,12 @@ public class Drink {
     private Double price;
 
     public Drink(Good good, Boolean hasCaffeine,
-                 Boolean isAlcohol, Boolean isCold,
+                 Boolean isAlcohol, Boolean isWarm,
                  Boolean isGazed, String drinkImg) {
         this.good = good;
         this.hasCaffeine = hasCaffeine;
         this.isAlcohol = isAlcohol;
-        this.isCold = isCold;
+        this.isWarm = isWarm;
         this.isGazed = isGazed;
         this.drinkImg = drinkImg;
     }
@@ -59,12 +59,12 @@ public class Drink {
         isAlcohol = alcohol;
     }
 
-    public Boolean getCold() {
-        return isCold;
+    public Boolean getWarm() {
+        return isWarm;
     }
 
-    public void setCold(Boolean cold) {
-        isCold = cold;
+    public void setWarm(Boolean warm) {
+        isWarm = warm;
     }
 
     public Boolean getGazed() {
