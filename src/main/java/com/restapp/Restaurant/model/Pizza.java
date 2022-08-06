@@ -1,7 +1,5 @@
 package com.restapp.Restaurant.model;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,10 +13,6 @@ public class Pizza {
     private Boolean isVegetarian;
     private Boolean isSpicy;
     private String pizzaImg;
-    @Transient
-    private String name;
-    @Transient
-    private Double price;
 
     public Pizza(Good good, Boolean isSpicy, Boolean isVegetarian, String pizzaImg) {
         this.good = good;
@@ -60,22 +54,6 @@ public class Pizza {
 
     public void setGood(Good good) {
         this.good = good;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public String getPizzaImg() {

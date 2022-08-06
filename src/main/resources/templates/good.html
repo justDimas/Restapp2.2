@@ -18,8 +18,8 @@
     </div>
     <div class="table-row" th:each="pizza:${pizzas}">
         <div class="table-cell"><p>Удалить</p></div>
-        <div class="table-cell"><p th:text="${pizza.name}"></p></div>
-        <div class="table-cell"><p th:text="${pizza.price}"></div>
+        <div class="table-cell"><p th:text="${pizza.good.goodName}"></p></div>
+        <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${pizza.vegetarian}"></div>
         <div class="table-cell"><p th:text="${pizza.spicy}"></div>
         <div class="table-cell"><p th:text="${pizza.pizzaImg}"></div>
@@ -88,8 +88,8 @@
     </div>
     <div class="table-row" th:each="salad:${salads}">
         <div class="table-cell"><p>Удалить</p></div>
-        <div class="table-cell"><p th:text="${salad.name}"></p></div>
-        <div class="table-cell"><p th:text="${salad.price}"></div>
+        <div class="table-cell"><p th:text="${salad.good.goodName}"></p></div>
+        <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${salad.vegetarian}"></div>
         <div class="table-cell"><p th:text="${salad.warm}"></div>
         <div class="table-cell"><p th:text="${salad.saladImg}"></div>
@@ -160,8 +160,8 @@
     </div>
     <div class="table-row" th:each="drink:${drinks}">
         <div class="table-cell"><p>Удалить</p></div>
-        <div class="table-cell"><p th:text="${drink.name}"></p></div>
-        <div class="table-cell"><p th:text="${drink.price}"></div>
+        <div class="table-cell"><p th:text="${drink.good.goodName}"></p></div>
+        <div class="table-cell"><p th:text="${drink.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${drink.alcohol}"></div>
         <div class="table-cell"><p th:text="${drink.warm}"></div>
         <div class="table-cell"><p th:text="${drink.gazed}"></div>

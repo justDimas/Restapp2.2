@@ -24,8 +24,8 @@
         <div class="good-block">
             <div class="good-data" th:each="pizza:${pizzas}">
                 <img th:src="@{'images/' + ${pizza.pizzaImg}}" alt="image">
-                <p th:text="${pizza.name}"></p>
-                <p th:text="${pizza.price}"></p>
+                <p th:text="${pizza.good.goodName}"></p>
+                <p th:text="${pizza.good.goodPrice}"></p>
                 <button type="button"><p>Подробнее</p></button>
             </div>
         </div>
@@ -35,8 +35,8 @@
         <div class="good-block">
             <div class="good-data" th:each="salad:${salads}">
                 <img th:src="@{'images/' + ${salad.saladImg}}" alt="image">
-                <p th:text="${salad.name}"></p>
-                <p th:text="${salad.price}"></p>
+                <p th:text="${salad.good.goodName}"></p>
+                <p th:text="${salad.good.goodPrice}"></p>
                 <button type="button"><p>Подробнее</p></button>
             </div>
         </div>
@@ -46,8 +46,8 @@
         <div class="good-block">
             <div class="good-data" th:each="drink:${drinks}">
                 <img th:src="@{'images/' + ${drink.drinkImg}}" alt="image">
-                <p th:text="${drink.name}"></p>
-                <p th:text="${drink.price}"></p>
+                <p th:text="${drink.good.goodName}"></p>
+                <p th:text="${drink.good.goodPrice}"></p>
                 <button type="button"><p>Подробнее</p></button>
             </div>
         </div>
