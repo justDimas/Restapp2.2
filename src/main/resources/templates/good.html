@@ -5,24 +5,33 @@
     <title>Restapp</title>
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/good.js"></script>
+    <script th:inline="javascript">
+        let pizzas = /*[[${pizzas}]]*/ "undef";
+        let salads = /*[[${salads}]]*/ "undef";
+        let drinks = /*[[${drinks}]]*/ "undef";
+    </script>
 </head>
 <body>
+<div class="main">
+<div class="tittle"><h2>пицца</h2></div>
 <div class="table">
     <div class="table-row">
         <div class="table-cell"></div>
         <div class="table-cell"><p>Название</p></div>
         <div class="table-cell"><p>Цена</p></div>
         <div class="table-cell"><p>Подходит вегетарицанцам</p></div>
+        <div class="table-cell"><p>Острая</p></div>
         <div class="table-cell"><p>Имя изображения</p></div>
         <div class="table-cell"></div>
     </div>
     <div class="table-row" th:each="pizza:${pizzas}">
-        <div class="table-cell"><p>Удалить</p></div>
+        <div class="table-cell">Удалить</div>
         <div class="table-cell"><p th:text="${pizza.good.goodName}"></p></div>
         <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${pizza.vegetarian}"></div>
         <div class="table-cell"><p th:text="${pizza.spicy}"></div>
-        <div class="table-cell"><p th:text="${pizza.pizzaImg}"></div>
+        <div class="table-cell"><div class="good-image"><img th:src="${pizza.pizzaImg}"></div></div>
+        <div class="table-cell" id="show-update-pizza-button"  data-toggle-id="update-pizza-form">Обновить</div>
     </div>
     <form class="table-row" method="post" action="/good" name="add-pizza-form"  id="add-pizza-form">
         <div class="table-cell">
@@ -41,7 +50,7 @@
             <input type="checkbox" name="pizzaIsSpicy">
         </div>
         <div class="table-cell">
-            <label for="pizza-image-add-input"><p>Вставить картинку</p></label>
+            <label for="pizza-image-add-input">Вставить картинку</label>
             <input type="file" accept="image/*" id="pizza-image-add-input" name="pizzaImage" required>
         </div>
         <div class="table-cell">
@@ -65,7 +74,7 @@
             <input type="checkbox" name="pizzaIsSpicy">
         </div>
         <div class="table-cell">
-            <label for="pizza-image-update-input"><p>Вставить картинку</p></label>
+            <label for="pizza-image-update-input">Вставить картинку</label>
             <input type="file" accept="image/*" id="pizza-image-update-input" name="pizzaImage" required>
         </div>
         <div class="table-cell">
@@ -73,9 +82,10 @@
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="show-add-pizza-button" data-toggle-id="add-pizza-form"><p>Добавить пиццу</p></div>
+        <div class="table-cell" id="show-add-pizza-button" data-toggle-id="add-pizza-form">Добавить пиццу</div>
     </div>
 </div>
+<div class="tittle"><h2>салаты</h2></div>
 <div class="table">
     <div class="table-row">
         <div class="table-cell"></div>
@@ -87,12 +97,13 @@
         <div class="table-cell"></div>
     </div>
     <div class="table-row" th:each="salad:${salads}">
-        <div class="table-cell"><p>Удалить</p></div>
+        <div class="table-cell">Удалить</div>
         <div class="table-cell"><p th:text="${salad.good.goodName}"></p></div>
         <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${salad.vegetarian}"></div>
         <div class="table-cell"><p th:text="${salad.warm}"></div>
-        <div class="table-cell"><p th:text="${salad.saladImg}"></div>
+        <div class="table-cell"><div class="good-image"><img th:src="${salad.saladImg}"></div></div>
+        <div class="table-cell" id="show-update-salad-button"  data-toggle-id="update-salad-form">Обновить</div>
     </div>
     <form class="table-row" method="post" action="/good" name="add-salad-form"  id="add-salad-form">
         <div class="table-cell">
@@ -111,7 +122,7 @@
             <input type="checkbox" name="saladIsWarm">
         </div>
         <div class="table-cell">
-            <label for="salad-image-add-input"><p>Вставить картинку</p></label>
+            <label for="salad-image-add-input">Вставить картинку</label>
             <input type="file" accept="image/*" id="salad-image-add-input" name="saladImage" required>
         </div>
         <div class="table-cell">
@@ -135,7 +146,7 @@
             <input type="checkbox" name="saladIsWarm">
         </div>
         <div class="table-cell">
-            <label for="salad-image-update-input"><p>Вставить картинку</p></label>
+            <label for="salad-image-update-input">Вставить картинку</label>
             <input type="file" accept="image/*" id="salad-image-update-input" name="saladImage" required>
         </div>
         <div class="table-cell">
@@ -143,9 +154,10 @@
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="show-add-salad-button" data-toggle-id="add-salad-form"><p>Добавить салат</p></div>
+        <div class="table-cell" id="show-add-salad-button" data-toggle-id="add-salad-form">Добавить салат</div>
     </div>
 </div>
+<div class="tittle"><h2>напитки</h2></div>
 <div class="table">
     <div class="table-row">
         <div class="table-cell"></div>
@@ -159,15 +171,15 @@
         <div class="table-cell"></div>
     </div>
     <div class="table-row" th:each="drink:${drinks}">
-        <div class="table-cell"><p>Удалить</p></div>
+        <div class="table-cell">Удалить</div>
         <div class="table-cell"><p th:text="${drink.good.goodName}"></p></div>
         <div class="table-cell"><p th:text="${drink.good.goodPrice}"></div>
         <div class="table-cell"><p th:text="${drink.alcohol}"></div>
         <div class="table-cell"><p th:text="${drink.warm}"></div>
         <div class="table-cell"><p th:text="${drink.gazed}"></div>
         <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
-        <div class="table-cell"><p th:text="${drink.drinkImg}"></div>
-        <div class="table-cell"><p>Обновить</p></div>
+        <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
+        <div class="table-cell" id="show-update-drink-button" th:value="${drink.drinkId}" data-toggle-id="update-drink-form">Обновить</div>
     </div>
     <form class="table-row" method="post" action="/good" name="add-drink-form"  id="add-drink-form">
         <div class="table-cell">
@@ -192,8 +204,9 @@
             <input type="checkbox" name="drinkHasCaffeine">
         </div>
         <div class="table-cell">
-            <label for="drink-image-add-input"><p>Вставить картинку</p></label>
-            <input type="file" accept="image/*" id="drink-image-add-input" name="drinkImage" required>
+            <label for="drink-image-add-input">Вставить картинку</label>
+            <input id="drink-image-add-input" data-toggle-id="drink-image-add-form" type="file" accept="image/*" name="drinkImage" required>
+            <img class="good-image" id="drink-image-add-form" src="images/noimg.jpg" alt="img">
         </div>
         <div class="table-cell">
             <button>Добавить</button>
@@ -204,34 +217,36 @@
             <button type="reset">Отменить</button>
         </div>
         <div class="table-cell">
-            <input type="text" minlength="3" maxlength="20" name="drinkName" required>
+            <input type="text" minlength="3" maxlength="20" name="drinkName" id="drink-name-update-input" required>
         </div>
         <div class="table-cell">
-            <input type="number" step="0.1" min="0" max="100" name="drinkPrice" required>
+            <input type="number" step="0.1" min="0" max="100" name="drinkPrice" id="drink-price-update-input" required>
         </div>
         <div class="table-cell">
-            <input type="checkbox" name="drinkIsAlcohol">
+            <input type="checkbox" name="drinkIsAlcohol" id="drink-alcohol-update-input">
         </div>
         <div class="table-cell">
-            <input type="checkbox" name="drinkIsWarm">
+            <input type="checkbox" name="drinkIsWarm" id="drink-warm-update-input">
         </div>
         <div class="table-cell">
-            <input type="checkbox" name="drinkIsGazed">
+            <input type="checkbox" name="drinkIsGazed" id="drink-gazed-update-input">
         </div>
         <div class="table-cell">
-            <input type="checkbox" name="drinkHasCaffeine">
+            <input type="checkbox" name="drinkHasCaffeine" id="drink-caffeine-update-input">
         </div>
         <div class="table-cell">
-            <label for="drink-image-update-input"><p>Вставить картинку</p></label>
-            <input type="file" accept="image/*" id="drink-image-update-input" name="drinkImage" required>
+            <label for="drink-image-update-input">Вставить картинку</label>
+            <input id="drink-image-update-input" data-toggle-id="drink-image-update-form" type="file" accept="image/*" name="drinkImage">
+            <img class="good-image" id="drink-image-update-form" alt="img">
         </div>
         <div class="table-cell">
             <button>Применить</button>
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="show-add-drink-button" data-toggle-id="add-drink-form"><p>Добавить напиток</p></div>
+        <div class="table-cell" id="show-add-drink-button" data-toggle-id="add-drink-form">Добавить напиток</div>
     </div>
+</div>
 </div>
 </body>
 </html>

@@ -19,28 +19,29 @@ p{
 
 button{
     padding:5px;
-    background-color: #ffffff;
+    background-color: #fff8f0;
     border-width: 0;
     border-radius: inherit;
 }
 
 button:hover{
-    background-color: #e6dfd8;
+    background-color: #fff1e1;
+    box-shadow: 0px -2px 7px rgba(0, 0 , 0, 0.5);
 }
 
-.head{
+.header{
     justify-content: space-around;
     background-color: #fff1e1;
 }
 
-.head div{
+.header div{
     margin: 10px 0 10px 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
 }
 
-.body{
+.main{
     background-color: #fff8f0;
     flex-direction: column;
     align-items: flex-start;
@@ -71,99 +72,3 @@ button:hover{
     width: 100%;
     border-radius: inherit;
 }
-
-/*
-	#A7F4E7 back
-	#B18645 item
-	#97D026 body
-
-.header{
-    background-color: #7259a7;
-    display: flex;
-    justify-content: space-around;
-}
-.header div{
-    padding:0 20px 0 20px;
-    height:100%;
-}
-.goodsBlock{
-    background-color: #8579d6;
-    margin:0 15% 0 15%;
-    padding:0;
-}
-.chapter{
-    display:flex;
-    justify-content: space-between;
-}
-.chapter div{
-    padding:0 2% 0 2%;
-    margin:1% 1% 1% 1%;
-}
-.goodList{
-    display:flex;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-    align-items:flex-start;
-}
-.goodList p{ margin:6px; }
-.good{
-    margin:1%;
-    width:23%;
-    border-radius:10px;
-    box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
-}
-.good img{
-    max-width:100%;
-    border-radius:10px 10px 0px 0px;
-}
-.update div:hover, .addBtn:hover, button:hover{
-    box-shadow:1px 1px 10px rgba(0, 0 , 0, 1);
-}
-.addBtn{
-    display:flex;
-    margin: auto 1% auto 1%;
-    padding:10px;
-    border-radius:50%;
-}
-.addBtn img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-.settingForm{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-around;
-    padding:0 2% 5% 2%;
-}
-button{
-    background-color:#644084;
-    padding:5px;
-    border:0px;
-    border-radius:5px;
-    text-align: center;
-    font-size: 16px;
-    color: white;
-}
-.updateAddForm:invalid{ box-shadow:1px 1px 10px rgba(255, 0 , 0, 1); }
-.updateAddForm:valid{ box-shadow:1px 1px 10px rgba(0, 255 , 0, 1); }
-.updateAddForm{
-    width:23%;
-    margin:1% 1% 1% 1%;
-    border-radius:10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction:column;
-}
-.updateAddForm div {
-    margin:7px;
-    display:flex;
-}
-.imgDiv{
-    align-items:flex-start;
-    flex-direction:column;
-}
-.checkDiv{ justify-content: flex-start; }
-.btnDiv{ justify-content: space-around; }
-.inputDiv{ justify-content: space-between; }
-*/
