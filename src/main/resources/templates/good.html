@@ -31,7 +31,7 @@
         <div class="table-cell"><p th:text="${pizza.vegetarian}"></div>
         <div class="table-cell"><p th:text="${pizza.spicy}"></div>
         <div class="table-cell"><div class="good-image"><img th:src="${pizza.pizzaImg}"></div></div>
-        <div class="table-cell" id="pizza-update-toggle"  data-toggle-id="pizza-update-form">Обновить</div>
+        <div class="table-cell update-toggle" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</div>
     </div>
     <form class="table-row" id="pizza-add-form" name="pizza-add-form" method="post" action="/good">
         <div class="table-cell">
@@ -84,7 +84,7 @@
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="pizza-add-toggle" data-toggle-id="pizza-add-form">Добавить пиццу</div>
+        <div class="table-cell add-toggle" data-toggle-id="pizza-add-form">Добавить пиццу</div>
     </div>
 </div>
 <div class="tittle"><h2>салаты</h2></div>
@@ -105,7 +105,7 @@
         <div class="table-cell"><p th:text="${salad.vegetarian}"></div>
         <div class="table-cell"><p th:text="${salad.warm}"></div>
         <div class="table-cell"><div class="good-image"><img th:src="${salad.saladImg}"></div></div>
-        <div class="table-cell" id="salad-update-toggle"  data-toggle-id="salad-update-form">Обновить</div>
+        <div class="table-cell update-toggle" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</div>
     </div>
     <form class="table-row" id="salad-add-form" name="salad-add-form" method="post" action="/good">
         <div class="table-cell">
@@ -158,7 +158,7 @@
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="salad-add-toggle" data-toggle-id="salad-add-form">Добавить салат</div>
+        <div class="table-cell add-toggle" data-toggle-id="salad-add-form">Добавить салат</div>
     </div>
 </div>
 <div class="tittle"><h2>напитки</h2></div>
@@ -183,7 +183,7 @@
         <div class="table-cell"><p th:text="${drink.gazed}"></div>
         <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
         <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
-        <div class="table-cell" id="drink-update-toggle" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</div>
+        <div class="table-cell update-toggle" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</div>
     </div>
     <form class="table-row" id="drink-add-form" name="drink-add-form" method="post" action="/good">
         <div class="table-cell">
@@ -248,7 +248,7 @@
         </div>
     </form>
     <div class="table-row">
-        <div class="table-cell" id="drink-add-toggle" data-toggle-id="drink-add-form">Добавить напиток</div>
+        <div class="table-cell add-toggle" data-toggle-id="drink-add-form">Добавить напиток</div>
     </div>
 </div>
 </div>
