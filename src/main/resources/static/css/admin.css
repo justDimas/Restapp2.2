@@ -74,18 +74,12 @@ input[type="text"]{
     width: 100%;
 }
 
-button{
-    width: 100%;
-    height: 100%;
-}
-
 .good-image{
-    transition-duration:500ms;
+    transition-duration:200ms;
     width:50%;
 }
 
-.good-image:hover{
-    transition-delay:300ms;
+.scale{
     border: 1px solid #000000;
     box-shadow: 3px 3px 10px #000000;
     transform: scale(3);
