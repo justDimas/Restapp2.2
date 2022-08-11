@@ -1,4 +1,12 @@
-function toggle(forms){
+let forms;
+let imageInputs;
+let addToggles;
+let updateToggles;
+let submitButtons;
+let resetButtons;
+let images;
+
+function toggle(){
     let trigForm = document.getElementById(event.target.dataset.toggleId);
     let isHidden = trigForm.classList.contains("hidden");
     forms.forEach(item => {
@@ -7,7 +15,7 @@ function toggle(forms){
     if(isHidden) trigForm.classList.remove("hidden");
 }
 
-function toggleAndSet(forms){
+function toggleAndSet(){
     toggle(forms);
     let form = document.getElementById(event.target.dataset.toggleId);
     if(event.target.dataset.toggleId == "pizza-update-form"){
@@ -84,40 +92,41 @@ function changeImage(){
     img.src = (!event.target.files.length) ? "images/noimg.jpg" : "images/" + event.target.files[0].name;
 }
 
-function scaleImage(images){
+function scaleImage(){
     let isScaled = event.target.classList.contains("scale");
-    Array.from(images).forEach(item => { if(item.classList.contains("scale"))
+    images.forEach(item => { if(item.classList.contains("scale"))
         item.classList.remove("scale");
     });
     if(!isScaled) event.target.classList.add("scale");
 }
 
-function ready() {
-    let forms = [document.getElementById("pizza-add-form"),
-                 document.getElementById("pizza-update-form"),
-                 document.getElementById("salad-add-form"),
-                 document.getElementById("salad-update-form"),
-                 document.getElementById("drink-add-form"),
-                 document.getElementById("drink-update-form")];
-    let imageInputs = [document.getElementById("pizza-image-add-input"),
-                      document.getElementById("pizza-image-update-input"),
-                      document.getElementById("salad-image-add-input"),
-                      document.getElementById("salad-image-update-input"),
-                      document.getElementById("drink-image-add-input"),
-                      document.getElementById("drink-image-update-input")];
-    let addToggles = document.getElementsByClassName("add-toggle");
-    let updateToggles = document.getElementsByClassName("update-toggle");
-    let submitButtons = document.getElementsByClassName("submit");
-    let resetButtons = document.getElementsByClassName("reset");
-    let images = document.getElementsByClassName("good-image");
+function resetForm(){
+    let form = document.getElementById(event.target.dataset.formId);
+    form.reset();
+    let imageInput = document.querySelector("#" + event.target.dataset.formId + " input[type=\"file\"]")
+    imageInput.dispatchEvent(new Event("change"));
+}
 
+function submitForm(){
+    let form = document.getElementById(event.target.dataset.formId);
+    form.submit();
+}
+
+function ready() {
+    forms = document.querySelectorAll(".form");
+    imageInputs = document.querySelectorAll(".image-input");
+    addToggles = document.querySelectorAll(".add-toggle");
+    updateToggles = document.querySelectorAll(".update-toggle");
+    submitButtons = document.querySelectorAll(".submit");
+    resetButtons = document.querySelectorAll(".reset");
+    images = document.querySelectorAll(".good-image");
+
+    submitButtons.forEach(item => item.addEventListener("click", submitForm ));
+    resetButtons.forEach(item => item.addEventListener("click", resetForm ));
     imageInputs.forEach(item => item.addEventListener("change", changeImage));
-    //TODO
-    /*Array.from(submitButtons).forEach(item => item.addEventListener("click", ()=>{ toggle(forms); }));
-    Array.from(resetButtons).forEach(item => item.addEventListener("click", ()=>{ toggle(forms); }));*/
-    Array.from(addToggles).forEach(item => item.addEventListener("click", ()=>{ toggle(forms); }));
-    Array.from(images).forEach(item => item.addEventListener("click", ()=>{ scaleImage(images); }));
-    Array.from(updateToggles).forEach(item => item.addEventListener("click", ()=>{ toggleAndSet(forms); }));
+    addToggles.forEach(item => item.addEventListener("click", toggle));
+    images.forEach(item => item.addEventListener("click", scaleImage));
+    updateToggles.forEach(item => item.addEventListener("click", toggleAndSet));
     forms.forEach(item => item.classList.add("hidden"));
 }
 document.addEventListener("DOMContentLoaded", ready);

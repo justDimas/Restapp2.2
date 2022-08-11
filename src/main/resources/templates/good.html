@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/good.js"></script>
     <script th:inline="javascript">
-        let pizzas = /*[[${pizzas}]]*/ "undef";
-        let salads = /*[[${salads}]]*/ "undef";
-        let drinks = /*[[${drinks}]]*/ "undef";
+        let pizzas = /*[[${pizzas}]]*/;
+        let salads = /*[[${salads}]]*/;
+        let drinks = /*[[${drinks}]]*/;
     </script>
 </head>
 <body>
@@ -33,8 +33,8 @@
             <div class="table-cell"><div class="good-image"><img th:src="${pizza.pizzaImg}"></div></div>
             <div class="table-cell update-toggle" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</div>
         </div>
-        <form class="table-row" id="pizza-add-form" name="pizza-add-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="pizza-add-form" name="pizza-add-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="pizza-add-form">Отменить</div>
             <div class="table-cell">
                 <input name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -49,13 +49,13 @@
             </div>
             <div class="table-cell">
                 <label for="pizza-image-add-input">Вставить картинку</label>
-                <input id="pizza-image-add-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
+                <input class="image-input" id="pizza-image-add-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
                 <img class="good-image" id="pizza-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit">Добавить</div>
+            <div class="table-cell submit" data-form-id="pizza-add-form">Добавить</div>
         </form>
-        <form class="table-row" id="pizza-update-form" name="pizza-update-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="pizza-update-form" name="pizza-update-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="pizza-update-form">Отменить</div>
             <div class="table-cell">
                 <input id="pizza-name-update-input" name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -70,10 +70,10 @@
             </div>
             <div class="table-cell">
                 <label for="pizza-image-update-input">Вставить картинку</label>
-                <input id="pizza-image-update-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
+                <input class="image-input" id="pizza-image-update-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="pizza-image-update-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit">Применить</div>
+            <div class="table-cell submit" data-form-id="pizza-update-form">Применить</div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="pizza-add-form">Добавить пиццу</div>
@@ -99,8 +99,8 @@
             <div class="table-cell"><div class="good-image"><img th:src="${salad.saladImg}"></div></div>
             <div class="table-cell update-toggle" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</div>
         </div>
-        <form class="table-row" id="salad-add-form" name="salad-add-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="salad-add-form" name="salad-add-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="salad-add-form">Отменить</div>
             <div class="table-cell">
                 <input name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -115,13 +115,13 @@
             </div>
             <div class="table-cell">
                 <label for="salad-image-add-input">Вставить картинку</label>
-                <input id="salad-image-add-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
+                <input class="image-input" id="salad-image-add-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
                 <img class="good-image" id="salad-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit">Добавить</div>
+            <div class="table-cell submit" data-form-id="salad-add-form">Добавить</div>
         </form>
-        <form class="table-row" id="salad-update-form" name="salad-update-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="salad-update-form" name="salad-update-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="salad-update-form">Отменить</div>
             <div class="table-cell">
                 <input id="salad-name-update-input" name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -136,10 +136,10 @@
             </div>
             <div class="table-cell">
                 <label for="salad-image-update-input">Вставить картинку</label>
-                <input id="salad-image-update-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
+                <input class="image-input" id="salad-image-update-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="salad-image-update-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit">Применить</div>
+            <div class="table-cell submit" data-form-id="salad-update-form">Применить</div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="salad-add-form">Добавить салат</div>
@@ -169,8 +169,8 @@
             <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
             <div class="table-cell update-toggle" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</div>
         </div>
-        <form class="table-row" id="drink-add-form" name="drink-add-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="drink-add-form" name="drink-add-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="drink-add-form">Отменить</div>
             <div class="table-cell">
                 <input name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -191,13 +191,13 @@
             </div>
             <div class="table-cell">
                 <label for="drink-image-add-input">Вставить картинку</label>
-                <input id="drink-image-add-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
+                <input class="image-input" id="drink-image-add-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
                 <img class="good-image" id="drink-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit">Добавить</div>
+            <div class="table-cell submit" data-form-id="drink-add-form">Добавить</div>
         </form>
-        <form class="table-row" id="drink-update-form" name="drink-update-form" method="post" action="/good">
-            <div class="table-cell reset">Отменить</div>
+        <form class="table-row form" id="drink-update-form" name="drink-update-form" method="post" action="/good">
+            <div class="table-cell reset" data-form-id="drink-update-form">Отменить</div>
             <div class="table-cell">
                 <input id="drink-name-update-input" name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -218,10 +218,10 @@
             </div>
             <div class="table-cell">
                 <label for="drink-image-update-input">Вставить картинку</label>
-                <input id="drink-image-update-input" name="drinkImage" data-toggle-id="drink-image-update-form" type="file" accept="image/*">
+                <input class="image-input" id="drink-image-update-input" name="drinkImage" data-toggle-id="drink-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="drink-image-update-form" alt="img">
             </div>
-            <div class="table-cell submit">Применить</div>
+            <div class="table-cell submit" data-form-id="drink-update-form">Применить</div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="drink-add-form">Добавить напиток</div>
