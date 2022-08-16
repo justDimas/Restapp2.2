@@ -16,14 +16,12 @@ public class Drink {
     private Boolean hasCaffeine;
     private String drinkImg;
 
-    public Drink(Good good, Boolean hasCaffeine,
-                 Boolean isAlcohol, Boolean isWarm,
-                 Boolean isGazed, String drinkImg) {
+    public Drink(Good good, Boolean isAlcohol, Boolean isWarm, Boolean isGazed, Boolean hasCaffeine, String drinkImg) {
         this.good = good;
-        this.hasCaffeine = hasCaffeine;
         this.isAlcohol = isAlcohol;
         this.isWarm = isWarm;
         this.isGazed = isGazed;
+        this.hasCaffeine = hasCaffeine;
         this.drinkImg = drinkImg;
     }
 

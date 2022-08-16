@@ -26,12 +26,8 @@ div, form{
 .table{
     flex-direction: column;
     min-width: fit-content;
-    justify-content:space-between;
-}
-
-.tittle{
-    border: 1px solid #000000;
-    padding: 5px;
+    justify-content: space-between;
+    margin: 0 0 50px 0;
 }
 
 .table-cell{
@@ -43,18 +39,6 @@ div, form{
     flex-grow: 1;
     width: 1%;
     transition-duration: 500ms;
-}
-
-.table-cell:hover{
-    background-color: #d3d0cf;
-}
-
-form:invalid{
-    background-color: #ffd0d1;
-}
-
-form:valid{
-    background-color: #d1ffd0;
 }
 
 .image-input{

@@ -2,7 +2,6 @@ let forms;
 let imageInputs;
 let addToggles;
 let updateToggles;
-let submitButtons;
 let resetButtons;
 let images;
 
@@ -16,23 +15,26 @@ function toggle(){
 }
 
 function toggleAndSet(){
-    toggle(forms);
+    toggle();
     let form = document.getElementById(event.target.dataset.toggleId);
     if(event.target.dataset.toggleId == "pizza-update-form"){
         let pizza;
+        let pizzaId = event.target.getAttribute("value");
         for(item of pizzas){
-            if(item.pizzaId == event.target.getAttribute("value")){
+            if(item.pizzaId == pizzaId){
                 pizza = item;
                 break;
             }
         }
         if(pizza === undefined) return;
+        let id = document.getElementById("pizza-id-box");
         let name = document.getElementById("pizza-name-update-input");
         let price =  document.getElementById("pizza-price-update-input");
         let vegetarian = document.getElementById("pizza-vegetarian-update-input");
         let spicy = document.getElementById("pizza-spicy-update-input");
         let image = document.getElementById("pizza-image-update-form");
 
+        id.value = pizzaId;
         name.value = pizza.good.goodName;
         price.value = pizza.good.goodPrice;
         vegetarian.checked = pizza.vegetarian;
@@ -41,19 +43,22 @@ function toggleAndSet(){
     }
     if(event.target.dataset.toggleId == "salad-update-form"){
         let salad;
+        let saladId = event.target.getAttribute("value");
         for(item of salads){
-            if(item.saladId == event.target.getAttribute("value")){
+            if(item.saladId == saladId){
                 salad = item;
                 break;
             }
         }
         if(salad === undefined) return;
+        let id = document.getElementById("salad-id-box");
         let name = document.getElementById("salad-name-update-input");
         let price =  document.getElementById("salad-price-update-input");
         let vegetarian = document.getElementById("salad-vegetarian-update-input");
         let warm = document.getElementById("salad-warm-update-input");
         let image = document.getElementById("salad-image-update-form");
 
+        id.value = saladId;
         name.value = salad.good.goodName;
         price.value = salad.good.goodPrice;
         vegetarian.checked = salad.vegetarian;
@@ -62,13 +67,15 @@ function toggleAndSet(){
     }
     if(event.target.dataset.toggleId == "drink-update-form"){
         let drink;
+        let drinkId = event.target.getAttribute("value");
         for(item of drinks){
-            if(item.drinkId == event.target.getAttribute("value")){
+            if(item.drinkId == drinkId){
                 drink = item;
                 break;
             }
         }
         if(drink === undefined) return;
+        let id = document.getElementById("drink-id-box");
         let name = document.getElementById("drink-name-update-input");
         let price =  document.getElementById("drink-price-update-input");
         let alc = document.getElementById("drink-alcohol-update-input");
@@ -77,6 +84,7 @@ function toggleAndSet(){
         let caffeine = document.getElementById("drink-caffeine-update-input");
         let image = document.getElementById("drink-image-update-form");
 
+        id.value = drinkId;
         name.value = drink.good.goodName;
         price.value = drink.good.goodPrice;
         alc.checked = drink.alcohol;
@@ -107,21 +115,14 @@ function resetForm(){
     imageInput.dispatchEvent(new Event("change"));
 }
 
-function submitForm(){
-    let form = document.getElementById(event.target.dataset.formId);
-    form.submit();
-}
-
 function ready() {
     forms = document.querySelectorAll(".form");
     imageInputs = document.querySelectorAll(".image-input");
     addToggles = document.querySelectorAll(".add-toggle");
     updateToggles = document.querySelectorAll(".update-toggle");
-    submitButtons = document.querySelectorAll(".submit");
     resetButtons = document.querySelectorAll(".reset");
     images = document.querySelectorAll(".good-image");
 
-    submitButtons.forEach(item => item.addEventListener("click", submitForm ));
     resetButtons.forEach(item => item.addEventListener("click", resetForm ));
     imageInputs.forEach(item => item.addEventListener("change", changeImage));
     addToggles.forEach(item => item.addEventListener("click", toggle));

@@ -14,10 +14,10 @@ public class Pizza {
     private Boolean isSpicy;
     private String pizzaImg;
 
-    public Pizza(Good good, Boolean isSpicy, Boolean isVegetarian, String pizzaImg) {
+    public Pizza(Good good, Boolean isVegetarian, Boolean isSpicy, String pizzaImg) {
         this.good = good;
-        this.isSpicy = isSpicy;
         this.isVegetarian = isVegetarian;
+        this.isSpicy = isSpicy;
         this.pizzaImg = pizzaImg;
     }
 

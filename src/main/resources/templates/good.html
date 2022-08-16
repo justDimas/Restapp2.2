@@ -13,8 +13,8 @@
 </head>
 <body>
 <div class="main">
-    <div class="tittle"><h2>пицца</h2></div>
     <div class="table">
+        <div class="table-row"><div class="table-cell"><h2>Пицца</h2></div></div>
         <div class="table-row">
             <div class="table-cell"></div>
             <div class="table-cell"><p>Название</p></div>
@@ -25,16 +25,23 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="pizza:${pizzas}">
-            <div class="table-cell">Удалить</div>
+            <form class="table-cell" th:id="${'pizza-delete-form-' + pizza.pizzaId}" method="post" action="/good">
+                <button name="form" value="pizzaDeleteForm">Удалить</button>
+                <input type="hidden" name="pizzaId" th:value="${pizza.pizzaId}">
+            </form>
             <div class="table-cell"><p th:text="${pizza.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
             <div class="table-cell"><p th:text="${pizza.vegetarian}"></div>
             <div class="table-cell"><p th:text="${pizza.spicy}"></div>
-            <div class="table-cell"><div class="good-image"><img th:src="${pizza.pizzaImg}"></div></div>
-            <div class="table-cell update-toggle" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</div>
+            <div class="table-cell"><img class="good-image" th:src="@{'images/'+${pizza.pizzaImg}}"></div>
+            <div class="table-cell">
+                <button class="update-toggle" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</button>
+            </div>
         </div>
-        <form class="table-row form" id="pizza-add-form" name="pizza-add-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="pizza-add-form">Отменить</div>
+        <form class="table-row form" id="pizza-add-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="pizza-add-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -52,10 +59,12 @@
                 <input class="image-input" id="pizza-image-add-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
                 <img class="good-image" id="pizza-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="pizza-add-form">Добавить</div>
+            <div class="table-cell"><button name="form" value="pizzaAddForm">Добавить</button></div>
         </form>
-        <form class="table-row form" id="pizza-update-form" name="pizza-update-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="pizza-update-form">Отменить</div>
+        <form class="table-row form" id="pizza-update-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="pizza-update-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input id="pizza-name-update-input" name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -73,14 +82,17 @@
                 <input class="image-input" id="pizza-image-update-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="pizza-image-update-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="pizza-update-form">Применить</div>
+            <div class="table-cell">
+                <button name="form" value="pizzaUpdateForm">Применить</button>
+                <input type="hidden" name="drinkId" id="pizza-id-box">
+            </div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="pizza-add-form">Добавить пиццу</div>
         </div>
     </div>
-    <div class="tittle"><h2>салаты</h2></div>
     <div class="table">
+        <div class="table-row"><div class="table-cell"><h2>Салаты</h2></div></div>
         <div class="table-row">
             <div class="table-cell"></div>
             <div class="table-cell"><p>Название</p></div>
@@ -91,16 +103,23 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="salad:${salads}">
-            <div class="table-cell">Удалить</div>
+            <form class="table-cell" th:id="${'salad-delete-form-' + salad.saladId}" method="post" action="/good">
+                <button name="form" value="saladDeleteForm">Удалить</button>
+                <input name="saladId" type="hidden" th:value="${salad.saladId}">
+            </form>
             <div class="table-cell"><p th:text="${salad.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
             <div class="table-cell"><p th:text="${salad.vegetarian}"></div>
             <div class="table-cell"><p th:text="${salad.warm}"></div>
-            <div class="table-cell"><div class="good-image"><img th:src="${salad.saladImg}"></div></div>
-            <div class="table-cell update-toggle" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</div>
+            <div class="table-cell"><img class="good-image" th:src="@{'images/'+${salad.saladImg}}"></div>
+            <div class="table-cell">
+                <button class="update-toggle" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</button>
+            </div>
         </div>
-        <form class="table-row form" id="salad-add-form" name="salad-add-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="salad-add-form">Отменить</div>
+        <form class="table-row form" id="salad-add-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="salad-add-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -118,10 +137,12 @@
                 <input class="image-input" id="salad-image-add-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
                 <img class="good-image" id="salad-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="salad-add-form">Добавить</div>
+            <div class="table-cell"><button name="form" value="saladAddForm">Добавить</button></div>
         </form>
-        <form class="table-row form" id="salad-update-form" name="salad-update-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="salad-update-form">Отменить</div>
+        <form class="table-row form" id="salad-update-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="salad-update-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input id="salad-name-update-input" name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -139,14 +160,17 @@
                 <input class="image-input" id="salad-image-update-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="salad-image-update-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="salad-update-form">Применить</div>
+            <div class="table-cell">
+                <button name="form" value="saladUpdateForm">Применить</button>
+                <input type="hidden" name="drinkId" id="salad-id-box">
+            </div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="salad-add-form">Добавить салат</div>
         </div>
     </div>
-    <div class="tittle"><h2>напитки</h2></div>
     <div class="table">
+        <div class="table-row"><div class="table-cell"><h2>Напитки</h2></div></div>
         <div class="table-row">
             <div class="table-cell"></div>
             <div class="table-cell"><p>Название</p></div>
@@ -159,7 +183,10 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="drink:${drinks}">
-            <div class="table-cell">Удалить</div>
+            <form class="table-cell" th:id="${'drink-delete-form-' + drink.drinkId}" method="post" action="/good">
+                <button name="form" value="drinkDeleteForm">Удалить</button>
+                <input name="drinkId" type="hidden" th:value="${drink.drinkId}">
+            </form>
             <div class="table-cell"><p th:text="${drink.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${drink.good.goodPrice}"></div>
             <div class="table-cell"><p th:text="${drink.alcohol}"></div>
@@ -167,10 +194,14 @@
             <div class="table-cell"><p th:text="${drink.gazed}"></div>
             <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
             <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
-            <div class="table-cell update-toggle" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</div>
+            <div class="table-cell">
+                <button class="update-toggle" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</button>
+            </div>
         </div>
-        <form class="table-row form" id="drink-add-form" name="drink-add-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="drink-add-form">Отменить</div>
+        <form class="table-row form" id="drink-add-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="drink-add-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -194,10 +225,12 @@
                 <input class="image-input" id="drink-image-add-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
                 <img class="good-image" id="drink-image-add-form" src="images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="drink-add-form">Добавить</div>
+            <div class="table-cell"><button name="form" value="drinkAddForm">Добавить</button></div>
         </form>
-        <form class="table-row form" id="drink-update-form" name="drink-update-form" method="post" action="/good">
-            <div class="table-cell reset" data-form-id="drink-update-form">Отменить</div>
+        <form class="table-row form" id="drink-update-form" method="post" action="/good">
+            <div class="table-cell">
+                <button class="reset" type="button" data-form-id="drink-update-form">Отменить</button>
+            </div>
             <div class="table-cell">
                 <input id="drink-name-update-input" name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
@@ -221,7 +254,10 @@
                 <input class="image-input" id="drink-image-update-input" name="drinkImage" data-toggle-id="drink-image-update-form" type="file" accept="image/*">
                 <img class="good-image" id="drink-image-update-form" alt="img">
             </div>
-            <div class="table-cell submit" data-form-id="drink-update-form">Применить</div>
+            <div class="table-cell">
+                <button name="form" value="drinkUpdateForm">Применить</button>
+                <input type="hidden" name="drinkId" id="drink-id-box">
+            </div>
         </form>
         <div class="table-row">
             <div class="table-cell add-toggle" data-toggle-id="drink-add-form">Добавить напиток</div>
