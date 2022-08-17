@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class GoodController {
@@ -59,6 +60,7 @@ public class GoodController {
         Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
         Boolean drinkHasCaffeine = (params.get("drinkHasCaffeine") != null);
         String drinkImage = params.get("drinkImage");
+
         Good requestGood = new Good(drinkName, drinkPrice);
         Drink requestDrink = new Drink(requestGood, drinkIsAlcohol, drinkIsWarm,
                                        drinkIsGazed, drinkHasCaffeine, drinkImage);
@@ -66,7 +68,32 @@ public class GoodController {
         drink.save(requestDrink);
     }
     public void updateDrink(Map<String,String> params){
+        Integer drinkId = Integer.parseInt(params.get("drinkId"));
+        String drinkName = params.get("drinkName");
+        Double drinkPrice = Double.parseDouble(params.get("drinkPrice"));
+        Boolean drinkIsAlcohol = (params.get("drinkIsAlcohol") != null);
+        Boolean drinkIsWarm = (params.get("drinkIsWarm") != null);
+        Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
+        Boolean drinkHasCaffeine = (params.get("drinkHasCaffeine") != null);
+        String drinkImage = params.get("drinkImage");
 
+        Optional<Drink> drinkOptional = drink.findById(drinkId);
+        if(drinkOptional.isEmpty()) return;
+
+        Drink requestDrink = drinkOptional.get();
+        Good requestGood = requestDrink.getGood();
+
+        requestDrink.setAlcohol(drinkIsAlcohol);
+        requestDrink.setWarm(drinkIsWarm);
+        requestDrink.setGazed(drinkIsGazed);
+        requestDrink.setHasCaffeine(drinkHasCaffeine);
+        if(drinkImage != "")
+            requestDrink.setDrinkImg(drinkImage);
+        requestGood.setGoodName(drinkName);
+        requestGood.setGoodPrice(drinkPrice);
+
+        drink.save(requestDrink);
+        good.save(requestGood);
     }
     public void deleteDrink(Map<String,String> params){
         Integer drinkId = Integer.parseInt(params.get("drinkId"));
@@ -79,13 +106,36 @@ public class GoodController {
         Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
         Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
         String pizzaImage = params.get("pizzaImage");
+
         Good requestGood = new Good(pizzaName, pizzaPrice);
         Pizza requestPizza = new Pizza(requestGood, pizzaIsVegetarian, pizzaIsSpicy, pizzaImage);
+
         good.save(requestGood);
         pizza.save(requestPizza);
     }
     public void updatePizza(Map<String,String> params){
+        Integer pizzaId = Integer.parseInt(params.get("pizzaId"));
+        String pizzaName = params.get("pizzaName");
+        Double pizzaPrice = Double.parseDouble(params.get("pizzaPrice"));
+        Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
+        Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
+        String pizzaImage = params.get("pizzaImage");
 
+        Optional<Pizza> pizzaOptional = pizza.findById(pizzaId);
+        if(pizzaOptional.isEmpty()) return;
+
+        Pizza requestPizza = pizzaOptional.get();
+        Good requestGood = requestPizza.getGood();
+
+        requestPizza.setVegetarian(pizzaIsVegetarian);
+        requestPizza.setSpicy(pizzaIsSpicy);
+        if(pizzaImage != "")
+            requestPizza.setPizzaImg(pizzaImage);
+        requestGood.setGoodName(pizzaName);
+        requestGood.setGoodPrice(pizzaPrice);
+
+        good.save(requestGood);
+        pizza.save(requestPizza);
     }
     public void deletePizza(Map<String,String> params){
         Integer pizzaId = Integer.parseInt(params.get("pizzaId"));
@@ -98,17 +148,39 @@ public class GoodController {
         Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
         Boolean saladIsWarm = (params.get("saladIsWarm") != null);
         String saladImage = params.get("saladImage");
+
         Good requestGood = new Good(saladName, saladPrice);
         Salad requestSalad = new Salad(requestGood, saladIsVegetarian, saladIsWarm, saladImage);
+
         good.save(requestGood);
         salad.save(requestSalad);
     }
     public void updateSalad(Map<String,String> params){
+        Integer saladId = Integer.parseInt(params.get("saladId"));
+        String saladName = params.get("saladName");
+        Double saladPrice = Double.parseDouble(params.get("saladPrice"));
+        Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
+        Boolean saladIsWarm = (params.get("saladIsWarm") != null);
+        String saladImage = params.get("saladImage");
 
+        Optional<Salad> saladOptional = salad.findById(saladId);
+        if(saladOptional.isEmpty()) return;
+
+        Salad requestSalad = saladOptional.get();
+        Good requestGood = requestSalad.getGood();
+
+        requestSalad.setVegetarian(saladIsVegetarian);
+        requestSalad.setWarm(saladIsWarm);
+        if(saladImage != "")
+            requestSalad.setSaladImg(saladImage);
+        requestGood.setGoodName(saladName);
+        requestGood.setGoodPrice(saladPrice);
+
+        good.save(requestGood);
+        salad.save(requestSalad);
     }
     public void deleteSalad(Map<String,String> params){
         Integer saladId = Integer.parseInt(params.get("saladId"));
         salad.deleteById(saladId);
     }
-
 }
