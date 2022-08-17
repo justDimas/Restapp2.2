@@ -15,8 +15,9 @@ function toggle(){
 }
 
 function toggleAndSet(){
-    toggle();
     let form = document.getElementById(event.target.dataset.toggleId);
+    if(form.classList.contains("hidden"))
+        toggle();
     if(event.target.dataset.toggleId == "pizza-update-form"){
         let pizza;
         let pizzaId = event.target.getAttribute("value");
@@ -116,7 +117,6 @@ function resetForm(){
 }
 
 function ready() {
-    forms = document.querySelectorAll(".form");
     imageInputs = document.querySelectorAll(".image-input");
     addToggles = document.querySelectorAll(".add-toggle");
     updateToggles = document.querySelectorAll(".update-toggle");
@@ -128,6 +128,8 @@ function ready() {
     addToggles.forEach(item => item.addEventListener("click", toggle));
     images.forEach(item => item.addEventListener("click", scaleImage));
     updateToggles.forEach(item => item.addEventListener("click", toggleAndSet));
+
+    forms = document.querySelectorAll(".form");
     forms.forEach(item => item.classList.add("hidden"));
 }
 document.addEventListener("DOMContentLoaded", ready);

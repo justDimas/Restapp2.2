@@ -1,6 +1,8 @@
 body{
-    background-color: #ffffff;
+    background: linear-gradient(90deg, #d1ffc9, #c9fcff);
     text-align: center;
+    line-height: 24px;
+    font-size: 18px;
 }
 
 *{
@@ -61,6 +63,29 @@ input[type="text"]{
 .good-image{
     transition-duration:200ms;
     width:50%;
+}
+
+.button{
+    cursor: pointer;
+    font-family: serif;
+    line-height: 24px;
+    font-size: 18px;
+    box-shadow: 0 0 2px 4px #b5e3e6;
+    border: 0;
+    background-color: #b5e3e6;
+    width: 100%;
+    height: 100%;
+    transition-duration:500ms;
+}
+
+label:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button:hover{
+    box-shadow: none;
+    background-color: #d7c9ff;
 }
 
 .scale{
