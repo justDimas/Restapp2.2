@@ -14,8 +14,8 @@ public class Purchase {
     @JoinColumn(name = "good")
     private Good good;
     @ManyToOne
-    @JoinColumn(name = "c_user")
-    private User user;
+    @JoinColumn(name = "t_user")
+    private CustomUser user;
 
     public Purchase() {
     }
@@ -52,11 +52,11 @@ public class Purchase {
         this.good = good;
     }
 
-    public User getUser() {
+    public CustomUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(CustomUser user) {
         this.user = user;
     }
 }

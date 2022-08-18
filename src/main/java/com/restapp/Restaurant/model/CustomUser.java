@@ -3,18 +3,17 @@ package com.restapp.Restaurant.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "t_user")
-public class User {
+public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String userName;
     private String userPassword;
     @ManyToOne
-    @JoinColumn(name = "access")
-    private Access access;
+    @JoinColumn(name = "user_role")
+    private CustomRole userRole;
 
-    public User() {
+    public CustomUser() {
     }
 
     public Integer getUserId() {
@@ -41,11 +40,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public Access getAccess() {
-        return access;
+    public CustomRole getUserRole() {
+        return userRole;
     }
 
-    public void setAccess(Access access) {
-        this.access = access;
+    public void setUserRole(CustomRole userRole) {
+        this.userRole = userRole;
     }
 }
