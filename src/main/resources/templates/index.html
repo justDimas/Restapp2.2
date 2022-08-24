@@ -4,53 +4,63 @@
     <meta charset="UTF-8">
     <title>Restapp</title>
     <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+    <script th:inline="javascript">
+        let user = /*[[${user}]]*/;
+    </script>
 </head>
 <body>
     <div class="header">
-        <div><a href="/"><p>Restapp</p></a></div>
+        <div>
+            <a href="/">Restapp</a>
+        </div>
         <div>
             <p>Время работы ресторана: 10:00-22:00 ежедневно</p>
             <p>Адресс: ул.Пушкина, дом Колотушкина</p>
         </div>
         <div>
-            <a id="login"><p>Вход</p></a>
-            <a href="/registration"><p>Регистрация</p></a>
+            <div class="toggle">Вход</div>
+            <div class="registration">Регистрация</div>
         </div>
     </div>
     <div class="main">
-        <div class="title">
-            <p>Пицца</p>
-        </div>
+        <div class="title">Пицца</div>
         <div class="good-block">
             <div class="good-data" th:each="pizza:${pizzas}">
                 <img th:src="@{'images/' + ${pizza.pizzaImg}}" alt="image">
                 <p th:text="${pizza.good.goodName}"></p>
                 <p th:text="${pizza.good.goodPrice}"></p>
-                <button type="button"><p>Подробнее</p></button>
+                <button type="button">Подробнее</button>
             </div>
         </div>
-        <div class="title">
-            <p>Салаты</p>
-        </div>
+        <div class="title">Салаты</div>
         <div class="good-block">
             <div class="good-data" th:each="salad:${salads}">
                 <img th:src="@{'images/' + ${salad.saladImg}}" alt="image">
                 <p th:text="${salad.good.goodName}"></p>
                 <p th:text="${salad.good.goodPrice}"></p>
-                <button type="button"><p>Подробнее</p></button>
+                <button type="button">Подробнее</button>
             </div>
         </div>
-        <div class="title">
-            <p>Напитки</p>
-        </div>
+        <div class="title">Напитки</div>
         <div class="good-block">
             <div class="good-data" th:each="drink:${drinks}">
                 <img th:src="@{'images/' + ${drink.drinkImg}}" alt="image">
                 <p th:text="${drink.good.goodName}"></p>
                 <p th:text="${drink.good.goodPrice}"></p>
-                <button type="button"><p>Подробнее</p></button>
+                <button type="button">Подробнее</button>
             </div>
         </div>
+    </div>
+    <div class="modal">
+        <form class="modal-window" method="post">
+            <button type="button" class="toggle">x</button>
+            <p>Логин:</p>
+            <input type="text" name="username" placeholder="логин" maxlength="50" required>
+            <p>Пароль:</p>
+            <input type="password" name="password" placeholder="пароль" maxlength="50"  required>
+            <button>Войти</button>
+        </form>
     </div>
 </body>
 </html>

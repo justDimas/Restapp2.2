@@ -22,14 +22,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/good**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
-                .and().formLogin();
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/goods*").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/*").permitAll()
+                .and().formLogin().loginPage("/")
+                .and().logout().logoutUrl("/logout").permitAll();
     }
+
+
 }

@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegistrationController {
     @GetMapping("/registration")
     public String registration(Model model){
-
         return "registration";
     }
 
     @PostMapping("/registration")
     public String registration(){
-
         return "redirect:/registration";
     }
 }
