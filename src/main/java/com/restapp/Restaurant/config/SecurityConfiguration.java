@@ -15,23 +15,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private CustomUserDetailsService userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder encoder(){
         return new BCryptPasswordEncoder(12);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/goods*").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/*").permitAll()
+                .antMatchers("/goods").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/registration").anonymous()
                 .and().formLogin().loginPage("/")
                 .and().logout().logoutUrl("/logout").permitAll();
     }
-
-
 }

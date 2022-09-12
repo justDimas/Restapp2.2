@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomUserDAO extends JpaRepository<CustomUser, Integer> {
     CustomUser findByUserName(String userName);
+    Boolean existsByUserName(String userName);
 }

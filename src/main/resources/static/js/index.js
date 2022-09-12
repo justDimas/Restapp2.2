@@ -4,10 +4,13 @@ let registration;
 
 function toggle(){
     modal = document.querySelector(".modal");
-    if(modal.classList.contains("hidden"))
+    if(modal.classList.contains("hidden")){
         modal.classList.remove("hidden");
-    else
+        document.body.style.overflow = 'hidden';
+    }else{
         modal.classList.add("hidden");
+        document.body.style.overflow = 'visible';
+    }
 }
 
 function ready() {

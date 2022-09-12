@@ -15,6 +15,14 @@ public class CustomRole {
     public CustomRole() {
     }
 
+    public CustomRole(Integer roleId){
+        this.roleId = roleId;
+    }
+
+    public CustomRole(String roleName) {
+        this.roleName = roleName;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }

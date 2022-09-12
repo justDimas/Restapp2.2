@@ -3,10 +3,10 @@ package com.restapp.Restaurant.config;
 import com.restapp.Restaurant.dao.CustomUserDAO;
 import com.restapp.Restaurant.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +20,17 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (requiredUser == null) {
             throw new UsernameNotFoundException("Unknown user: " + userName);
         }
-        return User.builder()
-                .username(requiredUser.getUserName())
-                .password(requiredUser.getUserPassword())
-                .roles(requiredUser.getUserRole().toString())
-                .build();
+        return requiredUser;
+    }
+
+    public Boolean saveUser(CustomUser user){
+        if(!userDAO.existsByUserName(user.getUserName())){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+            String encodePassword = encoder.encode(user.getPassword());
+            user.setUserPassword(encodePassword);
+            userDAO.save(user);
+            return true;
+        }else
+            return false;
     }
 }
