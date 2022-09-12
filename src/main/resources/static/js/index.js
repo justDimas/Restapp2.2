@@ -1,6 +1,5 @@
 let modal;
 let modalToggle;
-let registration;
 
 function toggle(){
     modal = document.querySelector(".modal");
@@ -16,20 +15,7 @@ function toggle(){
 function ready() {
     modalToggle = document.querySelectorAll(".toggle");
     modal = document.querySelector(".modal");
-    registration = document.querySelector(".registration");
-    if(user!=null){
-        modalToggle.forEach(item => item.innerHTML = user.username);
-        registration.innerHTML = "Выход из аккаунта";
-        registration.addEventListener("click", ()=>{
-            window.location.href = "/logout";
-        });
-    }else{
-        registration.innerHTML = "Регистрация";
-        modalToggle.forEach(item => item.addEventListener("click", toggle));
-        registration.addEventListener("click", ()=>{
-            window.location.href = "/registration";
-        });
-    }
+    modalToggle.forEach(item => item.addEventListener("click", toggle));
     modal.classList.add("hidden");
 }
 document.addEventListener("DOMContentLoaded", ready);

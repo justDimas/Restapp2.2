@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/goods").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/registration").anonymous()
                 .and().formLogin().loginPage("/")
-                .and().logout().logoutUrl("/logout").permitAll();
+                .and().exceptionHandling().accessDeniedPage("/");
     }
 }

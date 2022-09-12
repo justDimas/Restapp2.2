@@ -5,9 +5,6 @@
     <title>Restapp</title>
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js"></script>
-    <script th:inline="javascript">
-        let user = /*[[${user}]]*/;
-    </script>
 </head>
 <body>
     <div class="header">
@@ -18,9 +15,13 @@
             <p>Время работы ресторана: 10:00-22:00 ежедневно</p>
             <p>Адресс: ул.Пушкина, дом Колотушкина</p>
         </div>
-        <div>
+        <div th:if="${user}">
+            <div th:text="${user.userName}"></div>
+            <div><a href="/logout">Выход</a></div>
+        </div>
+        <div th:unless="${user}">
             <div class="toggle">Вход</div>
-            <div class="registration">Регистрация</div>
+            <div><a href="/registration">Регистрация</a></div>
         </div>
     </div>
     <div class="main">
