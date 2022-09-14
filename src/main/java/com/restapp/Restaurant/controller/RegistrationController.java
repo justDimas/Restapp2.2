@@ -26,7 +26,12 @@ public class RegistrationController {
     public String registration(@RequestParam Map<String, String> params, Model model){
         String userName = params.get("userName");
         String userPassword = params.get("userPassword");
-        if (userService.saveUser(new CustomUser(userName, userPassword, new CustomRole(2)))){
+        CustomUser build = CustomUser.builder()
+                .userName(userName)
+                .userPassword(userPassword)
+                .userRole(CustomRole.builder().roleId(1).build())
+                .build();
+        if (userService.saveUser(build)){
             return "redirect:/";
         }else{
             model.addAttribute("error", true);

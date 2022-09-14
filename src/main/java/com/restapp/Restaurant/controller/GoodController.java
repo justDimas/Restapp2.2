@@ -61,9 +61,18 @@ public class GoodController {
         Boolean drinkHasCaffeine = (params.get("drinkHasCaffeine") != null);
         String drinkImage = params.get("drinkImage");
 
-        Good requestGood = new Good(drinkName, drinkPrice);
-        Drink requestDrink = new Drink(requestGood, drinkIsAlcohol, drinkIsWarm,
-                                       drinkIsGazed, drinkHasCaffeine, drinkImage);
+        Good requestGood = Good.builder()
+                .goodName(drinkName)
+                .goodPrice(drinkPrice)
+                .build();
+        Drink requestDrink = Drink.builder()
+                .good(requestGood)
+                .isAlcohol(drinkIsAlcohol)
+                .isWarm(drinkIsWarm)
+                .isGazed(drinkIsGazed)
+                .hasCaffeine(drinkHasCaffeine)
+                .drinkImg(drinkImage)
+                .build();
         good.save(requestGood);
         drink.save(requestDrink);
     }
@@ -83,11 +92,11 @@ public class GoodController {
         Drink requestDrink = drinkOptional.get();
         Good requestGood = requestDrink.getGood();
 
-        requestDrink.setAlcohol(drinkIsAlcohol);
-        requestDrink.setWarm(drinkIsWarm);
-        requestDrink.setGazed(drinkIsGazed);
+        requestDrink.setIsAlcohol(drinkIsAlcohol);
+        requestDrink.setIsWarm(drinkIsWarm);
+        requestDrink.setIsGazed(drinkIsGazed);
         requestDrink.setHasCaffeine(drinkHasCaffeine);
-        if(drinkImage != "")
+        if(!drinkImage.isEmpty())
             requestDrink.setDrinkImg(drinkImage);
         requestGood.setGoodName(drinkName);
         requestGood.setGoodPrice(drinkPrice);
@@ -107,8 +116,16 @@ public class GoodController {
         Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
         String pizzaImage = params.get("pizzaImage");
 
-        Good requestGood = new Good(pizzaName, pizzaPrice);
-        Pizza requestPizza = new Pizza(requestGood, pizzaIsVegetarian, pizzaIsSpicy, pizzaImage);
+        Good requestGood = Good.builder()
+                .goodName(pizzaName)
+                .goodPrice(pizzaPrice)
+                .build();
+        Pizza requestPizza = Pizza.builder()
+                .good(requestGood)
+                .isVegetarian(pizzaIsVegetarian)
+                .isSpicy(pizzaIsSpicy)
+                .pizzaImg(pizzaImage)
+                .build();
 
         good.save(requestGood);
         pizza.save(requestPizza);
@@ -127,9 +144,9 @@ public class GoodController {
         Pizza requestPizza = pizzaOptional.get();
         Good requestGood = requestPizza.getGood();
 
-        requestPizza.setVegetarian(pizzaIsVegetarian);
-        requestPizza.setSpicy(pizzaIsSpicy);
-        if(pizzaImage != "")
+        requestPizza.setIsVegetarian(pizzaIsVegetarian);
+        requestPizza.setIsSpicy(pizzaIsSpicy);
+        if(!pizzaImage.isEmpty())
             requestPizza.setPizzaImg(pizzaImage);
         requestGood.setGoodName(pizzaName);
         requestGood.setGoodPrice(pizzaPrice);
@@ -149,8 +166,16 @@ public class GoodController {
         Boolean saladIsWarm = (params.get("saladIsWarm") != null);
         String saladImage = params.get("saladImage");
 
-        Good requestGood = new Good(saladName, saladPrice);
-        Salad requestSalad = new Salad(requestGood, saladIsVegetarian, saladIsWarm, saladImage);
+        Good requestGood = Good.builder()
+                .goodName(saladName)
+                .goodPrice(saladPrice)
+                .build();
+        Salad requestSalad = Salad.builder()
+                .good(requestGood)
+                .isVegetarian(saladIsVegetarian)
+                .isWarm(saladIsWarm)
+                .saladImg(saladImage)
+                .build();
 
         good.save(requestGood);
         salad.save(requestSalad);
@@ -169,9 +194,9 @@ public class GoodController {
         Salad requestSalad = saladOptional.get();
         Good requestGood = requestSalad.getGood();
 
-        requestSalad.setVegetarian(saladIsVegetarian);
-        requestSalad.setWarm(saladIsWarm);
-        if(saladImage != "")
+        requestSalad.setIsVegetarian(saladIsVegetarian);
+        requestSalad.setIsWarm(saladIsWarm);
+        if(!saladImage.isEmpty())
             requestSalad.setSaladImg(saladImage);
         requestGood.setGoodName(saladName);
         requestGood.setGoodPrice(saladPrice);

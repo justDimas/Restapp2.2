@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     public Boolean saveUser(CustomUser user){
-        if(!userDAO.existsByUserName(user.getUserName())){
+        if(!userDAO.existsByUserName(user.getUsername())){
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
             String encodePassword = encoder.encode(user.getPassword());
             user.setUserPassword(encodePassword);
