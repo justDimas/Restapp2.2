@@ -40,7 +40,7 @@ function toggleAndSet(){
         price.value = pizza.good.goodPrice;
         vegetarian.checked = pizza.vegetarian;
         spicy.checked = pizza.spicy;
-        image.src = "images/" + pizza.pizzaImg;
+        image.src = "/images/" + pizza.pizzaImg;
     }
     if(event.target.dataset.toggleId == "salad-update-form"){
         let salad;
@@ -64,7 +64,7 @@ function toggleAndSet(){
         price.value = salad.good.goodPrice;
         vegetarian.checked = salad.vegetarian;
         warm.checked = salad.warm;
-        image.src = "images/" + salad.saladImg;
+        image.src = "/images/" + salad.saladImg;
     }
     if(event.target.dataset.toggleId == "drink-update-form"){
         let drink;
@@ -92,13 +92,13 @@ function toggleAndSet(){
         warm.checked = drink.warm;
         gazed.checked = drink.gazed;
         caffeine.checked = drink.hasCaffeine;
-        image.src = "images/" + drink.drinkImg;
+        image.src = "/images/" + drink.drinkImg;
     }
 }
 
 function changeImage(){
     let img = document.getElementById(event.target.dataset.toggleId);
-    img.src = (!event.target.files.length) ? "images/noimg.jpg" : "images/" + event.target.files[0].name;
+    img.src = (!event.target.files.length) ? "/images/noimg.jpg" : "/images/" + event.target.files[0].name;
 }
 
 function scaleImage(){

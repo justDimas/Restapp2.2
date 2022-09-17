@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
-    <form method="post">
-        имя<input name="userName" placeholder="ник">
-        пароль<input name="userPassword" placeholder="пароль">
-        повторить пароль<input name="userPasswordRepeat" placeholder="пароль х2">
+<div class="wrapper">
+    <form class="main" method="post">
+        <p>имя</p>
+        <input name="userName" placeholder="ник">
+        <p>пароль</p>
+        <input name="userPassword" placeholder="пароль">
+        <p>повторить пароль</p>
+        <input name="userPasswordRepeat" placeholder="пароль х2">
         <button>зарегистрировать</button>
         <a href="/">на главную</a>
+        <H2 th:if="${error}">Никнейм занят</H2>
     </form>
-    <H2 th:if="${error}">Никнейм занят</H2>
+</div>
 </body>
 </html>

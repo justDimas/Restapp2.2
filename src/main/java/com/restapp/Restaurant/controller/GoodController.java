@@ -29,14 +29,14 @@ public class GoodController {
     @Autowired
     GoodDAO good;
 
-    @GetMapping("/goods")
+    @GetMapping("/admin/goods")
     public String good(Model model){
         model.addAttribute("pizzas", pizza.findAll());
         model.addAttribute("salads", salad.findAll());
         model.addAttribute("drinks", drink.findAll());
         return "goods";
     }
-    @PostMapping("/goods")
+    @PostMapping("/admin/goods")
     public String good(@RequestParam Map<String,String> params){
         switch (params.get("form")) {
             case "pizzaAddForm" -> addPizza(params);
@@ -49,7 +49,7 @@ public class GoodController {
             case "drinkUpdateForm" -> updateDrink(params);
             case "drinkDeleteForm" -> deleteDrink(params);
         }
-        return "redirect:/goods";
+        return "redirect:goods";
     }
 
     public void addDrink(Map<String,String> params){

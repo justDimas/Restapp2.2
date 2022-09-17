@@ -31,6 +31,6 @@ public class IndexController {
 
     @PostMapping("/")
     public String index(){
-        return "redirect:/";
+        return "redirect:index";
     }
 }

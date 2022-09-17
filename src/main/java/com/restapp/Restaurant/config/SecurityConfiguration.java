@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private CustomUserService userDetailsService;
 
     @Bean
     public PasswordEncoder encoder(){
@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/goods").hasAnyAuthority("ROLE_ADMIN", "ROLE_GOD")
+                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_GOD")
                 .antMatchers("/registration").anonymous()
                 .and().formLogin().loginPage("/")
                 .and().exceptionHandling().accessDeniedPage("/");

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Restapp</title>
-    <link rel="stylesheet" href="css/admin.css">
-    <script src="js/good.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/good.js"></script>
     <script th:inline="javascript">
         let pizzas = /*[[${pizzas}]]*/;
         let salads = /*[[${salads}]]*/;
@@ -33,7 +33,7 @@
             <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
             <div class="table-cell"><p th:text="${pizza.isVegetarian}"></div>
             <div class="table-cell"><p th:text="${pizza.isSpicy}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'images/'+${pizza.pizzaImg}}"></div>
+            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${pizza.pizzaImg}}"></div>
             <div class="table-cell">
                 <button class="update-toggle button" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</button>
             </div>
@@ -58,7 +58,7 @@
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="pizza-image-add-form" src="images/noimg.jpg" alt="img">
+                <img class="good-image" id="pizza-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
             <div class="table-cell">
                 <button class="button" name="form" value="pizzaAddForm">Добавить</button>
@@ -84,7 +84,7 @@
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
                 </label>
-                <img class="good-image" id="pizza-image-update-form" src="images/noimg.jpg" alt="img">
+                <img class="good-image" id="pizza-image-update-form" src="/images/noimg.jpg" alt="img">
             </div>
             <div class="table-cell">
                 <button class="button" name="form" value="pizzaUpdateForm">Применить</button>
@@ -117,7 +117,7 @@
             <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
             <div class="table-cell"><p th:text="${salad.isVegetarian}"></div>
             <div class="table-cell"><p th:text="${salad.isWarm}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'images/'+${salad.saladImg}}"></div>
+            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${salad.saladImg}}"></div>
             <div class="table-cell">
                 <button class="update-toggle button" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</button>
             </div>
@@ -142,7 +142,7 @@
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="salad-image-add-form" src="images/noimg.jpg" alt="img">
+                <img class="good-image" id="salad-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
             <div class="table-cell">
                 <button class="button" name="form" value="saladAddForm">Добавить</button>
@@ -168,7 +168,7 @@
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
                 </label>
-                <img class="good-image" id="salad-image-update-form" src="images/noimg.jpg" alt="img">
+                <img class="good-image" id="salad-image-update-form" src="/images/noimg.jpg" alt="img">
             </div>
             <div class="table-cell">
                 <button class="button" name="form" value="saladUpdateForm">Применить</button>
@@ -205,7 +205,7 @@
             <div class="table-cell"><p th:text="${drink.isWarm}"></div>
             <div class="table-cell"><p th:text="${drink.isGazed}"></div>
             <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
+            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${drink.drinkImg}}" alt="img"></div>
             <div class="table-cell">
                 <button class="update-toggle button" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</button>
             </div>
@@ -236,7 +236,7 @@
                 <label>Вставить картинку
                     <input class="image-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="drink-image-add-form" src="images/noimg.jpg" alt="img">
+                <img class="good-image" id="drink-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
             <div class="table-cell"><button class="button" name="form" value="drinkAddForm">Добавить</button></div>
         </form>
