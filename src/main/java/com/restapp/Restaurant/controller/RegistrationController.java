@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class RegistrationController {
@@ -29,7 +30,7 @@ public class RegistrationController {
         CustomUser build = CustomUser.builder()
                 .userName(userName)
                 .userPassword(userPassword)
-                .userRole(CustomRole.builder().roleId(1).build())
+                .userRoles(Set.of(CustomRole.builder().roleId(7).build()))
                 .build();
         if (userService.saveUser(build)){
             return "redirect:/";

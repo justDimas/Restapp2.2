@@ -31,8 +31,8 @@
             </form>
             <div class="table-cell"><p th:text="${pizza.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${pizza.vegetarian}"></div>
-            <div class="table-cell"><p th:text="${pizza.spicy}"></div>
+            <div class="table-cell"><p th:text="${pizza.isVegetarian}"></div>
+            <div class="table-cell"><p th:text="${pizza.isSpicy}"></div>
             <div class="table-cell"><img class="good-image" th:src="@{'images/'+${pizza.pizzaImg}}"></div>
             <div class="table-cell">
                 <button class="update-toggle button" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</button>
@@ -115,8 +115,8 @@
             </form>
             <div class="table-cell"><p th:text="${salad.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${salad.vegetarian}"></div>
-            <div class="table-cell"><p th:text="${salad.warm}"></div>
+            <div class="table-cell"><p th:text="${salad.isVegetarian}"></div>
+            <div class="table-cell"><p th:text="${salad.isWarm}"></div>
             <div class="table-cell"><img class="good-image" th:src="@{'images/'+${salad.saladImg}}"></div>
             <div class="table-cell">
                 <button class="update-toggle button" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</button>
@@ -201,9 +201,9 @@
             </form>
             <div class="table-cell"><p th:text="${drink.good.goodName}"></p></div>
             <div class="table-cell"><p th:text="${drink.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${drink.alcohol}"></div>
-            <div class="table-cell"><p th:text="${drink.warm}"></div>
-            <div class="table-cell"><p th:text="${drink.gazed}"></div>
+            <div class="table-cell"><p th:text="${drink.isAlcohol}"></div>
+            <div class="table-cell"><p th:text="${drink.isWarm}"></div>
+            <div class="table-cell"><p th:text="${drink.isGazed}"></div>
             <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
             <div class="table-cell"><img class="good-image" th:src="@{'images/'+${drink.drinkImg}}" alt="img"></div>
             <div class="table-cell">

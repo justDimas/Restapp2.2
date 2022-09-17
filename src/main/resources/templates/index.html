@@ -16,7 +16,7 @@
             <p>Адресс: ул.Пушкина, дом Колотушкина</p>
         </div>
         <div th:if="${user}">
-            <div th:text="${user.userName}"></div>
+            <div th:text="${user.username}"></div>
             <div><a href="/logout">Выход</a></div>
         </div>
         <div th:unless="${user}">

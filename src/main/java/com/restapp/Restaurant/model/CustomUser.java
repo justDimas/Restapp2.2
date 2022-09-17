@@ -21,13 +21,15 @@ public class CustomUser implements UserDetails {
     private Integer userId;
     private String userName;
     private String userPassword;
-    @ManyToOne
-    @JoinColumn(name = "user_role")
-    private CustomRole userRole;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+               joinColumns = @JoinColumn(name = "users"),
+               inverseJoinColumns = @JoinColumn(name="roles"))
+    private Set<CustomRole> userRoles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Set.of(userRole);
+        return userRoles;
     }
 
     @Override
