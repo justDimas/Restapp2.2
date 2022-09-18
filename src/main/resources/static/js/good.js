@@ -38,8 +38,8 @@ function toggleAndSet(){
         id.value = pizzaId;
         name.value = pizza.good.goodName;
         price.value = pizza.good.goodPrice;
-        vegetarian.checked = pizza.vegetarian;
-        spicy.checked = pizza.spicy;
+        vegetarian.checked = pizza.isVegetarian;
+        spicy.checked = pizza.isSpicy;
         image.src = "/images/" + pizza.pizzaImg;
     }
     if(event.target.dataset.toggleId == "salad-update-form"){
@@ -62,8 +62,8 @@ function toggleAndSet(){
         id.value = saladId;
         name.value = salad.good.goodName;
         price.value = salad.good.goodPrice;
-        vegetarian.checked = salad.vegetarian;
-        warm.checked = salad.warm;
+        vegetarian.checked = salad.isVegetarian;
+        warm.checked = salad.isWarm;
         image.src = "/images/" + salad.saladImg;
     }
     if(event.target.dataset.toggleId == "drink-update-form"){
@@ -88,9 +88,9 @@ function toggleAndSet(){
         id.value = drinkId;
         name.value = drink.good.goodName;
         price.value = drink.good.goodPrice;
-        alc.checked = drink.alcohol;
-        warm.checked = drink.warm;
-        gazed.checked = drink.gazed;
+        alc.checked = drink.isAlcohol;
+        warm.checked = drink.isWarm;
+        gazed.checked = drink.isGazed;
         caffeine.checked = drink.hasCaffeine;
         image.src = "/images/" + drink.drinkImg;
     }

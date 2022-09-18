@@ -1,5 +1,6 @@
 package com.restapp.Restaurant.config;
 
+import com.restapp.Restaurant.service.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

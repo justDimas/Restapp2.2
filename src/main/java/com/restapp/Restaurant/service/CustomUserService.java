@@ -1,4 +1,4 @@
-package com.restapp.Restaurant.config;
+package com.restapp.Restaurant.service;
 
 import com.restapp.Restaurant.dao.CustomUserDAO;
 import com.restapp.Restaurant.model.CustomUser;

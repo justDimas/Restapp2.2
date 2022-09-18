@@ -1,6 +1,6 @@
 package com.restapp.Restaurant.controller;
 
-import com.restapp.Restaurant.config.CustomUserService;
+import com.restapp.Restaurant.service.CustomUserService;
 import com.restapp.Restaurant.model.CustomRole;
 import com.restapp.Restaurant.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Set;
 

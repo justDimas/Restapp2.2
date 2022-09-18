@@ -25,7 +25,7 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="pizza:${pizzas}">
-            <form class="table-cell" th:id="${'pizza-delete-form-' + pizza.pizzaId}" method="post" action="/good">
+            <form class="table-cell" th:id="${'pizza-delete-form-' + pizza.pizzaId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="pizzaDeleteForm">Удалить</button>
                 <input type="hidden" name="pizzaId" th:value="${pizza.pizzaId}">
             </form>
@@ -38,7 +38,7 @@
                 <button class="update-toggle button" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="pizza-add-form" method="post" action="/good">
+        <form class="table-row form" id="pizza-add-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="pizza-add-form">Отменить</button>
             </div>
@@ -64,7 +64,7 @@
                 <button class="button" name="form" value="pizzaAddForm">Добавить</button>
             </div>
         </form>
-        <form class="table-row form" id="pizza-update-form" method="post" action="/good">
+        <form class="table-row form" id="pizza-update-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="pizza-update-form">Отменить</button>
             </div>
@@ -109,7 +109,7 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="salad:${salads}">
-            <form class="table-cell" th:id="${'salad-delete-form-' + salad.saladId}" method="post" action="/good">
+            <form class="table-cell" th:id="${'salad-delete-form-' + salad.saladId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="saladDeleteForm">Удалить</button>
                 <input name="saladId" type="hidden" th:value="${salad.saladId}">
             </form>
@@ -122,7 +122,7 @@
                 <button class="update-toggle button" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="salad-add-form" method="post" action="/good">
+        <form class="table-row form" id="salad-add-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="salad-add-form">Отменить</button>
             </div>
@@ -148,7 +148,7 @@
                 <button class="button" name="form" value="saladAddForm">Добавить</button>
             </div>
         </form>
-        <form class="table-row form" id="salad-update-form" method="post" action="/good">
+        <form class="table-row form" id="salad-update-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="salad-update-form">Отменить</button>
             </div>
@@ -195,7 +195,7 @@
             <div class="table-cell"></div>
         </div>
         <div class="table-row" th:each="drink:${drinks}">
-            <form class="table-cell" th:id="${'drink-delete-form-' + drink.drinkId}" method="post" action="/good">
+            <form class="table-cell" th:id="${'drink-delete-form-' + drink.drinkId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="drinkDeleteForm">Удалить</button>
                 <input name="drinkId" type="hidden" th:value="${drink.drinkId}">
             </form>
@@ -210,7 +210,7 @@
                 <button class="update-toggle button" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="drink-add-form" method="post" action="/good">
+        <form class="table-row form" id="drink-add-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="drink-add-form">Отменить</button>
             </div>
@@ -240,7 +240,7 @@
             </div>
             <div class="table-cell"><button class="button" name="form" value="drinkAddForm">Добавить</button></div>
         </form>
-        <form class="table-row form" id="drink-update-form" method="post" action="/good">
+        <form class="table-row form" id="drink-update-form" method="post" action="/admin/goods">
             <div class="table-cell">
                 <button class="reset button" type="button" data-form-id="drink-update-form">Отменить</button>
             </div>
