@@ -7,7 +7,7 @@
     <script src="js/index.js"></script>
 </head>
 <body>
-    <div class="header">
+    <header>
         <div>
             <a href="/">Restapp</a>
         </div>
@@ -23,9 +23,14 @@
             <div class="toggle">Вход</div>
             <div><a href="/registration">Регистрация</a></div>
         </div>
-    </div>
-    <div class="main">
-        <div class="title">Пицца</div>
+    </header>
+    <nav>
+        <div><a href="#pizza">Пицца</a></div>
+        <div><a href="#salad">Салаты</a></div>
+        <div><a href="#drink">Напитки</a></div>
+    </nav>
+    <main>
+        <div class="title" id="pizza">Пицца</div>
         <div class="good-block">
             <div class="good-data" th:each="pizza:${pizzas}">
                 <img th:src="@{'/images/' + ${pizza.pizzaImg}}" alt="image">
@@ -34,7 +39,7 @@
                 <button type="button">Подробнее</button>
             </div>
         </div>
-        <div class="title">Салаты</div>
+        <div class="title" id="salad">Салаты</div>
         <div class="good-block">
             <div class="good-data" th:each="salad:${salads}">
                 <img th:src="@{'/images/' + ${salad.saladImg}}" alt="image">
@@ -43,7 +48,7 @@
                 <button type="button">Подробнее</button>
             </div>
         </div>
-        <div class="title">Напитки</div>
+        <div class="title" id="drink">Напитки</div>
         <div class="good-block">
             <div class="good-data" th:each="drink:${drinks}">
                 <img th:src="@{'/images/' + ${drink.drinkImg}}" alt="image">
@@ -52,7 +57,7 @@
                 <button type="button">Подробнее</button>
             </div>
         </div>
-    </div>
+    </main>
     <div class="modal">
         <form class="modal-window" method="post">
             <button type="button" class="toggle">x</button>
@@ -61,7 +66,9 @@
             <p>Пароль:</p>
             <input type="password" name="password" placeholder="пароль" maxlength="50"  required>
             <button>Войти</button>
+            <p>Попробуйте еще раз</p>
         </form>
     </div>
+    <footer></footer>
 </body>
 </html>
