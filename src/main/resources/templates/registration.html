@@ -8,12 +8,12 @@
 <body>
 <div class="wrapper">
     <form class="main" method="post">
-        <p>имя</p>
-        <input name="userName" placeholder="ник">
+        <p>никнейм</p>
+        <input name="userName" placeholder="никнейм" required>
         <p>пароль</p>
-        <input name="userPassword" placeholder="пароль">
+        <input name="userPassword" type="password" placeholder="пароль" required>
         <p>повторить пароль</p>
-        <input name="userPasswordRepeat" placeholder="пароль х2">
+        <input name="userPasswordRepeat" type="password" placeholder="пароль х2" required>
         <button>зарегистрировать</button>
         <a href="/">на главную</a>
         <H2 th:if="${error}">Никнейм занят</H2>

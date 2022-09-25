@@ -33,7 +33,17 @@
         <div class="title" id="pizza">Пицца</div>
         <div class="good-block">
             <div class="good-data" th:each="pizza:${pizzas}">
-                <img th:src="@{'/images/' + ${pizza.pizzaImg}}" alt="image">
+                <div class="image-block">
+                    <img th:src="@{'/images/' + ${pizza.pizzaImg}}" alt="image">
+                    <div class="icon-block">
+                        <div class="icon-case" th:if="${pizza.isSpicy}">
+                            <img src="/images/icon-spicy.png" title="Острая">
+                        </div>
+                        <div class="icon-case" th:if="${pizza.isVegetarian}">
+                            <img src="/images/icon-vegan.png" title="Вегетарианская">
+                        </div>
+                    </div>
+                </div>
                 <p th:text="${pizza.good.goodName}"></p>
                 <p th:text="${pizza.good.goodPrice}"></p>
                 <button type="button">Подробнее</button>
@@ -42,7 +52,17 @@
         <div class="title" id="salad">Салаты</div>
         <div class="good-block">
             <div class="good-data" th:each="salad:${salads}">
-                <img th:src="@{'/images/' + ${salad.saladImg}}" alt="image">
+                <div class="image-block">
+                    <img th:src="@{'/images/' + ${salad.saladImg}}" alt="image">
+                    <div class="icon-block">
+                        <div class="icon-case" th:if="${salad.isWarm}">
+                            <img src="/images/icon-hot.png" title="Теплый">
+                        </div>
+                        <div class="icon-case" th:if="${salad.isVegetarian}">
+                            <img src="/images/icon-vegan.png" title="Вегетарианский">
+                        </div>
+                    </div>
+                </div>
                 <p th:text="${salad.good.goodName}"></p>
                 <p th:text="${salad.good.goodPrice}"></p>
                 <button type="button">Подробнее</button>
@@ -51,7 +71,23 @@
         <div class="title" id="drink">Напитки</div>
         <div class="good-block">
             <div class="good-data" th:each="drink:${drinks}">
-                <img th:src="@{'/images/' + ${drink.drinkImg}}" alt="image">
+                <div class="image-block">
+                    <img th:src="@{'/images/' + ${drink.drinkImg}}">
+                    <div class="icon-block">
+                        <div class="icon-case" th:if="${drink.isWarm}">
+                            <img src="/images/icon-hot.png" title="Горячий">
+                        </div>
+                        <div class="icon-case" th:if="${drink.isAlcohol}">
+                            <img src="/images/icon-alcohol.png" title="Алкогольный">
+                        </div>
+                        <div class="icon-case" th:if="${drink.isGazed}">
+                            <img src="/images/icon-gazed.png" title="Газированый">
+                        </div>
+                        <div class="icon-case" th:if="${drink.hasCaffeine}">
+                            <img src="/images/icon-coffee.png" title="Содержит Кофеин">
+                        </div>
+                    </div>
+                </div>
                 <p th:text="${drink.good.goodName}"></p>
                 <p th:text="${drink.good.goodPrice}"></p>
                 <button type="button">Подробнее</button>
