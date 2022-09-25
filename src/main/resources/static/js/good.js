@@ -31,6 +31,7 @@ function toggleAndSet(){
         let id = document.getElementById("pizza-id-box");
         let name = document.getElementById("pizza-name-update-input");
         let price =  document.getElementById("pizza-price-update-input");
+        let description = document.getElementById("pizza-description-update-input");
         let vegetarian = document.getElementById("pizza-vegetarian-update-input");
         let spicy = document.getElementById("pizza-spicy-update-input");
         let image = document.getElementById("pizza-image-update-form");
@@ -38,6 +39,7 @@ function toggleAndSet(){
         id.value = pizzaId;
         name.value = pizza.good.goodName;
         price.value = pizza.good.goodPrice;
+        description.value = pizza.good.goodDescription;
         vegetarian.checked = pizza.isVegetarian;
         spicy.checked = pizza.isSpicy;
         image.src = "/images/" + pizza.pizzaImg;
@@ -55,6 +57,7 @@ function toggleAndSet(){
         let id = document.getElementById("salad-id-box");
         let name = document.getElementById("salad-name-update-input");
         let price =  document.getElementById("salad-price-update-input");
+        let description = document.getElementById("salad-description-update-input");
         let vegetarian = document.getElementById("salad-vegetarian-update-input");
         let warm = document.getElementById("salad-warm-update-input");
         let image = document.getElementById("salad-image-update-form");
@@ -62,6 +65,7 @@ function toggleAndSet(){
         id.value = saladId;
         name.value = salad.good.goodName;
         price.value = salad.good.goodPrice;
+        description.value = salad.good.goodDescription;
         vegetarian.checked = salad.isVegetarian;
         warm.checked = salad.isWarm;
         image.src = "/images/" + salad.saladImg;
@@ -79,6 +83,7 @@ function toggleAndSet(){
         let id = document.getElementById("drink-id-box");
         let name = document.getElementById("drink-name-update-input");
         let price =  document.getElementById("drink-price-update-input");
+        let description = document.getElementById("drink-description-update-input");
         let alc = document.getElementById("drink-alcohol-update-input");
         let warm = document.getElementById("drink-warm-update-input");
         let gazed = document.getElementById("drink-gazed-update-input");
@@ -88,6 +93,7 @@ function toggleAndSet(){
         id.value = drinkId;
         name.value = drink.good.goodName;
         price.value = drink.good.goodPrice;
+        description.value = drink.good.goodDescription;
         alc.checked = drink.isAlcohol;
         warm.checked = drink.isWarm;
         gazed.checked = drink.isGazed;

@@ -52,6 +52,7 @@ public class GoodController {
     public boolean pizzaAdd(Map<String,String> params){
         String pizzaName = params.get("pizzaName");
         Double pizzaPrice = Double.parseDouble(params.get("pizzaPrice"));
+        String pizzaDescription = params.get("pizzaDescription");
         Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
         Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
         String pizzaImage = params.get("pizzaImage");
@@ -59,6 +60,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(pizzaName)
                 .goodPrice(pizzaPrice)
+                .goodDescription(pizzaDescription)
                 .build();
         Pizza responsePizza = Pizza.builder()
                 .good(responseGood)
@@ -73,6 +75,7 @@ public class GoodController {
         Integer pizzaId = Integer.parseInt(params.get("pizzaId"));
         String pizzaName = params.get("pizzaName");
         Double pizzaPrice = Double.parseDouble(params.get("pizzaPrice"));
+        String pizzaDescription = params.get("pizzaDescription");
         Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
         Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
         String pizzaImage = params.get("pizzaImage");
@@ -80,6 +83,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(pizzaName)
                 .goodPrice(pizzaPrice)
+                .goodDescription(pizzaDescription)
                 .build();
         Pizza responsePizza = Pizza.builder()
                 .pizzaId(pizzaId)
@@ -100,6 +104,7 @@ public class GoodController {
     public boolean saladAdd(Map<String,String> params){
         String saladName = params.get("saladName");
         Double saladPrice = Double.parseDouble(params.get("saladPrice"));
+        String saladDescription = params.get("saladDescription");
         Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
         Boolean saladIsWarm = (params.get("saladIsWarm") != null);
         String saladImage = params.get("saladImage");
@@ -107,6 +112,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(saladName)
                 .goodPrice(saladPrice)
+                .goodDescription(saladDescription)
                 .build();
         Salad responseSalad = Salad.builder()
                 .good(responseGood)
@@ -120,6 +126,7 @@ public class GoodController {
         Integer saladId = Integer.parseInt(params.get("saladId"));
         String saladName = params.get("saladName");
         Double saladPrice = Double.parseDouble(params.get("saladPrice"));
+        String saladDescription = params.get("saladDescription");
         Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
         Boolean saladIsWarm = (params.get("saladIsWarm") != null);
         String saladImage = params.get("saladImage");
@@ -127,6 +134,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(saladName)
                 .goodPrice(saladPrice)
+                .goodDescription(saladDescription)
                 .build();
         Salad responseSalad = Salad.builder()
                 .saladId(saladId)
@@ -147,6 +155,7 @@ public class GoodController {
     public boolean drinkAdd(Map<String,String> params){
         String drinkName = params.get("drinkName");
         Double drinkPrice = Double.parseDouble(params.get("drinkPrice"));
+        String drinkDescription = params.get("drinkDescription");
         Boolean drinkIsAlcohol = (params.get("drinkIsAlcohol") != null);
         Boolean drinkIsWarm = (params.get("drinkIsWarm") != null);
         Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
@@ -156,6 +165,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(drinkName)
                 .goodPrice(drinkPrice)
+                .goodDescription(drinkDescription)
                 .build();
         Drink responseDrink = Drink.builder()
                 .good(responseGood)
@@ -171,6 +181,7 @@ public class GoodController {
         Integer drinkId = Integer.parseInt(params.get("drinkId"));
         String drinkName = params.get("drinkName");
         Double drinkPrice = Double.parseDouble(params.get("drinkPrice"));
+        String drinkDescription = params.get("drinkDescription");
         Boolean drinkIsAlcohol = (params.get("drinkIsAlcohol") != null);
         Boolean drinkIsWarm = (params.get("drinkIsWarm") != null);
         Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
@@ -180,6 +191,7 @@ public class GoodController {
         Good responseGood = Good.builder()
                 .goodName(drinkName)
                 .goodPrice(drinkPrice)
+                .goodDescription(drinkDescription)
                 .build();
         Drink responseDrink = Drink.builder()
                 .drinkId(drinkId)

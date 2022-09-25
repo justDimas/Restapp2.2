@@ -20,4 +20,5 @@ public class Good {
     private Integer goodId;
     private String goodName;
     private Double goodPrice;
+    private String goodDescription;
 }

@@ -32,6 +32,7 @@ public class PizzaService {
                 .goodId(currentPizza.getGood().getGoodId())
                 .goodName(newPizza.getGood().getGoodName())
                 .goodPrice(newPizza.getGood().getGoodPrice())
+                .goodDescription(newPizza.getGood().getGoodDescription())
                 .build();
         currentPizza.setGood(newGood);
         currentPizza.setIsSpicy(newPizza.getIsSpicy());

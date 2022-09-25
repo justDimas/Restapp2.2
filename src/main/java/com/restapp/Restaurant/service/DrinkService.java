@@ -32,6 +32,7 @@ public class DrinkService {
                 .goodId(currentDrink.getGood().getGoodId())
                 .goodName(newDrink.getGood().getGoodName())
                 .goodPrice(newDrink.getGood().getGoodPrice())
+                .goodDescription(newDrink.getGood().getGoodDescription())
                 .build();
         currentDrink.setGood(newGood);
         currentDrink.setHasCaffeine(newDrink.getHasCaffeine());

@@ -32,6 +32,7 @@ public class SaladService {
                 .goodId(currentSalad.getGood().getGoodId())
                 .goodName(newSalad.getGood().getGoodName())
                 .goodPrice(newSalad.getGood().getGoodPrice())
+                .goodDescription(newSalad.getGood().getGoodDescription())
                 .build();
         currentSalad.setGood(newGood);
         currentSalad.setGood(newSalad.getGood());

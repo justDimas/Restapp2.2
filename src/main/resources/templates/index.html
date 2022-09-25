@@ -46,7 +46,12 @@
                 </div>
                 <p th:text="${pizza.good.goodName}"></p>
                 <p th:text="${pizza.good.goodPrice}"></p>
-                <button type="button">Подробнее</button>
+                <button class="popup-toggle" type="button">Подробнее</button>
+                <div class="popup">
+                    <div class="popup-text">
+                        <p th:text="${pizza.good.goodDescription}"></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="title" id="salad">Салаты</div>
@@ -65,7 +70,12 @@
                 </div>
                 <p th:text="${salad.good.goodName}"></p>
                 <p th:text="${salad.good.goodPrice}"></p>
-                <button type="button">Подробнее</button>
+                <button class="popup-toggle" type="button">Подробнее</button>
+                <div class="popup">
+                    <div class="popup-text">
+                        <p th:text="${salad.good.goodDescription}"></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="title" id="drink">Напитки</div>
@@ -90,7 +100,12 @@
                 </div>
                 <p th:text="${drink.good.goodName}"></p>
                 <p th:text="${drink.good.goodPrice}"></p>
-                <button type="button">Подробнее</button>
+                <button class="popup-toggle" type="button">Подробнее</button>
+                <div class="popup">
+                    <div class="popup-text">
+                        <p th:text="${drink.good.goodDescription}"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
