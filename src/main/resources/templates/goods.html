@@ -14,290 +14,298 @@
 <body>
 <div class="main">
     <div class="table">
-        <div class="table-row"><div class="table-cell"><h2>Пицца</h2></div></div>
-        <div class="table-row">
-            <div class="table-cell"></div>
-            <div class="table-cell"><p>Название</p></div>
-            <div class="table-cell"><p>Цена</p></div>
-            <div class="table-cell"><p>Описание</p></div>
-            <div class="table-cell"><p>Подходит вегетарицанцам</p></div>
-            <div class="table-cell"><p>Острая</p></div>
-            <div class="table-cell"><p>Имя изображения</p></div>
-            <div class="table-cell"></div>
+        <div class="table-row far-row"><div class="table-cell"><h2>Пицца</h2></div></div>
+        <div class="table-row title-row">
+            <div class="table-cell small-data-cell"></div>
+            <div class="table-cell small-data-cell">Название</div>
+            <div class="table-cell small-data-cell">Цена</div>
+            <div class="table-cell big-data-cell">Описание</div>
+            <div class="table-cell small-data-cell">Вегетарианская</div>
+            <div class="table-cell small-data-cell">Острая</div>
+            <div class="table-cell big-data-cell">Имя изображения</div>
+            <div class="table-cell small-data-cell"></div>
         </div>
-        <div class="table-row" th:each="pizza:${pizzas}">
-            <form class="table-cell" th:id="${'pizza-delete-form-' + pizza.pizzaId}" method="post" action="/admin/goods">
+        <div class="table-row data-row" th:each="pizza:${pizzas}">
+            <form class="table-cell small-data-cell" th:id="${'pizza-delete-form-' + pizza.pizzaId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="pizzaDeleteForm">Удалить</button>
                 <input type="hidden" name="pizzaId" th:value="${pizza.pizzaId}">
             </form>
-            <div class="table-cell"><p th:text="${pizza.good.goodName}"></p></div>
-            <div class="table-cell"><p th:text="${pizza.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${pizza.good.goodDescription}"></div>
-            <div class="table-cell"><p th:text="${pizza.isVegetarian}"></div>
-            <div class="table-cell"><p th:text="${pizza.isSpicy}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${pizza.pizzaImg}}"></div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell" th:text="${pizza.good.goodName}"></div>
+            <div class="table-cell small-data-cell" th:text="${pizza.good.goodPrice}"></div>
+            <div class="table-cell big-data-cell" th:text="${pizza.good.goodDescription}"></div>
+            <div class="table-cell small-data-cell" th:if="${pizza.isVegetarian}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${pizza.isVegetarian}">нет</div>
+            <div class="table-cell small-data-cell" th:if="${pizza.isSpicy}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${pizza.isSpicy}">нет</div>
+            <div class="table-cell big-data-cell"><img class="good-image" th:src="@{'/images/'+${pizza.pizzaImg}}"></div>
+            <div class="table-cell small-data-cell">
                 <button class="update-toggle button" data-toggle-id="pizza-update-form" th:value="${pizza.pizzaId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="pizza-add-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="pizza-add-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="pizza-add-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="pizzaPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea name="pizzaDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="pizzaIsVegetarian" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="pizzaIsSpicy" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="pizza-image-add-form" src="/images/noimg.jpg" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="pizza-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <button class="button" name="form" value="pizzaAddForm">Добавить</button>
             </div>
         </form>
-        <form class="table-row form" id="pizza-update-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="pizza-update-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="pizza-update-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="pizza-name-update-input" name="pizzaName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="pizza-price-update-input" name="pizzaPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea id="pizza-description-update-input" name="pizzaDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="pizza-vegetarian-update-input" name="pizzaIsVegetarian" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="pizza-spicy-update-input" name="pizzaIsSpicy" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="pizza-image-update-form" src="/images/noimg.jpg" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
                 </label>
-                <img class="good-image" id="pizza-image-update-form" src="/images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <button class="button" name="form" value="pizzaUpdateForm">Применить</button>
                 <input type="hidden" name="pizzaId" id="pizza-id-box">
             </div>
         </form>
-        <div class="table-row">
+        <div class="table-row far-row">
             <div class="table-cell">
                 <button class="add-toggle button" data-toggle-id="pizza-add-form">Добавить пиццу</button>
             </div>
         </div>
     </div>
     <div class="table">
-        <div class="table-row"><div class="table-cell"><h2>Салаты</h2></div></div>
-        <div class="table-row">
-            <div class="table-cell"></div>
-            <div class="table-cell"><p>Название</p></div>
-            <div class="table-cell"><p>Цена</p></div>
-            <div class="table-cell"><p>Описание</p></div>
-            <div class="table-cell"><p>Подходит вегетарицанцам?</p></div>
-            <div class="table-cell"><p>Теплый?</p></div>
-            <div class="table-cell"><p>Имя изображения</p></div>
-            <div class="table-cell"></div>
+        <div class="table-row far-row"><div class="table-cell"><h2>Салаты</h2></div></div>
+        <div class="table-row title-row">
+            <div class="table-cell small-data-cell"></div>
+            <div class="table-cell small-data-cell">Название</div>
+            <div class="table-cell small-data-cell">Цена</div>
+            <div class="table-cell big-data-cell">Описание</div>
+            <div class="table-cell small-data-cell">Вегетарианский</div>
+            <div class="table-cell small-data-cell">Теплый</div>
+            <div class="table-cell big-data-cell">Имя изображения</div>
+            <div class="table-cell small-data-cell"></div>
         </div>
-        <div class="table-row" th:each="salad:${salads}">
-            <form class="table-cell" th:id="${'salad-delete-form-' + salad.saladId}" method="post" action="/admin/goods">
+        <div class="table-row data-row" th:each="salad:${salads}">
+            <form class="table-cell small-data-cell" th:id="${'salad-delete-form-' + salad.saladId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="saladDeleteForm">Удалить</button>
                 <input name="saladId" type="hidden" th:value="${salad.saladId}">
             </form>
-            <div class="table-cell"><p th:text="${salad.good.goodName}"></p></div>
-            <div class="table-cell"><p th:text="${salad.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${salad.good.goodDescription}"></div>
-            <div class="table-cell"><p th:text="${salad.isVegetarian}"></div>
-            <div class="table-cell"><p th:text="${salad.isWarm}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${salad.saladImg}}"></div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell" th:text="${salad.good.goodName}"></div>
+            <div class="table-cell small-data-cell" th:text="${salad.good.goodPrice}"></div>
+            <div class="table-cell big-data-cell" th:text="${salad.good.goodDescription}"></div>
+            <div class="table-cell small-data-cell" th:if="${salad.isVegetarian}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${salad.isVegetarian}">нет</div>
+            <div class="table-cell small-data-cell" th:if="${salad.isWarm}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${salad.isWarm}">нет</div>
+            <div class="table-cell big-data-cell"><img class="good-image" th:src="@{'/images/'+${salad.saladImg}}"></div>
+            <div class="table-cell small-data-cell">
                 <button class="update-toggle button" data-toggle-id="salad-update-form" th:value="${salad.saladId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="salad-add-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="salad-add-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="salad-add-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="saladPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea name="saladDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="saladIsVegetarian" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="saladIsWarm" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="salad-image-add-form" src="/images/noimg.jpg" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="salad-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <button class="button" name="form" value="saladAddForm">Добавить</button>
             </div>
         </form>
-        <form class="table-row form" id="salad-update-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="salad-update-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="salad-update-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="salad-name-update-input" name="saladName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="salad-price-update-input" name="saladPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea id="salad-description-update-input" name="saladDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="salad-vegetarian-update-input" name="saladIsVegetarian" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="salad-warm-update-input" name="saladIsWarm" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="salad-image-update-form" src="/images/noimg.jpg" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
                 </label>
-                <img class="good-image" id="salad-image-update-form" src="/images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <button class="button" name="form" value="saladUpdateForm">Применить</button>
                 <input type="hidden" name="saladId" id="salad-id-box">
             </div>
         </form>
-        <div class="table-row">
+        <div class="table-row far-row">
             <div class="table-cell">
                 <button class="add-toggle button" data-toggle-id="salad-add-form">Добавить салат</button>
             </div>
         </div>
     </div>
     <div class="table">
-        <div class="table-row"><div class="table-cell"><h2>Напитки</h2></div></div>
-        <div class="table-row">
-            <div class="table-cell"></div>
-            <div class="table-cell"><p>Название</p></div>
-            <div class="table-cell"><p>Цена</p></div>
-            <div class="table-cell"><p>Описание</p></div>
-            <div class="table-cell"><p>Алкогольный?</p></div>
-            <div class="table-cell"><p>Теплый?</p></div>
-            <div class="table-cell"><p>Газированый?</p></div>
-            <div class="table-cell"><p>Содержит кофеин?</p></div>
-            <div class="table-cell"><p>Имя изображения</p></div>
-            <div class="table-cell"></div>
+        <div class="table-row far-row"><div class="table-cell"><h2>Напитки</h2></div></div>
+        <div class="table-row title-row">
+            <div class="table-cell small-data-cell"></div>
+            <div class="table-cell small-data-cell">Название</div>
+            <div class="table-cell small-data-cell">Цена</div>
+            <div class="table-cell big-data-cell">Описание</div>
+            <div class="table-cell small-data-cell">Алкогольный</div>
+            <div class="table-cell small-data-cell">Теплый</div>
+            <div class="table-cell small-data-cell">Газированый</div>
+            <div class="table-cell small-data-cell">Кофеин</div>
+            <div class="table-cell big-data-cell">Изображение</div>
+            <div class="table-cell small-data-cell"></div>
         </div>
-        <div class="table-row" th:each="drink:${drinks}">
-            <form class="table-cell" th:id="${'drink-delete-form-' + drink.drinkId}" method="post" action="/admin/goods">
+        <div class="table-row data-row" th:each="drink:${drinks}">
+            <form class="table-cell small-data-cell" th:id="${'drink-delete-form-' + drink.drinkId}" method="post" action="/admin/goods">
                 <button class="button" name="form" value="drinkDeleteForm">Удалить</button>
                 <input name="drinkId" type="hidden" th:value="${drink.drinkId}">
             </form>
-            <div class="table-cell"><p th:text="${drink.good.goodName}"></p></div>
-            <div class="table-cell"><p th:text="${drink.good.goodPrice}"></div>
-            <div class="table-cell"><p th:text="${drink.good.goodDescription}"></div>
-            <div class="table-cell"><p th:text="${drink.isAlcohol}"></div>
-            <div class="table-cell"><p th:text="${drink.isWarm}"></div>
-            <div class="table-cell"><p th:text="${drink.isGazed}"></div>
-            <div class="table-cell"><p th:text="${drink.hasCaffeine}"></div>
-            <div class="table-cell"><img class="good-image" th:src="@{'/images/'+${drink.drinkImg}}" alt="img"></div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell" th:text="${drink.good.goodName}"></div>
+            <div class="table-cell small-data-cell" th:text="${drink.good.goodPrice}"></div>
+            <div class="table-cell big-data-cell" th:text="${drink.good.goodDescription}"></div>
+            <div class="table-cell small-data-cell" th:if="${drink.isAlcohol}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${drink.isAlcohol}">нет</div>
+            <div class="table-cell small-data-cell" th:if="${drink.isWarm}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${drink.isWarm}">нет</div>
+            <div class="table-cell small-data-cell" th:if="${drink.isGazed}">да</div>
+            <div class="table-cell small-data-cell" th:unless="${drink.isGazed}">нет</div>
+            <div class="table-cell small-data-cell" th:unless="${drink.hasCaffeine}">нет</div>
+            <div class="table-cell small-data-cell" th:if="${drink.hasCaffeine}">да</div>
+            <div class="table-cell big-data-cell"><img class="good-image" th:src="@{'/images/'+${drink.drinkImg}}" alt="img"></div>
+            <div class="table-cell small-data-cell">
                 <button class="update-toggle button" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</button>
             </div>
         </div>
-        <form class="table-row form" id="drink-add-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="drink-add-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="drink-add-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea name="drinkDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkIsAlcohol" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkIsWarm" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkIsGazed" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input name="drinkHasCaffeine" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="drink-image-add-form" src="/images/noimg.jpg" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
                 </label>
-                <img class="good-image" id="drink-image-add-form" src="/images/noimg.jpg" alt="img">
             </div>
-            <div class="table-cell"><button class="button" name="form" value="drinkAddForm">Добавить</button></div>
+            <div class="table-cell small-data-cell"><button class="button" name="form" value="drinkAddForm">Добавить</button></div>
         </form>
-        <form class="table-row form" id="drink-update-form" method="post" action="/admin/goods">
-            <div class="table-cell">
+        <form class="table-row form data-row" id="drink-update-form" method="post" action="/admin/goods">
+            <div class="table-cell small-data-cell">
                 <button class="reset button" type="button" data-form-id="drink-update-form">Отменить</button>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-name-update-input" name="drinkName" type="text" minlength="3" maxlength="20" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-price-update-input" name="drinkPrice" type="number" step="0.1" min="0" max="100" required>
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
                 <textarea id="drink-description-update-input" name="drinkDescription" required></textarea>
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-alcohol-update-input" name="drinkIsAlcohol" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-warm-update-input" name="drinkIsWarm" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-gazed-update-input" name="drinkIsGazed" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <input id="drink-caffeine-update-input" name="drinkHasCaffeine" type="checkbox">
             </div>
-            <div class="table-cell">
+            <div class="table-cell big-data-cell">
+                <img class="good-image" id="drink-image-update-form" alt="img">
                 <label>Вставить картинку
                     <input class="image-input" name="drinkImage" data-toggle-id="drink-image-update-form" type="file" accept="image/*">
                 </label>
-                <img class="good-image" id="drink-image-update-form" alt="img">
             </div>
-            <div class="table-cell">
+            <div class="table-cell small-data-cell">
                 <button class="button" name="form" value="drinkUpdateForm">Применить</button>
                 <input type="hidden" name="drinkId" id="drink-id-box">
             </div>
         </form>
-        <div class="table-row">
+        <div class="table-row far-row">
             <div class="table-cell">
                 <button class="add-toggle button" data-toggle-id="drink-add-form">Добавить напиток</button>
             </div>

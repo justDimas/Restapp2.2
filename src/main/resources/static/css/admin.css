@@ -1,8 +1,11 @@
 body{
-    background: linear-gradient(90deg, #d1ffc9, #c9fcff);
+    background-image: url("../images/background-curve.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     text-align: center;
-    line-height: 24px;
     font-size: 18px;
+    word-break: break-word;
 }
 
 *{
@@ -14,33 +17,52 @@ body{
     display: none;
 }
 
+.scale{
+    box-shadow: 5px 5px 5px #000000;
+    transform: scale(3);
+}
+
 div, form{
     display: flex;
 }
 
 .main{
-    margin: 0 15% 0 15%;
-    display: flex;
+    margin: 50px 0 0 0;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .table{
     flex-direction: column;
-    min-width: fit-content;
-    justify-content: space-between;
     margin: 0 0 50px 0;
+    width: min-content;
+    background-color: #d9f5ff;
+}
+
+.title-row, .far-row{
+    height: 50px;
+}
+
+far-row{
+    width: 100%;
 }
 
 .table-cell{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000000;
+    border: 1px solid;
     padding: 5px;
-    flex-grow: 1;
-    width: 1%;
     transition-duration: 500ms;
+    width: 100%;
+}
+
+.big-data-cell{
+    width: 200px;
+}
+
+.small-data-cell{
+    width: 100px;
 }
 
 .image-input{
@@ -62,27 +84,17 @@ textarea{
     resize: none;
 }
 
-.good-image{
-    transition-duration:200ms;
-    width:50%;
-}
-
 .button{
     cursor: pointer;
     font-family: serif;
     line-height: 24px;
     font-size: 18px;
-    box-shadow: 0 0 2px 4px #b5e3e6;
+    box-shadow: 0 0 2px 4px #9fe5ff;
     border: 0;
-    background-color: #b5e3e6;
+    background-color: #9fe5ff;
     width: 100%;
     height: 100%;
-    transition-duration:500ms;
-}
-
-label:hover{
-    text-decoration: underline;
-    cursor: pointer;
+    transition-duration: 500ms;
 }
 
 .button:hover{
@@ -90,8 +102,21 @@ label:hover{
     background-color: #d7c9ff;
 }
 
-.scale{
-    border: 1px solid #000000;
-    box-shadow: 3px 3px 10px #000000;
-    transform: scale(3);
+.good-image{
+    transition-duration: 200ms;
+    width: 50%;
+    cursor: pointer;
+}
+
+label{
+    height: 30%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 0px 0px 20px;
+    cursor: pointer;
+}
+
+label:hover{
+    border-right: 1px solid;
+    border-bottom: 1px solid;
 }

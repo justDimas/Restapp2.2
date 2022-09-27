@@ -18,7 +18,7 @@ function toggleModal(){
     if(toggle(modal)){
         document.body.style.overflow = 'hidden';
     }else
-        document.body.style.overflow = 'visible';
+        document.body.style.overflow = 'overlay';
 }
 
 function togglePopup(){
