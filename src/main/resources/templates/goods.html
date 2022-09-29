@@ -12,6 +12,11 @@
     </script>
 </head>
 <body>
+<nav>
+    <a href="/"><h3>Главная cтраница</h3></a>
+    <a href="/admin/users"><h3>Пользователи</h3></a>
+    <a href="/admin/products"><h3>Склад</h3></a>
+</nav>
 <div class="main">
     <div class="table">
         <div class="table-row far-row"><div class="table-cell"><h2>Пицца</h2></div></div>
@@ -62,7 +67,7 @@
                 <input name="pizzaIsSpicy" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="pizza-image-add-form" src="/images/noimg.jpg" alt="img">
+                <img class="good-image" id="pizza-image-add-form" src="/images/good-noimg.jpg">
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-add-form" type="file" accept="image/*" required>
                 </label>
@@ -91,7 +96,7 @@
                 <input id="pizza-spicy-update-input" name="pizzaIsSpicy" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="pizza-image-update-form" src="/images/noimg.jpg" alt="img">
+                <img class="good-image" id="pizza-image-update-form" src="/images/good-noimg.jpg">
                 <label>Вставить картинку
                     <input class="image-input" name="pizzaImage" data-toggle-id="pizza-image-update-form" type="file" accept="image/*">
                 </label>
@@ -156,7 +161,7 @@
                 <input name="saladIsWarm" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="salad-image-add-form" src="/images/noimg.jpg" alt="img">
+                <img class="good-image" id="salad-image-add-form" src="/images/good-noimg.jpg">
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-add-form" type="file" accept="image/*" required>
                 </label>
@@ -185,7 +190,7 @@
                 <input id="salad-warm-update-input" name="saladIsWarm" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="salad-image-update-form" src="/images/noimg.jpg" alt="img">
+                <img class="good-image" id="salad-image-update-form" src="/images/good-noimg.jpg">
                 <label>Вставить картинку
                     <input class="image-input" name="saladImage" data-toggle-id="salad-image-update-form" type="file" accept="image/*">
                 </label>
@@ -231,7 +236,7 @@
             <div class="table-cell small-data-cell" th:unless="${drink.isGazed}">нет</div>
             <div class="table-cell small-data-cell" th:unless="${drink.hasCaffeine}">нет</div>
             <div class="table-cell small-data-cell" th:if="${drink.hasCaffeine}">да</div>
-            <div class="table-cell big-data-cell"><img class="good-image" th:src="@{'/images/'+${drink.drinkImg}}" alt="img"></div>
+            <div class="table-cell big-data-cell"><img class="good-image" th:src="@{'/images/'+${drink.drinkImg}}"></div>
             <div class="table-cell small-data-cell">
                 <button class="update-toggle button" data-toggle-id="drink-update-form" th:value="${drink.drinkId}">Обновить</button>
             </div>
@@ -262,7 +267,7 @@
                 <input name="drinkHasCaffeine" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="drink-image-add-form" src="/images/noimg.jpg" alt="img">
+                <img class="good-image" id="drink-image-add-form" src="/images/good-noimg.jpg">
                 <label>Вставить картинку
                     <input class="image-input" data-toggle-id="drink-image-add-form" name="drinkImage" type="file" accept="image/*" required>
                 </label>
@@ -295,7 +300,7 @@
                 <input id="drink-caffeine-update-input" name="drinkHasCaffeine" type="checkbox">
             </div>
             <div class="table-cell big-data-cell">
-                <img class="good-image" id="drink-image-update-form" alt="img">
+                <img class="good-image" id="drink-image-update-form">
                 <label>Вставить картинку
                     <input class="image-input" name="drinkImage" data-toggle-id="drink-image-update-form" type="file" accept="image/*">
                 </label>

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Objects;
+
 @Controller
 public class IndexController {
     @Autowired
@@ -25,7 +27,13 @@ public class IndexController {
         model.addAttribute("pizzas", pizza.findAll());
         model.addAttribute("salads", salad.findAll());
         model.addAttribute("drinks", drink.findAll());
-        model.addAttribute("user", user);
+        boolean isAdmin = false;
+        if(user!=null) {
+            model.addAttribute("user", user);
+            isAdmin = user.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> Objects.equals(grantedAuthority.getAuthority(), "ROLE_ADMIN"));
+        }
+        model.addAttribute("isAdmin", isAdmin);
         return "index";
     }
 

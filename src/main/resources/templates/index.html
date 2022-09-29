@@ -9,32 +9,33 @@
 <body>
     <header>
         <div>
-            <a href="/">Restapp</a>
+            <a href="/"><h2>Restapp</h2></a>
         </div>
         <div>
-            <p>Время работы ресторана: 10:00-22:00 ежедневно</p>
-            <p>Адресс: ул.Пушкина, дом Колотушкина</p>
+            <h3>Время работы ресторана: 10:00-22:00 ежедневно</h3>
+            <h3>Адресс: ул.Пушкина, дом Колотушкина</h3>
         </div>
         <div th:if="${user}">
-            <div th:text="${user.username}"></div>
-            <div><a href="/logout">Выход</a></div>
+            <div><h4 th:text="'Привет ' + ${user.username}"></h4></div>
+            <div th:if="${isAdmin}"><a href="/admin/goods"><h4>Редактирование</h4></a></div>
+            <div><a href="/logout"><h4>Выход</h4></a></div>
         </div>
         <div th:unless="${user}">
-            <div class="toggle">Вход</div>
-            <div><a href="/registration">Регистрация</a></div>
+            <div class="toggle"><h4>Вход</h4></div>
+            <div><a href="/registration"><h4>Регистрация</h4></a></div>
         </div>
     </header>
     <nav>
-        <div><a href="#pizza">Пицца</a></div>
-        <div><a href="#salad">Салаты</a></div>
-        <div><a href="#drink">Напитки</a></div>
+        <div><a href="#pizza"><h3>Пицца</h3></a></div>
+        <div><a href="#salad"><h3>Салаты</h3></a></div>
+        <div><a href="#drink"><h3>Напитки</h3></a></div>
     </nav>
     <main>
-        <div class="title" id="pizza">Пицца</div>
+        <div class="title" id="pizza"><h3>Пицца</h3></div>
         <div class="good-block">
             <div class="good-data" th:each="pizza:${pizzas}">
                 <div class="image-block">
-                    <img th:src="@{'/images/' + ${pizza.pizzaImg}}" alt="image">
+                    <img th:src="@{'/images/' + ${pizza.pizzaImg}}">
                     <div class="icon-block">
                         <div class="icon-case" th:if="${pizza.isSpicy}">
                             <img src="/images/icon-spicy.png" title="Острая">
@@ -44,21 +45,21 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${pizza.good.goodName}"></p>
-                <p th:text="${pizza.good.goodPrice}"></p>
+                <h4 th:text="${pizza.good.goodName}"></h4>
+                <h4 th:text="${pizza.good.goodPrice}"></h4>
                 <button class="popup-toggle" type="button">Подробнее</button>
                 <div class="popup">
                     <div class="popup-text">
-                        <p th:text="${pizza.good.goodDescription}"></p>
+                        <h4 th:text="${pizza.good.goodDescription}"></h4>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="title" id="salad">Салаты</div>
+        <div class="title" id="salad"><h3>Салаты</h3></div>
         <div class="good-block">
             <div class="good-data" th:each="salad:${salads}">
                 <div class="image-block">
-                    <img th:src="@{'/images/' + ${salad.saladImg}}" alt="image">
+                    <img th:src="@{'/images/' + ${salad.saladImg}}">
                     <div class="icon-block">
                         <div class="icon-case" th:if="${salad.isWarm}">
                             <img src="/images/icon-hot.png" title="Теплый">
@@ -68,17 +69,17 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${salad.good.goodName}"></p>
-                <p th:text="${salad.good.goodPrice}"></p>
+                <h4 th:text="${salad.good.goodName}"></h4>
+                <h4 th:text="${salad.good.goodPrice}"></h4>
                 <button class="popup-toggle" type="button">Подробнее</button>
                 <div class="popup">
                     <div class="popup-text">
-                        <p th:text="${salad.good.goodDescription}"></p>
+                        <h4 th:text="${salad.good.goodDescription}"></h4>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="title" id="drink">Напитки</div>
+        <div class="title" id="drink"><h3>Напитки</h3></div>
         <div class="good-block">
             <div class="good-data" th:each="drink:${drinks}">
                 <div class="image-block">
@@ -98,12 +99,12 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${drink.good.goodName}"></p>
-                <p th:text="${drink.good.goodPrice}"></p>
+                <h4 th:text="${drink.good.goodName}"></h4>
+                <h4 th:text="${drink.good.goodPrice}"></h4>
                 <button class="popup-toggle" type="button">Подробнее</button>
                 <div class="popup">
                     <div class="popup-text">
-                        <p th:text="${drink.good.goodDescription}"></p>
+                        <h4 th:text="${drink.good.goodDescription}"></h4>
                     </div>
                 </div>
             </div>
@@ -112,12 +113,12 @@
     <div class="modal">
         <form class="modal-window" method="post">
             <button type="button" class="toggle">x</button>
-            <p>Логин:</p>
+            <h4>Логин:</h4>
             <input type="text" name="username" placeholder="логин" maxlength="50" required>
-            <p>Пароль:</p>
+            <h4>Пароль:</h4>
             <input type="password" name="password" placeholder="пароль" maxlength="50"  required>
             <button>Войти</button>
-            <p>Попробуйте еще раз</p>
+            <h4>Попробуйте еще раз</h4>
         </form>
     </div>
     <footer></footer>
