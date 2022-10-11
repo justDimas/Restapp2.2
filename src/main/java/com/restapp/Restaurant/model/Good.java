@@ -2,10 +2,8 @@ package com.restapp.Restaurant.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,4 +19,18 @@ public class Good {
     private String goodName;
     private Double goodPrice;
     private String goodDescription;
+    private String goodImage;
+    @ManyToOne
+    @JoinColumn(name = "category")
+    private Category goodCategory;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "goods_ingredients",
+               joinColumns = @JoinColumn(name = "goods"),
+               inverseJoinColumns = @JoinColumn(name = "ingredients"))
+    private Set<Ingredient> goodIngredients;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "goods_properties",
+               joinColumns = @JoinColumn(name = "goods"),
+               inverseJoinColumns = @JoinColumn(name = "properties"))
+    private Set<Property> goodProperties;
 }

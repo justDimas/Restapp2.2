@@ -19,7 +19,7 @@ public class CustomRole implements GrantedAuthority {
     private Integer roleId;
     private String roleName;
 
-    @ManyToMany(mappedBy = "userRoles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "userRoles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CustomUser> roleUsers;
 
     @Override

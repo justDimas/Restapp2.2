@@ -1,44 +1,47 @@
 package com.restapp.Restaurant.controller;
 
-import com.restapp.Restaurant.dao.DrinkDAO;
-import com.restapp.Restaurant.dao.PizzaDAO;
-import com.restapp.Restaurant.dao.SaladDAO;
+import com.restapp.Restaurant.model.Category;
 import com.restapp.Restaurant.model.CustomUser;
+import com.restapp.Restaurant.model.Good;
+import com.restapp.Restaurant.service.CategoryService;
+import com.restapp.Restaurant.service.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class IndexController {
     @Autowired
-    PizzaDAO pizza;
+    GoodService goodService;
     @Autowired
-    SaladDAO salad;
-    @Autowired
-    DrinkDAO drink;
+    CategoryService categoryService;
 
     @GetMapping("/")
-    public String index(Model model, @AuthenticationPrincipal CustomUser user){
-        model.addAttribute("pizzas", pizza.findAll());
-        model.addAttribute("salads", salad.findAll());
-        model.addAttribute("drinks", drink.findAll());
-        boolean isAdmin = false;
+    public String getShow(Model model, @AuthenticationPrincipal CustomUser user){
         if(user!=null) {
+            boolean isAdmin = user.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
             model.addAttribute("user", user);
-            isAdmin = user.getAuthorities().stream()
-                    .anyMatch(grantedAuthority -> Objects.equals(grantedAuthority.getAuthority(), "ROLE_ADMIN"));
+            model.addAttribute("isAdmin", isAdmin);
         }
-        model.addAttribute("isAdmin", isAdmin);
-        return "index";
-    }
 
-    @PostMapping("/")
-    public String index(){
-        return "redirect:index";
+        Collection<Good> goods = goodService.getAll();
+
+        Collection<Category> sortCategories = goods.stream()
+                .map(Good::getGoodCategory)
+                .distinct()
+                .sorted(Comparator.comparing(Category::getCategoryName))
+                .toList();
+
+        Map<String, List<Good>> goodsByCategory = sortCategories.stream()
+                .collect(Collectors.toMap(Category::getCategoryName, category -> goods.stream()
+                        .filter(good->Objects.equals(category,good.getGoodCategory())).toList()));
+        model.addAttribute("goodsByCategory", goodsByCategory);
+        return "index";
     }
 }

@@ -34,7 +34,7 @@ public class RegistrationController {
                 .userPassword(userPassword)
                 .userRoles(Set.of(CustomRole.builder().roleId(7).build()))
                 .build();
-        if (userService.saveUser(build)){
+        if (userService.add(build)){
             return "redirect:";
         }else{
             return "redirect:registration?error=true";

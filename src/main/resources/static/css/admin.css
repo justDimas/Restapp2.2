@@ -5,7 +5,7 @@ body{
     background-size: cover;
     text-align: center;
     font-size: 18px;
-    word-break: break-word;
+    overflow-x: hidden;
 }
 
 *{
@@ -17,13 +17,11 @@ body{
     display: none;
 }
 
-.scale{
-    box-shadow: 5px 5px 5px #000000;
-    transform: scale(3);
-}
-
-div, form, nav{
-    display: flex;
+a{
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a:link, a:visited, a:active {
@@ -31,66 +29,71 @@ a:link, a:visited, a:active {
 }
 
 nav{
-    justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
     background: rgba(217, 245, 255, 0.5);
     margin: 0 0 20px 0;
 }
 
-nav a{
-    padding: 20px 50px;
-    outline: none;
-    text-decoration: none;
+nav>a{
+    padding: 20px 40px;
 }
 
-nav a:hover{
+nav>a:hover{
     background: rgba(217, 245, 255, 0.5);
 }
 
-.main{
-    flex-direction: column;
-    align-items: center;
+h3{
+    white-space: nowrap;
+}
+
+main{
+    width: 100%;
+    overflow-x: auto;
 }
 
 .table{
-    flex-direction: column;
-    margin: 0 0 50px 0;
-    width: min-content;
+    width: fit-content;
+    margin: 0 50px 50px;
     background-color: #d9f5ff;
 }
 
-.title-row, .far-row{
-    height: 50px;
+.table-row{
+    display: flex;
+    width: fit-content;
 }
 
-far-row{
+.table> :last-child{
     width: 100%;
 }
 
 .table-cell{
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid;
     padding: 5px;
     transition-duration: 500ms;
+}
+
+.table> :last-child > .table-cell{
     width: 100%;
 }
 
-.big-data-cell{
-    width: 200px;
+.col-50{width:50px;}
+.col-100{width:100px;}
+.col-150{width:150px;}
+
+#selector-image{
+    display: none;
 }
 
-.small-data-cell{
-    width: 100px;
-}
-
-.image-input{
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+input{
+    text-align: center;
 }
 
 input[type="number"], input[type="text"]{
@@ -101,6 +104,12 @@ textarea{
     width: 100%;
     height: 100%;
     resize: none;
+    transition-duration: 300ms;
+    z-index: 1;
+}
+
+textarea:hover{
+    width: 200%;
 }
 
 .button{
@@ -113,7 +122,7 @@ textarea{
     background-color: #9fe5ff;
     width: 100%;
     height: 100%;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
 }
 
 .button:hover{
@@ -122,20 +131,18 @@ textarea{
 }
 
 .good-image{
-    transition-duration: 200ms;
-    width: 50%;
-    cursor: pointer;
+    width: 100%;
 }
 
 label{
-    height: 30%;
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 0px 0px 20px;
+    width: 100%;
     cursor: pointer;
 }
 
 label:hover{
-    border-right: 1px solid;
-    border-bottom: 1px solid;
+    box-shadow: 0 0 10px #000000;
+}
+
+.ul{
+    align-items: start;
 }

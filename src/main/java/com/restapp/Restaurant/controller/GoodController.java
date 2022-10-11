@@ -1,212 +1,151 @@
 package com.restapp.Restaurant.controller;
 
-import com.restapp.Restaurant.model.Drink;
+import com.restapp.Restaurant.model.Category;
 import com.restapp.Restaurant.model.Good;
-import com.restapp.Restaurant.model.Pizza;
-import com.restapp.Restaurant.model.Salad;
-import com.restapp.Restaurant.service.DrinkService;
-import com.restapp.Restaurant.service.PizzaService;
-import com.restapp.Restaurant.service.SaladService;
+import com.restapp.Restaurant.model.Ingredient;
+import com.restapp.Restaurant.model.Property;
+import com.restapp.Restaurant.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class GoodController {
     @Autowired
-    PizzaService pizza;
+    GoodService goodService;
     @Autowired
-    DrinkService drink;
+    CategoryService categoryService;
     @Autowired
-    SaladService salad;
+    IngredientService ingredientService;
+    @Autowired
+    PropertyService propertyService;
 
     @GetMapping("/admin/goods")
-    public String good(Model model){
-        model.addAttribute("pizzas", pizza.getAll());
-        model.addAttribute("salads", salad.getAll());
-        model.addAttribute("drinks", drink.getAll());
+    public String getShow(@RequestAttribute(required = false) Boolean success, Model model){
+        List<Good> goods = goodService.getAll();
+        if(goods.isEmpty())
+            return "redirect:/admin/goods/goods-add";
+        model.addAttribute("goods", goods);
         return "goods";
     }
-    @PostMapping("/admin/goods")
-    public String good(@RequestParam Map<String,String> params){
-        boolean success = false;
-        switch (params.get("form")) {
-            case "pizzaAddForm" ->    success = pizzaAdd(params);
-            case "pizzaUpdateForm" -> success = pizzaUpdate(params);
-            case "pizzaDeleteForm" -> success = pizzaDelete(params);
-            case "saladAddForm" ->    success = saladAdd(params);
-            case "saladUpdateForm" -> success = saladUpdate(params);
-            case "saladDeleteForm" -> success = saladDelete(params);
-            case "drinkAddForm" ->    success = drinkAdd(params);
-            case "drinkUpdateForm" -> success = drinkUpdate(params);
-            case "drinkDeleteForm" -> success = drinkDelete(params);
+
+    @GetMapping("/admin/goods/goods-add")
+    public String getAdd(Model model){
+        List<Ingredient> ingredients = ingredientService.getAll();
+        List<Property> properties = propertyService.getAll();
+        List<Category> categories = categoryService.getAll();
+
+        if(categories.isEmpty())
+            return "redirect:/admin/categories/categories-add";
+
+        model.addAttribute("ingredients", ingredients);
+        model.addAttribute("properties", properties);
+        model.addAttribute("categories", categories);
+        return "goods-add";
+    }
+
+    @GetMapping("/admin/goods/{goodId}/goods-update")
+    public String getUpdate(@PathVariable Integer goodId, Model model){
+        Good good;
+        List<Category> categories;
+        List<Ingredient> ingredients;
+        List<Property> properties;
+        try{
+            good = goodService.getById(Good.builder().goodId(goodId).build());
+        }catch (NoSuchElementException e) {
+            return "redirect:/admin/goods?success=false";
         }
-        return "redirect:goods" + "?success=" + success;
+        categories = categoryService.getAll();
+        if(categories.isEmpty())
+            return "redirect:/admin/categories/categories-add";
+
+        ingredients = ingredientService.getAll();
+        properties = propertyService.getAll();
+
+        model.addAttribute("good", good);
+        model.addAttribute("ingredients", ingredients);
+        model.addAttribute("properties", properties);
+        model.addAttribute("categories", categories);
+        return "goods-update";
     }
 
-    public boolean pizzaAdd(Map<String,String> params){
-        String pizzaName = params.get("pizzaName");
-        Double pizzaPrice = Double.parseDouble(params.get("pizzaPrice"));
-        String pizzaDescription = params.get("pizzaDescription");
-        Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
-        Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
-        String pizzaImage = params.get("pizzaImage");
+    @PostMapping("/admin/goods/goods-add")
+    public String postAdd(@RequestParam Map<String,String> params,
+                          @RequestParam Collection<Integer> properties,
+                          @RequestParam Collection<Integer> ingredients)
+    {
+        boolean success;
+        String goodName = params.get("name");
+        Double goodPrice = Double.parseDouble(params.get("price"));
+        String goodDescription = params.get("description");
+        String goodImage = params.get("image");
+        Category goodCategory = Category.builder().categoryId(Integer.parseInt(params.get("category"))).build();
+        Set<Ingredient> goodIngredients = ingredients.stream()
+                .map(id->Ingredient.builder().ingredientId(id).build())
+                .collect(Collectors.toSet());
+        Set<Property> goodProperties = properties.stream()
+                .map(id->Property.builder().propertyId(id).build())
+                .collect(Collectors.toSet());
 
-        Good responseGood = Good.builder()
-                .goodName(pizzaName)
-                .goodPrice(pizzaPrice)
-                .goodDescription(pizzaDescription)
+        Good good = Good.builder()
+                .goodName(goodName)
+                .goodPrice(goodPrice)
+                .goodDescription(goodDescription)
+                .goodImage(goodImage)
+                .goodCategory(goodCategory)
+                .goodIngredients(goodIngredients)
+                .goodProperties(goodProperties)
                 .build();
-        Pizza responsePizza = Pizza.builder()
-                .good(responseGood)
-                .isVegetarian(pizzaIsVegetarian)
-                .isSpicy(pizzaIsSpicy)
-                .pizzaImg(pizzaImage)
-                .build();
-
-        return pizza.add(responsePizza);
-    }
-    public boolean pizzaUpdate(Map<String,String> params){
-        Integer pizzaId = Integer.parseInt(params.get("pizzaId"));
-        String pizzaName = params.get("pizzaName");
-        Double pizzaPrice = Double.parseDouble(params.get("pizzaPrice"));
-        String pizzaDescription = params.get("pizzaDescription");
-        Boolean pizzaIsVegetarian = (params.get("pizzaIsVegetarian") != null);
-        Boolean pizzaIsSpicy = (params.get("pizzaIsSpicy") != null);
-        String pizzaImage = params.get("pizzaImage");
-
-        Good responseGood = Good.builder()
-                .goodName(pizzaName)
-                .goodPrice(pizzaPrice)
-                .goodDescription(pizzaDescription)
-                .build();
-        Pizza responsePizza = Pizza.builder()
-                .pizzaId(pizzaId)
-                .good(responseGood)
-                .isVegetarian(pizzaIsVegetarian)
-                .isSpicy(pizzaIsSpicy)
-                .pizzaImg(pizzaImage)
-                .build();
-
-        return pizza.update(responsePizza);
-    }
-    public boolean pizzaDelete(Map<String,String> params){
-        Integer pizzaId = Integer.parseInt(params.get("pizzaId"));
-        Pizza responsePizza = Pizza.builder().pizzaId(pizzaId).build();
-        return pizza.delete(responsePizza);
+        success = goodService.add(good);
+        return "redirect:/admin/goods" + "?success=" + success;
     }
 
-    public boolean saladAdd(Map<String,String> params){
-        String saladName = params.get("saladName");
-        Double saladPrice = Double.parseDouble(params.get("saladPrice"));
-        String saladDescription = params.get("saladDescription");
-        Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
-        Boolean saladIsWarm = (params.get("saladIsWarm") != null);
-        String saladImage = params.get("saladImage");
+    @PostMapping("/admin/goods/goods-update")
+    public String postUpdate(@RequestParam Map<String,String> params,
+                             @RequestParam Collection<Integer> properties,
+                             @RequestParam Collection<Integer> ingredients)
+    {
+        boolean success;
+        Integer goodId = Integer.parseInt(params.get("id"));
+        String goodName = params.get("name");
+        Double goodPrice = Double.parseDouble(params.get("price"));
+        String goodDescription = params.get("description");
+        String goodImage = params.get("image");
+        Category goodCategory = Category.builder().categoryId(Integer.parseInt(params.get("category"))).build();
+        Set<Ingredient> goodIngredients = ingredients.stream()
+                .map(id->Ingredient.builder().ingredientId(id).build())
+                .collect(Collectors.toSet());
+        Set<Property> goodProperties = properties.stream()
+                .map(id->Property.builder().propertyId(id).build())
+                .collect(Collectors.toSet());
 
-        Good responseGood = Good.builder()
-                .goodName(saladName)
-                .goodPrice(saladPrice)
-                .goodDescription(saladDescription)
-                .build();
-        Salad responseSalad = Salad.builder()
-                .good(responseGood)
-                .isVegetarian(saladIsVegetarian)
-                .isWarm(saladIsWarm)
-                .saladImg(saladImage)
-                .build();
-        return salad.add(responseSalad);
-    }
-    public boolean saladUpdate(Map<String,String> params){
-        Integer saladId = Integer.parseInt(params.get("saladId"));
-        String saladName = params.get("saladName");
-        Double saladPrice = Double.parseDouble(params.get("saladPrice"));
-        String saladDescription = params.get("saladDescription");
-        Boolean saladIsVegetarian = (params.get("saladIsVegetarian") != null);
-        Boolean saladIsWarm = (params.get("saladIsWarm") != null);
-        String saladImage = params.get("saladImage");
-
-        Good responseGood = Good.builder()
-                .goodName(saladName)
-                .goodPrice(saladPrice)
-                .goodDescription(saladDescription)
-                .build();
-        Salad responseSalad = Salad.builder()
-                .saladId(saladId)
-                .good(responseGood)
-                .isVegetarian(saladIsVegetarian)
-                .isWarm(saladIsWarm)
-                .saladImg(saladImage)
+        Good good = Good.builder()
+                .goodId(goodId)
+                .goodName(goodName)
+                .goodPrice(goodPrice)
+                .goodDescription(goodDescription)
+                .goodImage(goodImage)
+                .goodCategory(goodCategory)
+                .goodIngredients(goodIngredients)
+                .goodProperties(goodProperties)
                 .build();
 
-        return salad.update(responseSalad);
-    }
-    public boolean saladDelete(Map<String,String> params){
-        Integer saladId = Integer.parseInt(params.get("saladId"));
-        Salad responseSalad = Salad.builder().saladId(saladId).build();
-        return salad.delete(responseSalad);
+        success = goodService.update(good);
+        return "redirect:/admin/goods" + "?success=" + success;
     }
 
-    public boolean drinkAdd(Map<String,String> params){
-        String drinkName = params.get("drinkName");
-        Double drinkPrice = Double.parseDouble(params.get("drinkPrice"));
-        String drinkDescription = params.get("drinkDescription");
-        Boolean drinkIsAlcohol = (params.get("drinkIsAlcohol") != null);
-        Boolean drinkIsWarm = (params.get("drinkIsWarm") != null);
-        Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
-        Boolean drinkHasCaffeine = (params.get("drinkHasCaffeine") != null);
-        String drinkImage = params.get("drinkImage");
-
-        Good responseGood = Good.builder()
-                .goodName(drinkName)
-                .goodPrice(drinkPrice)
-                .goodDescription(drinkDescription)
-                .build();
-        Drink responseDrink = Drink.builder()
-                .good(responseGood)
-                .isAlcohol(drinkIsAlcohol)
-                .isWarm(drinkIsWarm)
-                .isGazed(drinkIsGazed)
-                .hasCaffeine(drinkHasCaffeine)
-                .drinkImg(drinkImage)
-                .build();
-        return drink.add(responseDrink);
-    }
-    public boolean drinkUpdate(Map<String,String> params){
-        Integer drinkId = Integer.parseInt(params.get("drinkId"));
-        String drinkName = params.get("drinkName");
-        Double drinkPrice = Double.parseDouble(params.get("drinkPrice"));
-        String drinkDescription = params.get("drinkDescription");
-        Boolean drinkIsAlcohol = (params.get("drinkIsAlcohol") != null);
-        Boolean drinkIsWarm = (params.get("drinkIsWarm") != null);
-        Boolean drinkIsGazed = (params.get("drinkIsGazed") != null);
-        Boolean drinkHasCaffeine = (params.get("drinkHasCaffeine") != null);
-        String drinkImage = params.get("drinkImage");
-
-        Good responseGood = Good.builder()
-                .goodName(drinkName)
-                .goodPrice(drinkPrice)
-                .goodDescription(drinkDescription)
-                .build();
-        Drink responseDrink = Drink.builder()
-                .drinkId(drinkId)
-                .good(responseGood)
-                .isAlcohol(drinkIsAlcohol)
-                .isWarm(drinkIsWarm)
-                .isGazed(drinkIsGazed)
-                .hasCaffeine(drinkHasCaffeine)
-                .drinkImg(drinkImage)
-                .build();
-        return drink.update(responseDrink);
-    }
-    public boolean drinkDelete(Map<String,String> params){
-        Integer drinkId = Integer.parseInt(params.get("drinkId"));
-        Drink responseDrink = Drink.builder().drinkId(drinkId).build();
-        return drink.delete(responseDrink);
+    @PostMapping("/admin/goods/{goodId}/goods-delete")
+    public String postDelete(@PathVariable Integer goodId){
+        boolean success = true;
+        try {
+            goodService.delete(Good.builder().goodId(goodId).build());
+        }catch (IllegalArgumentException e){
+            success = false;
+        }
+        return "redirect:/admin/goods" + "?success=" + success;
     }
 }

@@ -1,141 +1,67 @@
-let forms;
-let imageInputs;
-let addToggles;
-let updateToggles;
-let resetButtons;
-let images;
-
-function toggle(){
-    let trigForm = document.getElementById(event.target.dataset.toggleId);
-    let isHidden = trigForm.classList.contains("hidden");
-    forms.forEach(item => {
-        if(!item.classList.contains("hidden")) item.classList.add("hidden");
-    });
-    if(isHidden) trigForm.classList.remove("hidden");
-}
-
-function toggleAndSet(){
-    let form = document.getElementById(event.target.dataset.toggleId);
-    if(form.classList.contains("hidden"))
-        toggle();
-    if(event.target.dataset.toggleId == "pizza-update-form"){
-        let pizza;
-        let pizzaId = event.target.getAttribute("value");
-        for(item of pizzas){
-            if(item.pizzaId == pizzaId){
-                pizza = item;
-                break;
-            }
-        }
-        if(pizza === undefined) return;
-        let id = document.getElementById("pizza-id-box");
-        let name = document.getElementById("pizza-name-update-input");
-        let price =  document.getElementById("pizza-price-update-input");
-        let description = document.getElementById("pizza-description-update-input");
-        let vegetarian = document.getElementById("pizza-vegetarian-update-input");
-        let spicy = document.getElementById("pizza-spicy-update-input");
-        let image = document.getElementById("pizza-image-update-form");
-
-        id.value = pizzaId;
-        name.value = pizza.good.goodName;
-        price.value = pizza.good.goodPrice;
-        description.value = pizza.good.goodDescription;
-        vegetarian.checked = pizza.isVegetarian;
-        spicy.checked = pizza.isSpicy;
-        image.src = "/images/" + pizza.pizzaImg;
+function changeImage(img, imgInput){
+    let validExpr = /^image\//;
+    if(!event.target.files.length){
+        alert('изображение не выбрано');
+        return;
     }
-    if(event.target.dataset.toggleId == "salad-update-form"){
-        let salad;
-        let saladId = event.target.getAttribute("value");
-        for(item of salads){
-            if(item.saladId == saladId){
-                salad = item;
-                break;
-            }
-        }
-        if(salad === undefined) return;
-        let id = document.getElementById("salad-id-box");
-        let name = document.getElementById("salad-name-update-input");
-        let price =  document.getElementById("salad-price-update-input");
-        let description = document.getElementById("salad-description-update-input");
-        let vegetarian = document.getElementById("salad-vegetarian-update-input");
-        let warm = document.getElementById("salad-warm-update-input");
-        let image = document.getElementById("salad-image-update-form");
-
-        id.value = saladId;
-        name.value = salad.good.goodName;
-        price.value = salad.good.goodPrice;
-        description.value = salad.good.goodDescription;
-        vegetarian.checked = salad.isVegetarian;
-        warm.checked = salad.isWarm;
-        image.src = "/images/" + salad.saladImg;
+    if(!validExpr.test(event.target.files[0].type)){
+        alert('некорректный тип файла');
+        return;
     }
-    if(event.target.dataset.toggleId == "drink-update-form"){
-        let drink;
-        let drinkId = event.target.getAttribute("value");
-        for(item of drinks){
-            if(item.drinkId == drinkId){
-                drink = item;
-                break;
-            }
-        }
-        if(drink === undefined) return;
-        let id = document.getElementById("drink-id-box");
-        let name = document.getElementById("drink-name-update-input");
-        let price =  document.getElementById("drink-price-update-input");
-        let description = document.getElementById("drink-description-update-input");
-        let alc = document.getElementById("drink-alcohol-update-input");
-        let warm = document.getElementById("drink-warm-update-input");
-        let gazed = document.getElementById("drink-gazed-update-input");
-        let caffeine = document.getElementById("drink-caffeine-update-input");
-        let image = document.getElementById("drink-image-update-form");
-
-        id.value = drinkId;
-        name.value = drink.good.goodName;
-        price.value = drink.good.goodPrice;
-        description.value = drink.good.goodDescription;
-        alc.checked = drink.isAlcohol;
-        warm.checked = drink.isWarm;
-        gazed.checked = drink.isGazed;
-        caffeine.checked = drink.hasCaffeine;
-        image.src = "/images/" + drink.drinkImg;
-    }
+    imgInput.value = event.target.files[0].name;
+    img.src = '/images/' + event.target.files[0].name;
 }
 
-function changeImage(){
-    let img = document.getElementById(event.target.dataset.toggleId);
-    img.src = (!event.target.files.length) ? "/images/noimg.jpg" : "/images/" + event.target.files[0].name;
-}
-
-function scaleImage(){
-    let isScaled = event.target.classList.contains("scale");
-    images.forEach(item => { if(item.classList.contains("scale"))
-        item.classList.remove("scale");
-    });
-    if(!isScaled) event.target.classList.add("scale");
-}
-
-function resetForm(){
-    let form = document.getElementById(event.target.dataset.formId);
-    form.reset();
-    let imageInput = document.querySelector("#" + event.target.dataset.formId + " input[type=\"file\"]")
-    imageInput.dispatchEvent(new Event("change"));
+function imageError(imgInput){
+    alert('некорректный путь к файлу');
+    event.target.src = '/images/good-noimg.jpg';
+    imgInput.value = 'good-noimg.jpg';
 }
 
 function ready() {
-    imageInputs = document.querySelectorAll(".image-input");
-    addToggles = document.querySelectorAll(".add-toggle");
-    updateToggles = document.querySelectorAll(".update-toggle");
-    resetButtons = document.querySelectorAll(".reset");
-    images = document.querySelectorAll(".good-image");
+    let image = document.querySelector('.good-image');
+    let imageInput = document.querySelector('#input-image');
+    let imageSelector = document.querySelector('#selector-image');
+    if(typeof good === 'undefined'){
+        image.src = '/images/good-noimg.jpg';
+        imageInput.value = '/images/good-noimg.jpg';
+    }else{
+        let id = document.querySelector('#input-id');
+        let name = document.querySelector('#input-name');
+        let price = document.querySelector('#input-price');
+        let description = document.querySelector('#textarea-description');
+        let categories = document.querySelectorAll("input[id^='input-category-']");
+        let properties = document.querySelectorAll("input[id^='input-property-']");
+        let ingredients = document.querySelectorAll("input[id^='input-ingredient-']");
 
-    resetButtons.forEach(item => item.addEventListener("click", resetForm ));
-    imageInputs.forEach(item => item.addEventListener("change", changeImage));
-    addToggles.forEach(item => item.addEventListener("click", toggle));
-    images.forEach(item => item.addEventListener("click", scaleImage));
-    updateToggles.forEach(item => item.addEventListener("click", toggleAndSet));
+        id.value = good.goodId;
+        name.value = good.goodName;
+        price.value = good.goodPrice;
+        description.value = good.goodDescription;
+        image.src = '/images/'+good.goodImage;
+        imageInput.value = good.goodImage;
+        categories.forEach((category)=>{
+            if(category.value==good.goodCategory.categoryId){
+                category.checked='checked';
+            }
+        });
+        properties.forEach((property)=>{
+            good.goodProperties.forEach((goodProperty)=>{
+                if(property.value == goodProperty.propertyId){
+                    property.checked='checked';
+                }
+            });
+        });
+        ingredients.forEach((ingredient)=>{
+            good.goodIngredients.forEach((goodIngredient)=>{
+                if(ingredient.value == goodIngredient.ingredientId){
+                    ingredient.checked='checked';
+                }
+            });
+        });
+    }
 
-    forms = document.querySelectorAll(".form");
-    forms.forEach(item => item.classList.add("hidden"));
+    imageSelector.addEventListener('change', ()=>changeImage(image, imageInput));
+    image.addEventListener('error', ()=>imageError(imageInput));
 }
-document.addEventListener("DOMContentLoaded", ready);
+document.addEventListener('DOMContentLoaded', ready);

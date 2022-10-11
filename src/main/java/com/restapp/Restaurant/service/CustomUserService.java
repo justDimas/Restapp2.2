@@ -9,28 +9,82 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
-public class CustomUserService implements UserDetailsService {
+public class CustomUserService implements UserDetailsService, MyService<CustomUser> {
     @Autowired
     private CustomUserDAO userDAO;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        CustomUser requiredUser = userDAO.findByUserName(userName);
-        if (requiredUser == null) {
-            throw new UsernameNotFoundException("Unknown user: " + userName);
-        }
-        return requiredUser;
+        return userDAO.findByUserName(userName)
+                .orElseThrow(()->new UsernameNotFoundException("Unknown user: " + userName));
     }
 
-    public Boolean saveUser(CustomUser user){
-        if(!userDAO.existsByUserName(user.getUsername())){
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-            String encodePassword = encoder.encode(user.getPassword());
-            user.setUserPassword(encodePassword);
-            userDAO.save(user);
-            return true;
-        }else
+    @Override
+    public CustomUser getById(CustomUser respUser) throws NoSuchElementException {
+        return userDAO.findById(respUser.getUserId()).orElseThrow();
+    }
+
+    @Override
+    public List<CustomUser> getAll(){
+        return userDAO.findAll();
+    }
+
+    @Override
+    public boolean add(CustomUser respUser){
+        boolean matchesLogin = respUser.getUsername().matches("^[a-zA-Z0-9]{4,32}$");
+        boolean passwordIsValid = respUser.getUserPassword().matches("^[a-zA-Z0-9]{4,32}$");
+        if(!matchesLogin || !passwordIsValid)
             return false;
+
+        boolean exists = userDAO.existsByUserName(respUser.getUsername());
+        if(exists)
+            return false;
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        String encodePassword = encoder.encode(respUser.getPassword());
+        respUser.setUserPassword(encodePassword);
+        userDAO.save(respUser);
+        return true;
+    }
+
+    @Override
+    public boolean delete(CustomUser respUser) {
+        boolean exists = userDAO.existsById(respUser.getUserId());
+        if (!exists)
+            return false;
+        userDAO.deleteById(respUser.getUserId());
+        return true;
+    }
+
+    @Override
+    public boolean update(CustomUser respUser) {
+        boolean matchesLogin = respUser.getUsername().matches("^[a-zA-Z0-9]{4,32}$");
+        boolean matchesPassword = respUser.getUserPassword().matches("^[a-zA-Z0-9]{4,32}$");
+        if(!matchesLogin || !matchesPassword) 
+            return false;
+
+        Optional<CustomUser> optionalUser = userDAO.findById(respUser.getUserId());
+        if(optionalUser.isEmpty())
+            return false;
+        CustomUser user = optionalUser.get();
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+        boolean equalsPassword = encoder.matches(respUser.getUserPassword(), user.getPassword());
+        boolean equalsLogin = Objects.equals(user.getUsername(), respUser.getUsername());
+        if(!equalsPassword) 
+            user.setUserPassword(encoder.encode(respUser.getUserPassword()));
+        if(!equalsLogin)
+            user.setUserName(respUser.getUsername());
+        
+        user.setUserRoles(respUser.getUserRoles());
+        userDAO.save(user);
+        return true;
     }
 }

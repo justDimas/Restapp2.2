@@ -19,6 +19,7 @@ public class CustomUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+    @Column(unique = true)
     private String userName;
     private String userPassword;
     @ManyToMany(fetch = FetchType.EAGER)

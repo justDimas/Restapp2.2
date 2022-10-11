@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Restapp ingredients updating</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<nav>
+    <a href="/"><h3>Главная cтраница</h3></a>
+    <a href="/admin/ingredients"><h3>Ингредиенты</h3></a>
+    <a href="/admin/properties"><h3>Свойства</h3></a>
+    <a href="/admin/units"><h3>Ед измерения</h3></a>
+    <a href="/admin/users"><h3>Пользователи</h3></a>
+    <a href="/admin/categories"><h3>Категории</h3></a>
+    <a href="/admin/goods"><h3>Товары</h3></a>
+</nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell"></div>
+            <div class="table-cell">Id ингредиента</div>
+            <div class="table-cell">Название</div>
+            <div class="table-cell">Граммовка</div>
+            <div class="table-cell">Id единицы измерения</div>
+            <div class="table-cell">Единица измерения</div>
+            <div class="table-cell">Список товаров</div>
+            <div class="table-cell"></div>
+        </div>
+        <div class="table-row" th:each="ingredient:${ingredients}">
+            <div class="table-cell"></div>
+            <div class="table-cell" th:text="${ingredient.ingredientId}"></div>
+            <div class="table-cell" th:text="${ingredient.ingredientName}"></div>
+            <div class="table-cell" th:text="${ingredient.ingredientWeight}"></div>
+            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitId}"></div>
+            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitName}"></div>
+            <div class="table-cell"></div>
+        </div>
+        <form class="table-row form"></form>
+        <form class="table-row form"></form>
+        <div class="table-row">
+            <div class="table-cell"></div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

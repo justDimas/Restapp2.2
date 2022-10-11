@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Restapp goods adding</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/good.js"></script>
+</head>
+<body>
+<nav>
+    <a href="/"><h3>Главная cтраница</h3></a>
+    <a href="/admin/ingredients"><h3>Ингредиенты</h3></a>
+    <a href="/admin/properties"><h3>Свойства</h3></a>
+    <a href="/admin/units"><h3>Ед измерения</h3></a>
+    <a href="/admin/users"><h3>Пользователи</h3></a>
+    <a href="/admin/categories"><h3>Категории</h3></a>
+    <a href="/admin/goods"><h3>Товары</h3></a>
+</nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-150">Название</div>
+            <div class="table-cell col-100">Цена</div>
+            <div class="table-cell col-150">Описание</div>
+            <div class="table-cell col-150">Изображение</div>
+            <div class="table-cell col-150">Категория</div>
+            <div class="table-cell col-150">Ингредиенты</div>
+            <div class="table-cell col-150">Свойства</div>
+        </div>
+        <form class="table-row" id="add-form" method="post">
+            <div class="table-cell col-150">
+                <input name="name" type="text" required>
+            </div>
+            <div class="table-cell col-100">
+                <input name="price" type="number" required>
+            </div>
+            <div class="table-cell col-150">
+                <textarea name="description" required></textarea>
+            </div>
+            <div class="table-cell col-150">
+                <input id="input-image" name="image" type="hidden">
+                <input id="selector-image" type="file" accept="image/*">
+                <label for="selector-image">
+                    <img class="good-image">
+                </label>
+            </div>
+            <div class="table-cell col-150 ul">
+                <div class="ul-li" th:each="category:${categories}">
+                    <input name="category" type="radio" th:value="${category.categoryId}" th:id="'input-category-'+${category.categoryId}" checked>
+                    <label th:text="${category.categoryName}" th:for="'input-category-'+${category.categoryId}"></label>
+                </div>
+            </div>
+            <div class="table-cell col-150 ul" th:unless="${ingredients==null}">
+                <div class="ul-li" th:each="ingredient:${ingredients}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.ingredientId}" th:id="'input-ingredient-'+${ingredient.ingredientId}">
+                    <label th:text="${ingredient.ingredientName}" th:for="'input-ingredient-'+${ingredient.ingredientId}"></label>
+                </div>
+            </div>
+            <div class="table-cell col-150 ul" th:unless="${properties==null}">
+                <div class="ul-li" th:each="property:${properties}">
+                    <input name="properties" type="checkbox" th:value="${property.propertyId}" th:id="'input-property-'+${property.propertyId}">
+                    <label th:text="${property.propertyName}" th:for="'input-property-'+${property.propertyId}"></label>
+                </div>
+            </div>
+        </form>
+        <div class="table-row">
+            <div class="table-cell">
+                <button class="button" form="add-form">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</main>

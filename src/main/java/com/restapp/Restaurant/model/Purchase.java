@@ -25,3 +25,21 @@ public class Purchase {
     @JoinColumn(name = "t_user")
     private CustomUser user;
 }
+
+/*TODO
+public class Purchase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer purchaseId;
+    private LocalDateTime purchaseTime;
+    private String purchaseCommentary;
+    @ManyToMany
+    @JoinTable(name="purchases-goods",
+               joinColumns = @JoinColumn(name = "purchases"),
+               inverseJoinColumns = @JoinColumn(name="goods"))
+    private Set<Good> purchaseGoods;
+    @ManyToOne
+    @JoinColumn(name = "c_user")
+    private CustomUser purchaseUser;
+}
+*/
