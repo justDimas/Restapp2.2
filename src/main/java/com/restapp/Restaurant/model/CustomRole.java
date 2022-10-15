@@ -1,5 +1,6 @@
 package com.restapp.Restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -19,7 +20,9 @@ public class CustomRole implements GrantedAuthority {
     private Integer roleId;
     private String roleName;
 
-    @ManyToMany(mappedBy = "userRoles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "userRoles", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @JsonIgnore
     private Set<CustomUser> roleUsers;
 
     @Override

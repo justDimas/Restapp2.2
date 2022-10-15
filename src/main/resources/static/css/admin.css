@@ -56,7 +56,7 @@ main{
 .table{
     width: fit-content;
     margin: 0 50px 50px;
-    background-color: #d9f5ff;
+    background: rgba(217, 245, 255, 0.5);
 }
 
 .table-row{
@@ -87,6 +87,7 @@ main{
 .col-50{width:50px;}
 .col-100{width:100px;}
 .col-150{width:150px;}
+.col-200{width:200px;}
 
 #selector-image{
     display: none;
@@ -144,5 +145,19 @@ label:hover{
 }
 
 .ul{
-    align-items: start;
+    overflow: auto;
+    justify-content: start;
+    max-height: 200px;
+}
+
+.ul-li{
+    align-self: start;
+    text-align: left;
+    border-bottom: 1px solid #000000;
+    margin: 0 0 5px 0;
+}
+
+.ul > :last-child{
+    margin: 0;
+    border-bottom: 0;
 }

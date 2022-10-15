@@ -40,7 +40,7 @@
                             <div class="icon-block">
                                 <th:block th:each="property:${good.goodProperties}">
                                     <div class="icon-case">
-                                        <img src="@{'/images/' + ${good.propertyImage}}" th:title="${good.propertyName}">
+                                        <img th:src="@{'/images/' + ${property.propertyImage}}" th:title="${property.propertyName}">
                                     </div>
                                 </th:block>
                             </div>

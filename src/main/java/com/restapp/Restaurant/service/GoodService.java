@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.GoodDAO;
 import com.restapp.Restaurant.model.Good;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +28,10 @@ public class GoodService implements MyService<Good> {
 
     @Override
     public boolean add(Good respGood) {
-        boolean matchesName = respGood.getGoodName().matches("^[A-Za-zА-Яа-я0-9\\s\\,\\.\\-\\_\\\"]{2,32}$");
-        boolean matchesPrice = respGood.getGoodPrice() > 0 && respGood.getGoodPrice() < 1000;
-        boolean matchesDescription = respGood.getGoodDescription().matches("^[A-Za-zА-Яа-я0-9\\s\\,\\.\\-\\_\\\"]{2,256}$");
-        boolean matchesImage = respGood.getGoodImage().matches("^[А-Яа-яA-Za-z0-9\\s\\_\\-\\,\\.]{1,32}\\.[A-Za-z0-9]{1,8}$");
+        boolean matchesName = respGood.isValidName();
+        boolean matchesPrice = respGood.isValidPrice();
+        boolean matchesDescription = respGood.isValidDescription();
+        boolean matchesImage = respGood.isValidImage();
         if(!matchesName || !matchesPrice || !matchesDescription || ! matchesImage)
             return false;
 
@@ -40,19 +41,20 @@ public class GoodService implements MyService<Good> {
 
     @Override
     public boolean delete(Good respGood) {
-        boolean exists = goodDAO.existsById(respGood.getGoodId());
-        if(!exists)
+        try{
+            goodDAO.deleteById(respGood.getGoodId());
+            return true;
+        }catch(EmptyResultDataAccessException e){
             return false;
-        goodDAO.deleteById(respGood.getGoodId());
-        return true;
+        }
     }
 
     @Override
     public boolean update(Good respGood) {
-        boolean matchesName = respGood.getGoodName().matches("^[A-Za-zА-Яа-я0-9\\s\\,\\.\\-\\_\\\"]{2,32}$");
-        boolean matchesPrice = respGood.getGoodPrice() > 0 && respGood.getGoodPrice() < 1000;
-        boolean matchesDescription = respGood.getGoodDescription().matches("^[A-Za-zА-Яа-я0-9\\s\\,\\.\\-\\_\\\"]{2,256}$");
-        boolean matchesImage = respGood.getGoodImage().matches("^[А-Яа-яA-Za-z0-9\\s\\_\\-\\,\\.]{1,32}\\.[A-Za-z0-9]{1,8}$");
+        boolean matchesName = respGood.isValidName();
+        boolean matchesPrice = respGood.isValidPrice();
+        boolean matchesDescription = respGood.isValidDescription();
+        boolean matchesImage = respGood.isValidImage();
         if(!matchesName || !matchesPrice || !matchesDescription || ! matchesImage)
             return false;
 

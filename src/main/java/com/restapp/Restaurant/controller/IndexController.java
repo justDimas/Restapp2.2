@@ -35,7 +35,6 @@ public class IndexController {
         Collection<Category> sortCategories = goods.stream()
                 .map(Good::getGoodCategory)
                 .distinct()
-                .sorted(Comparator.comparing(Category::getCategoryName))
                 .toList();
 
         Map<String, List<Good>> goodsByCategory = sortCategories.stream()

@@ -19,22 +19,22 @@ public class RegistrationController {
     CustomUserService userService;
 
     @GetMapping("/registration")
-    public String registration(Model model, @RequestParam(required = false) Boolean error){
+    public String getRegistration(Model model, @RequestParam(required = false) Boolean error){
         if(error!=null)
             model.addAttribute("error", error);
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@RequestParam Map<String, String> params){
+    public String postRegistration(@RequestParam Map<String, String> params){
         String userName = params.get("userName");
         String userPassword = params.get("userPassword");
-        CustomUser build = CustomUser.builder()
+        CustomUser user = CustomUser.builder()
                 .userName(userName)
                 .userPassword(userPassword)
                 .userRoles(Set.of(CustomRole.builder().roleId(7).build()))
                 .build();
-        if (userService.add(build)){
+        if (userService.add(user)){
             return "redirect:";
         }else{
             return "redirect:registration?error=true";

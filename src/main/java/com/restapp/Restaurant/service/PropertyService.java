@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.PropertyDAO;
 import com.restapp.Restaurant.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class PropertyService implements MyService<Property> {
 
     @Override
     public boolean add(Property respProperty) {
-        boolean matchesName = respProperty.getPropertyName().matches("^[А-Яа-я0-9]{2,32}$");
-        boolean matchesImage = respProperty.getPropertyImage().matches("^[А-Яа-яA-Za-z0-9\\s\\_\\-\\,\\.]{1,32}\\.[A-Za-z0-9]{1,8}$");
+        boolean matchesName = respProperty.isValidName();
+        boolean matchesImage = respProperty.isValidImage();
         if(!matchesName || !matchesImage)
             return false;
         propertyDAO.save(respProperty);
@@ -37,17 +38,18 @@ public class PropertyService implements MyService<Property> {
 
     @Override
     public boolean delete(Property respProperty) {
-        boolean exists = propertyDAO.existsById(respProperty.getPropertyId());
-        if(!exists)
+        try{
+            propertyDAO.deleteById(respProperty.getPropertyId());
+            return true;
+        }catch(EmptyResultDataAccessException e){
             return false;
-        propertyDAO.deleteById(respProperty.getPropertyId());
-        return true;
+        }
     }
 
     @Override
     public boolean update(Property respProperty) {
-        boolean matchesName = respProperty.getPropertyName().matches("^[А-Яа-я0-9]{2,32}$");
-        boolean matchesImage = respProperty.getPropertyImage().matches("^[А-Яа-яA-Za-z0-9\\s\\_\\-\\,\\.]{1,32}\\.[A-Za-z0-9]{1,8}$");
+        boolean matchesName = respProperty.isValidName();
+        boolean matchesImage = respProperty.isValidImage();
         if(!matchesName || !matchesImage)
             return false;
 

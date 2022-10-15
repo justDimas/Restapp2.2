@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.UnitDAO;
 import com.restapp.Restaurant.model.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class UnitService implements MyService<Unit>{
 
     @Override
     public boolean add(Unit respUnit) {
-        boolean matchesName = respUnit.getUnitName().matches("^[А-Яа-я0-9]{2,16}$");
+        boolean matchesName = respUnit.isValidName();
         if(!matchesName)
             return false;
         unitDAO.save(respUnit);
@@ -36,16 +37,17 @@ public class UnitService implements MyService<Unit>{
 
     @Override
     public boolean delete(Unit respUnit) {
-        boolean exists = unitDAO.existsById(respUnit.getUnitId());
-        if(!exists)
+        try{
+            unitDAO.deleteById(respUnit.getUnitId());
+            return true;
+        }catch(EmptyResultDataAccessException e){
             return false;
-        unitDAO.delete(respUnit);
-        return true;
+        }
     }
 
     @Override
     public boolean update(Unit respUnit) {
-        boolean matchesName = respUnit.getUnitName().matches("^[А-Яа-я0-9]{2,32}$");
+        boolean matchesName = respUnit.isValidName();
         if(!matchesName)
             return false;
 

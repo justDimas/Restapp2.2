@@ -1,5 +1,6 @@
 package com.restapp.Restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
@@ -20,6 +21,24 @@ public class Ingredient {
     @ManyToOne
     @JoinColumn(name = "unit")
     private Unit ingredientUnit;
-    @ManyToMany(mappedBy = "goodIngredients", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "goodIngredients")
+    @JsonIgnore
+    @ToString.Exclude
     private Set<Good> ingredientGoods;
+    @Transient
+    @JsonIgnore
+    private static final String regexCheckName = "^[А-Яа-я0-9]{2,32}$";
+    @Transient
+    @JsonIgnore
+    private static final Double minWeight = 0d;
+    @Transient
+    @JsonIgnore
+    private static final Double maxWeight = 1000d;
+
+    public boolean isValidName(){
+        return ingredientName.matches(regexCheckName);
+    }
+    public boolean isValidPrice(){
+        return (ingredientWeight>minWeight&&ingredientWeight<maxWeight);
+    }
 }

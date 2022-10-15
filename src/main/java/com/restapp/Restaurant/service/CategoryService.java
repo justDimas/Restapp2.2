@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.CategoryDAO;
 import com.restapp.Restaurant.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class CategoryService implements MyService<Category> {
 
     @Override
     public boolean add(Category respCategory) {
-        boolean matchesName = respCategory.getCategoryName().matches("^[А-Яа-я0-9]{2,32}$");
+        boolean matchesName = respCategory.isValidName();
         if(!matchesName)
             return false;
         categoryDAO.save(respCategory);
@@ -36,15 +37,17 @@ public class CategoryService implements MyService<Category> {
 
     @Override
     public boolean delete(Category respCategory) {
-        boolean exists = categoryDAO.existsById(respCategory.getCategoryId());
-        if(exists)
+        try{
             categoryDAO.deleteById(respCategory.getCategoryId());
-        return exists;
+            return true;
+        }catch (EmptyResultDataAccessException e){
+            return false;
+        }
     }
 
     @Override
     public boolean update(Category respCategory) {
-        boolean matchesName = respCategory.getCategoryName().matches("^[А-Яа-я0-9]{2,32}$");
+        boolean matchesName = respCategory.isValidName();
         if(!matchesName)
             return false;
 
@@ -57,6 +60,6 @@ public class CategoryService implements MyService<Category> {
         if(!equalsName)
             category.setCategoryName(respCategory.getCategoryName());
         categoryDAO.save(category);
-        return false;
+        return true;
     }
 }

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Restapp goods</title>
     <link rel="stylesheet" href="/css/admin.css">
-    <script src="/js/good.js"></script>
 </head>
 <body>
 <nav>
@@ -27,8 +26,7 @@
             <div class="table-cell col-150">Категория</div>
             <div class="table-cell col-150">Ингредиенты</div>
             <div class="table-cell col-150">Свойства</div>
-            <div class="table-cell col-100"></div>
-            <div class="table-cell col-100"></div>
+            <div class="table-cell col-200"></div>
         </div>
         <div class="table-row" th:each="good:${goods}">
             <div class="table-cell col-50" th:text="${good.goodId}"></div>
@@ -39,7 +37,7 @@
             <div class="table-cell col-150" th:text="${good.goodCategory.categoryName}"></div>
             <div class="table-cell ul col-150">
                 <th:block th:each="ingredient:${good.goodIngredients}">
-                    <div class="ul-li" th:text="${ingredient.ingredientName}"></div>
+                    <div class="ul-li" th:text="${ingredient.ingredientName}+' '+${ingredient.ingredientWeight}"></div>
                 </th:block>
             </div>
             <div class="table-cell ul col-150">

@@ -41,6 +41,8 @@ public class GoodController {
 
         if(categories.isEmpty())
             return "redirect:/admin/categories/categories-add";
+        if(ingredients.isEmpty())
+            return "redirect:/admin/ingredients/ingredients-add";
 
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("properties", properties);
@@ -51,21 +53,20 @@ public class GoodController {
     @GetMapping("/admin/goods/{goodId}/goods-update")
     public String getUpdate(@PathVariable Integer goodId, Model model){
         Good good;
-        List<Category> categories;
-        List<Ingredient> ingredients;
-        List<Property> properties;
         try{
             good = goodService.getById(Good.builder().goodId(goodId).build());
         }catch (NoSuchElementException e) {
             return "redirect:/admin/goods?success=false";
         }
-        categories = categoryService.getAll();
-        if(categories.isEmpty())
+        List<Category> categories = categoryService.getAll();
+        List<Ingredient> ingredients = ingredientService.getAll();
+        List<Property> properties = propertyService.getAll();
+        if(categories.isEmpty()) {
             return "redirect:/admin/categories/categories-add";
-
-        ingredients = ingredientService.getAll();
-        properties = propertyService.getAll();
-
+        }
+        if(ingredients.isEmpty()) {
+            return "redirect:/admin/ingredients/ingredients-add";
+        }
         model.addAttribute("good", good);
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("properties", properties);
@@ -75,7 +76,7 @@ public class GoodController {
 
     @PostMapping("/admin/goods/goods-add")
     public String postAdd(@RequestParam Map<String,String> params,
-                          @RequestParam Collection<Integer> properties,
+                          @RequestParam(required = false) Collection<Integer> properties,
                           @RequestParam Collection<Integer> ingredients)
     {
         boolean success;
@@ -138,8 +139,8 @@ public class GoodController {
         return "redirect:/admin/goods" + "?success=" + success;
     }
 
-    @PostMapping("/admin/goods/{goodId}/goods-delete")
-    public String postDelete(@PathVariable Integer goodId){
+    @GetMapping("/admin/goods/{goodId}/goods-delete")
+    public String getDelete(@PathVariable Integer goodId){
         boolean success = true;
         try {
             goodService.delete(Good.builder().goodId(goodId).build());

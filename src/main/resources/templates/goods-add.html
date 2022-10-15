@@ -24,7 +24,7 @@
             <div class="table-cell col-150">Описание</div>
             <div class="table-cell col-150">Изображение</div>
             <div class="table-cell col-150">Категория</div>
-            <div class="table-cell col-150">Ингредиенты</div>
+            <div class="table-cell col-200">Ингредиенты</div>
             <div class="table-cell col-150">Свойства</div>
         </div>
         <form class="table-row" id="add-form" method="post">
@@ -45,22 +45,32 @@
                 </label>
             </div>
             <div class="table-cell col-150 ul">
-                <div class="ul-li" th:each="category:${categories}">
-                    <input name="category" type="radio" th:value="${category.categoryId}" th:id="'input-category-'+${category.categoryId}" checked>
-                    <label th:text="${category.categoryName}" th:for="'input-category-'+${category.categoryId}"></label>
-                </div>
+                <th:block th:each="category:${categories}">
+                    <div class="ul-li">
+                        <input name="category" type="radio" th:value="${category.categoryId}"
+                               th:id="'input-category-'+${category.categoryId}">
+                        <label th:text="${category.categoryName}" th:for="'input-category-'+${category.categoryId}"></label>
+                    </div>
+                </th:block>
             </div>
-            <div class="table-cell col-150 ul" th:unless="${ingredients==null}">
-                <div class="ul-li" th:each="ingredient:${ingredients}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.ingredientId}" th:id="'input-ingredient-'+${ingredient.ingredientId}">
-                    <label th:text="${ingredient.ingredientName}" th:for="'input-ingredient-'+${ingredient.ingredientId}"></label>
-                </div>
+            <div class="table-cell col-200 ul">
+                <th:block th:each="ingredient:${ingredients}">
+                    <div class="ul-li">
+                        <input name="ingredients" type="checkbox" th:value="${ingredient.ingredientId}"
+                               th:id="'input-ingredient-'+${ingredient.ingredientId}">
+                        <label th:text="${ingredient.ingredientName}+' '+${ingredient.ingredientWeight}"
+                               th:for="'input-ingredient-'+${ingredient.ingredientId}"></label>
+                    </div>
+                </th:block>
             </div>
-            <div class="table-cell col-150 ul" th:unless="${properties==null}">
-                <div class="ul-li" th:each="property:${properties}">
-                    <input name="properties" type="checkbox" th:value="${property.propertyId}" th:id="'input-property-'+${property.propertyId}">
-                    <label th:text="${property.propertyName}" th:for="'input-property-'+${property.propertyId}"></label>
-                </div>
+            <div class="table-cell col-200 ul" th:unless="${properties==null}">
+                <th:block th:each="property:${properties}">
+                    <div class="ul-li">
+                        <input name="properties" type="checkbox" th:value="${property.propertyId}"
+                               th:id="'input-property-'+${property.propertyId}">
+                        <label th:text="${property.propertyName}" th:for="'input-property-'+${property.propertyId}"></label>
+                    </div>
+                </th:block>
             </div>
         </form>
         <div class="table-row">
@@ -70,3 +80,5 @@
         </div>
     </div>
 </main>
+</body>
+</html>

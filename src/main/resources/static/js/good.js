@@ -22,24 +22,19 @@ function ready() {
     let image = document.querySelector('.good-image');
     let imageInput = document.querySelector('#input-image');
     let imageSelector = document.querySelector('#selector-image');
+    let categories = document.querySelectorAll("input[id^='input-category-']");
     if(typeof good === 'undefined'){
+        categories[0].checked = 'checked';
         image.src = '/images/good-noimg.jpg';
-        imageInput.value = '/images/good-noimg.jpg';
+        imageInput.value = 'good-noimg.jpg';
     }else{
-        let id = document.querySelector('#input-id');
-        let name = document.querySelector('#input-name');
-        let price = document.querySelector('#input-price');
         let description = document.querySelector('#textarea-description');
-        let categories = document.querySelectorAll("input[id^='input-category-']");
         let properties = document.querySelectorAll("input[id^='input-property-']");
         let ingredients = document.querySelectorAll("input[id^='input-ingredient-']");
 
-        id.value = good.goodId;
-        name.value = good.goodName;
-        price.value = good.goodPrice;
-        description.value = good.goodDescription;
         image.src = '/images/'+good.goodImage;
         imageInput.value = good.goodImage;
+        description.value = good.goodDescription;
         categories.forEach((category)=>{
             if(category.value==good.goodCategory.categoryId){
                 category.checked='checked';

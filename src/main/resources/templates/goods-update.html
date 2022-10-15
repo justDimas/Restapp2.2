@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Restapp goods updating</title>
     <link rel="stylesheet" href="/css/admin.css">
-    <script src="/js/good.js"></script>
-    <script th:inline="javascript">let good = [[${good}]];</script>
+    <script src="/js/good.js" th:inline="javascript"></script>
+    <script th:inline="javascript">
+        let good = [[${good}]];
+    </script>
 </head>
 <body>
 <nav>
@@ -20,24 +22,20 @@
 <main>
     <div class="table">
         <div class="table-row">
-            <div class="table-cell col-50">Id</div>
             <div class="table-cell col-150">Название</div>
             <div class="table-cell col-100">Цена</div>
             <div class="table-cell col-150">Описание</div>
             <div class="table-cell col-150">Изображение</div>
             <div class="table-cell col-150">Категория</div>
-            <div class="table-cell col-150">Ингредиенты</div>
-            <div class="table-cell col-150">Свойства</div>
+            <div class="table-cell col-200">Ингредиенты</div>
+            <div class="table-cell col-200">Свойства</div>
         </div>
-        <form class="table-row" id="update-form" method="post">
-            <div class="table-cell col-50">
-                <input type="number" name="id" id="input-id" disabled>
-            </div>
+        <form class="table-row" id="form-update" method="post" action="/admin/goods/goods-update">
             <div class="table-cell col-150">
-                <input name="name" id="input-name" type="text" required>
+                <input name="name" th:value="${good.goodName}" type="text" required>
             </div>
             <div class="table-cell col-100">
-                <input name="price" id="input-price" type="number" required>
+                <input name="price" th:value="${good.goodPrice}" type="number" required>
             </div>
             <div class="table-cell col-150">
                 <textarea name="description" id="textarea-description" required></textarea>
@@ -50,27 +48,37 @@
                 </label>
             </div>
             <div class="table-cell col-150 ul">
-                <div class="ul-li" th:each="category:${categories}">
-                    <input name="category" type="radio" th:value="${category.categoryId}" th:id="'input-category-'+${category.categoryId}">
-                    <label th:text="${category.categoryName}" th:for="'input-category-'+${category.categoryId}"></label>
-                </div>
+                <th:block th:each="category:${categories}">
+                    <div class="ul-li">
+                        <input name="category" type="radio" th:value="${category.categoryId}"
+                               th:id="'input-category-'+${category.categoryId}">
+                        <label th:text="${category.categoryName}" th:for="'input-category-'+${category.categoryId}"></label>
+                    </div>
+                </th:block>
             </div>
-            <div class="table-cell col-150 ul" th:unless="${ingredients==null}">
-                <div class="ul-li" th:each="ingredient:${ingredients}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.ingredientId}" th:id="'input-ingredient-'+${ingredient.ingredientId}">
-                    <label th:text="${ingredient.ingredientName}" th:for="'input-ingredient-'+${ingredient.ingredientId}"></label>
-                </div>
+            <div class="table-cell col-200 ul">
+                <th:block th:each="ingredient:${ingredients}">
+                    <div class="ul-li">
+                        <input name="ingredients" type="checkbox" th:value="${ingredient.ingredientId}"
+                               th:id="'input-ingredient-'+${ingredient.ingredientId}">
+                        <label th:text="${ingredient.ingredientName}+' '+${ingredient.ingredientWeight}"
+                               th:for="'input-ingredient-'+${ingredient.ingredientId}"></label>
+                    </div>
+                </th:block>
             </div>
-            <div class="table-cell col-150 ul" th:unless="${properties==null}">
-                <div class="ul-li" th:each="property:${properties}">
-                    <input name="properties" type="checkbox" th:value="${property.propertyId}" th:id="'input-property-'+${property.propertyId}">
-                    <label th:text="${property.propertyName}" th:for="'input-property-'+${property.propertyId}"></label>
-                </div>
+            <div class="table-cell col-200 ul" th:unless="${properties==null}">
+                <th:block th:each="property:${properties}">
+                    <div class="ul-li">
+                        <input name="properties" type="checkbox" th:value="${property.propertyId}"
+                               th:id="'input-property-'+${property.propertyId}">
+                        <label th:text="${property.propertyName}" th:for="'input-property-'+${property.propertyId}"></label>
+                    </div>
+                </th:block>
             </div>
         </form>
         <div class="table-row">
             <div class="table-cell">
-                <button class="button" form="update-form">Сохранить</button>
+                <button class="button" name="id" th:value="${good.goodId}" form="form-update">Сохранить</button>
             </div>
         </div>
     </div>

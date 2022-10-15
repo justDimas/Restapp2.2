@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.CustomUserDAO;
 import com.restapp.Restaurant.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,8 +38,8 @@ public class CustomUserService implements UserDetailsService, MyService<CustomUs
 
     @Override
     public boolean add(CustomUser respUser){
-        boolean matchesLogin = respUser.getUsername().matches("^[a-zA-Z0-9]{4,32}$");
-        boolean passwordIsValid = respUser.getUserPassword().matches("^[a-zA-Z0-9]{4,32}$");
+        boolean matchesLogin = respUser.isValidUsername();
+        boolean passwordIsValid = respUser.isValidPassword();
         if(!matchesLogin || !passwordIsValid)
             return false;
 
@@ -55,17 +56,18 @@ public class CustomUserService implements UserDetailsService, MyService<CustomUs
 
     @Override
     public boolean delete(CustomUser respUser) {
-        boolean exists = userDAO.existsById(respUser.getUserId());
-        if (!exists)
+        try{
+            userDAO.deleteById(respUser.getUserId());
+            return true;
+        }catch (EmptyResultDataAccessException e){
             return false;
-        userDAO.deleteById(respUser.getUserId());
-        return true;
+        }
     }
 
     @Override
     public boolean update(CustomUser respUser) {
-        boolean matchesLogin = respUser.getUsername().matches("^[a-zA-Z0-9]{4,32}$");
-        boolean matchesPassword = respUser.getUserPassword().matches("^[a-zA-Z0-9]{4,32}$");
+        boolean matchesLogin = respUser.isValidUsername();
+        boolean matchesPassword = respUser.isValidPassword();
         if(!matchesLogin || !matchesPassword) 
             return false;
 

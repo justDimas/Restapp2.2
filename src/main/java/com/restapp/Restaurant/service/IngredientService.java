@@ -3,6 +3,7 @@ package com.restapp.Restaurant.service;
 import com.restapp.Restaurant.dao.IngredientDAO;
 import com.restapp.Restaurant.model.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class IngredientService implements MyService<Ingredient> {
 
     @Override
     public boolean add(Ingredient respIngredient) {
-        boolean matchesName = respIngredient.getIngredientName().matches("^[А-Яа-я0-9]{2,32}$");
-        boolean matchesWeight = (respIngredient.getIngredientWeight()>=0 && respIngredient.getIngredientWeight()<1000);
+        boolean matchesName = respIngredient.isValidName();
+        boolean matchesWeight = respIngredient.isValidPrice();
         if (!matchesName || !matchesWeight)
             return false;
 
@@ -38,17 +39,18 @@ public class IngredientService implements MyService<Ingredient> {
 
     @Override
     public boolean delete(Ingredient respIngredient) {
-        boolean exists = ingredientDAO.existsById(respIngredient.getIngredientId());
-        if(!exists)
+        try{
+            ingredientDAO.deleteById(respIngredient.getIngredientId());
+            return true;
+        }catch(EmptyResultDataAccessException e){
             return false;
-        ingredientDAO.deleteById(respIngredient.getIngredientId());
-        return true;
+        }
     }
 
     @Override
     public boolean update(Ingredient respIngredient) {
-        boolean matchesName = respIngredient.getIngredientName().matches("^[А-Яа-я0-9]{2,32}$");
-        boolean matchesWeight = (respIngredient.getIngredientWeight()>=0 && respIngredient.getIngredientWeight()<1000);
+        boolean matchesName = respIngredient.isValidName();
+        boolean matchesWeight = respIngredient.isValidPrice();
         if (!matchesName || !matchesWeight)
             return false;
 

@@ -1,11 +1,10 @@
 package com.restapp.Restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,4 +18,15 @@ public class Category{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
     private String categoryName;
+    @OneToMany(mappedBy = "goodCategory", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @JsonIgnore
+    private Set<Good> categoryGood;
+    @Transient
+    @JsonIgnore
+    private static final String regexCheckName = "^[А-Яа-я0-9]{2,32}$";
+
+    public boolean isValidName(){
+        return categoryName.matches(regexCheckName);
+    }
 }
