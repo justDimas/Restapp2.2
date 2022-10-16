@@ -1,0 +1,130 @@
+insert into custom_role (role_name) values ('USER');
+insert into custom_role (role_name) values ('ADMIN');
+insert into custom_role (role_name) values ('GOD');
+
+insert into custom_user (user_name, user_password) 
+    values ('dimon','$2a$12$JIb36Nc7Yhi2P.ahE7/0s.V1.Pq0vScUrwyoq2X.8Gwmktm/GfiOC');
+
+insert into users_roles (users, roles) values(1,1);
+insert into users_roles (users, roles) values(1,2);
+insert into users_roles (users, roles) values(1,3);
+
+insert into unit (unit_name) values ('Кг');
+insert into unit (unit_name) values ('Литр');
+insert into unit (unit_name) values ('Штука');
+
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Тесто', 0.3, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Соус для пиццы', 0.1, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Сыр моцарелла', 0.2, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Сыр пармезан', 0.1, 1);    
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Пепперони', 0.1, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Грибы лесные', 0.1, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Грибы шампиньоны', 0.1, 1);    
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Салат айсберг', 0.2, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Помидоры черри', 0.04, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Соус цезарь', 0.1, 2);    
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Креветки каролевские', 0.2, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Креветки салатные', 0.2, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Грудка куриная', 0.2, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Молоко', 0.1, 2);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Кофе', 0.02, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Вода газированая', 0.2, 2);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Мята', 0.01, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Лимон', 0.5, 3);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Ром', 0.1, 2);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Лед', 0.1, 1);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Ликер черная смородина', 0.015, 2);
+insert into ingredient (ingredient_name,ingredient_weight, unit) 
+    values ('Имбирь', 0.02, 1);
+    
+insert into property (property_image, property_name) 
+    values('icon-alcohol.png', 'Алкоголь');
+insert into property (property_image, property_name) 
+    values('icon-vegan.png', 'Вегетарианский');
+insert into property (property_image, property_name) 
+    values('icon-coffee.png', 'Коффеин');
+insert into property (property_image, property_name) 
+    values('icon-spicy.png', 'Острый');
+
+insert into category (category_name) values('Пицца');
+insert into category (category_name) values('Салаты');
+insert into category (category_name) values('Напитки');
+
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-pizza-margarita.jpeg', 'Маргарита', 6, 1);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-pizza-forest.jpeg', 'Лесная', 7, 1);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-pizza-pepperoni.jpeg', 'Пепперони', 8, 1);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-salad-caesarWithSrimp.jpg', 'Цезарь с креветкой', 9.5, 2);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-salad-caesarWithChicken.jpg', 'Цезарь с курицей', 8, 2);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-drink-capuchino.jpg', 'Капучино', 3.5, 3);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-drink-majito.jpg', 'Мохито', 6, 3);
+insert into good (good_description, good_image, good_name, good_price, category) 
+    values ('описание','good-drink-eldiablo.jpg', 'Эль-диабло', 6.9, 3);
+    
+insert into goods_ingredients (goods, ingredients) values (1,1);    
+insert into goods_ingredients (goods, ingredients) values (1,2);    
+insert into goods_ingredients (goods, ingredients) values (1,3);    
+insert into goods_ingredients (goods, ingredients) values (2,1);    
+insert into goods_ingredients (goods, ingredients) values (2,2);    
+insert into goods_ingredients (goods, ingredients) values (2,6);    
+insert into goods_ingredients (goods, ingredients) values (3,1);   
+insert into goods_ingredients (goods, ingredients) values (3,2);   
+insert into goods_ingredients (goods, ingredients) values (3,5);  
+insert into goods_ingredients (goods, ingredients) values (4,4);  
+insert into goods_ingredients (goods, ingredients) values (4,8);  
+insert into goods_ingredients (goods, ingredients) values (4,9);  
+insert into goods_ingredients (goods, ingredients) values (4,10);
+insert into goods_ingredients (goods, ingredients) values (4,11); 
+insert into goods_ingredients (goods, ingredients) values (5,4);  
+insert into goods_ingredients (goods, ingredients) values (5,8);  
+insert into goods_ingredients (goods, ingredients) values (5,9);  
+insert into goods_ingredients (goods, ingredients) values (5,10);
+insert into goods_ingredients (goods, ingredients) values (5,13);
+insert into goods_ingredients (goods, ingredients) values (6,14);
+insert into goods_ingredients (goods, ingredients) values (6,15);
+insert into goods_ingredients (goods, ingredients) values (7,16);
+insert into goods_ingredients (goods, ingredients) values (7,17);
+insert into goods_ingredients (goods, ingredients) values (7,18);
+insert into goods_ingredients (goods, ingredients) values (7,19);
+insert into goods_ingredients (goods, ingredients) values (7,20);
+insert into goods_ingredients (goods, ingredients) values (8,16);
+insert into goods_ingredients (goods, ingredients) values (8,18);
+insert into goods_ingredients (goods, ingredients) values (8,19);
+insert into goods_ingredients (goods, ingredients) values (8,20);
+insert into goods_ingredients (goods, ingredients) values (8,21);
+insert into goods_ingredients (goods, ingredients) values (8,22);
+
+insert into goods_properties (goods, properties) values (7, 1);
+insert into goods_properties (goods, properties) values (8, 1);
+insert into goods_properties (goods, properties) values (1, 2);
+insert into goods_properties (goods, properties) values (2, 2);
+insert into goods_properties (goods, properties) values (4, 2);
+insert into goods_properties (goods, properties) values (6, 3);
+insert into goods_properties (goods, properties) values (3, 4);

@@ -20,7 +20,7 @@ public class CustomRole implements GrantedAuthority {
     private Integer roleId;
     private String roleName;
 
-    @ManyToMany(mappedBy = "userRoles", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "userRoles")
     @ToString.Exclude
     @JsonIgnore
     private Set<CustomUser> roleUsers;

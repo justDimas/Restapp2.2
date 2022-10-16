@@ -18,28 +18,30 @@
 <main>
     <div class="table">
         <div class="table-row">
-            <div class="table-cell"></div>
-            <div class="table-cell">Id ингредиента</div>
-            <div class="table-cell">Название</div>
-            <div class="table-cell">Граммовка</div>
-            <div class="table-cell">Id единицы измерения</div>
-            <div class="table-cell">Единица измерения</div>
-            <div class="table-cell">Список товаров</div>
-            <div class="table-cell"></div>
+            <div class="table-cell col-50">Id</div>
+            <div class="table-cell col-150">Наименование</div>
+            <div class="table-cell col-100">Граммовка</div>
+            <div class="table-cell col-100">Единица измерения</div>
+            <div class="table-cell col-200"></div>
         </div>
-        <div class="table-row" th:each="ingredient:${ingredients}">
-            <div class="table-cell"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientId}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientName}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientWeight}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitId}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitName}"></div>
-            <div class="table-cell"></div>
-        </div>
-        <form class="table-row form"></form>
-        <form class="table-row form"></form>
+        <th:block th:each="ingredient:${ingredients}">
+            <div class="table-row">
+                <div class="table-cell col-50" th:text="${ingredient.ingredientId}"></div>
+                <div class="table-cell col-150" th:text="${ingredient.ingredientName}"></div>
+                <div class="table-cell col-100" th:text="${ingredient.ingredientWeight}"></div>
+                <div class="table-cell col-100" th:text="${ingredient.ingredientUnit.unitName}"></div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="@{'/admin/ingredients/'+${ingredient.ingredientId}+'/ingredients-update'}">Изменить</a>
+                </div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="@{'/admin/ingredients/'+${ingredient.ingredientId}+'/ingredients-delete'}">Удалить</a>
+                </div>
+            </div>
+        </th:block>
         <div class="table-row">
-            <div class="table-cell"></div>
+            <div class="table-cell">
+                <a class="button" href="/admin/ingredients/ingredients-add">Добавить</a>
+            </div>
         </div>
     </div>
 </main>

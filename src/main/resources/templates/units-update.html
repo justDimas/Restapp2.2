@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Restapp units updating</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <nav>
@@ -14,5 +15,22 @@
     <a href="/admin/categories"><h3>Категории</h3></a>
     <a href="/admin/goods"><h3>Товары</h3></a>
 </nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-150">Наименование</div>
+        </div>
+        <form class="table-row" id="form-update" method="post" action="/admin/units/units-update">
+            <div class="table-cell col-150">
+                <input name="name" type="text" th:value="${unit.unitName}">
+            </div>
+        </form>
+        <div class="table-row">
+            <div class="table-cell">
+                <button class="button" name="id" th:value="${unit.unitId}" form="form-update">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

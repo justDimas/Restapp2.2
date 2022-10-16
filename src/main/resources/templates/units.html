@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Restapp units</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <nav>
@@ -14,5 +15,31 @@
     <a href="/admin/categories"><h3>Категории</h3></a>
     <a href="/admin/goods"><h3>Товары</h3></a>
 </nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-50">Id</div>
+            <div class="table-cell col-150">Наименование</div>
+            <div class="table-cell col-200"></div>
+        </div>
+        <th:block th:each="unit:${units}">
+            <div class="table-row">
+                <div class="table-cell col-50" th:text="${unit.unitId}"></div>
+                <div class="table-cell col-150" th:text="${unit.unitName}"></div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="@{'/admin/units/'+${unit.unitId}+'/units-update'}">Обновить</a>
+                </div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="@{'/admin/units/'+${unit.unitId}+'/units-delete'}">Удалить</a>
+                </div>
+            </div>
+        </th:block>
+        <div class="table-row">
+            <div class="table-cell">
+                <a class="button" href="/admin/units/units-add">Добавить</a>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

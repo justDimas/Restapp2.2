@@ -18,7 +18,7 @@ public class Category{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
     private String categoryName;
-    @OneToMany(mappedBy = "goodCategory", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "goodCategory")
     @ToString.Exclude
     @JsonIgnore
     private Set<Good> categoryGood;
