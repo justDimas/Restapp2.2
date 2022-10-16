@@ -20,7 +20,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     @GetMapping("/admin/categories")
-    public String showCategories(Model model){
+    public String getCategories(Model model){
         List<Category> categories = categoryService.getAll();
         if (categories.isEmpty())
             return "redirect:/admin/categories/categories-add";

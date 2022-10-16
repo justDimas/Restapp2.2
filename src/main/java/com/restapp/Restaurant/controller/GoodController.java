@@ -25,7 +25,7 @@ public class GoodController {
     PropertyService propertyService;
 
     @GetMapping("/admin/goods")
-    public String getShow(@RequestAttribute(required = false) Boolean success, Model model){
+    public String getGoods(@RequestAttribute(required = false) Boolean success, Model model){
         List<Good> goods = goodService.getAll();
         if(goods.isEmpty())
             return "redirect:/admin/goods/goods-add";
@@ -72,6 +72,17 @@ public class GoodController {
         model.addAttribute("properties", properties);
         model.addAttribute("categories", categories);
         return "goods-update";
+    }
+
+    @GetMapping("/admin/goods/{goodId}/goods-delete")
+    public String getDelete(@PathVariable Integer goodId){
+        boolean success = true;
+        try {
+            goodService.delete(Good.builder().goodId(goodId).build());
+        }catch (IllegalArgumentException e){
+            success = false;
+        }
+        return "redirect:/admin/goods" + "?success=" + success;
     }
 
     @PostMapping("/admin/goods/goods-add")
@@ -136,17 +147,6 @@ public class GoodController {
                 .build();
 
         success = goodService.update(good);
-        return "redirect:/admin/goods" + "?success=" + success;
-    }
-
-    @GetMapping("/admin/goods/{goodId}/goods-delete")
-    public String getDelete(@PathVariable Integer goodId){
-        boolean success = true;
-        try {
-            goodService.delete(Good.builder().goodId(goodId).build());
-        }catch (IllegalArgumentException e){
-            success = false;
-        }
         return "redirect:/admin/goods" + "?success=" + success;
     }
 }

@@ -22,7 +22,7 @@ public class IndexController {
     CategoryService categoryService;
 
     @GetMapping("/")
-    public String getShow(Model model, @AuthenticationPrincipal CustomUser user){
+    public String getIndex(Model model, @AuthenticationPrincipal CustomUser user){
         if(user!=null) {
             boolean isAdmin = user.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));

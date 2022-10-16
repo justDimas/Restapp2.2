@@ -29,13 +29,13 @@
         </div>
         <form class="table-row" id="add-form" method="post">
             <div class="table-cell col-150">
-                <input name="name" type="text" required>
+                <input name="name" minlength="2" maxlength="32" type="text" required>
             </div>
             <div class="table-cell col-100">
-                <input name="price" type="number" required>
+                <input name="price" min="0" max="1000" step="0.01" type="number" required>
             </div>
             <div class="table-cell col-150">
-                <textarea name="description" required></textarea>
+                <textarea name="description" minlength="2" maxlength="256" required></textarea>
             </div>
             <div class="table-cell col-150">
                 <input id="input-image" name="image" type="hidden">

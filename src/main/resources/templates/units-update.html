@@ -22,7 +22,7 @@
         </div>
         <form class="table-row" id="form-update" method="post" action="/admin/units/units-update">
             <div class="table-cell col-150">
-                <input name="name" type="text" th:value="${unit.unitName}">
+                <input name="name" minlength="2" maxlength="32" type="text" th:value="${unit.unitName}">
             </div>
         </form>
         <div class="table-row">

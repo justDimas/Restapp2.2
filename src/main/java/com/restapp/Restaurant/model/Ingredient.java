@@ -27,7 +27,7 @@ public class Ingredient {
     private Set<Good> ingredientGoods;
     @Transient
     @JsonIgnore
-    private static final String regexCheckName = "^[А-Яа-я0-9]{2,32}$";
+    private static final String regexCheckName = "^[А-Яа-я0-9\\s]{2,32}$";
     @Transient
     @JsonIgnore
     private static final Double minWeight = 0d;

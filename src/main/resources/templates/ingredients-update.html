@@ -18,28 +18,40 @@
 <main>
     <div class="table">
         <div class="table-row">
-            <div class="table-cell"></div>
-            <div class="table-cell">Id ингредиента</div>
-            <div class="table-cell">Название</div>
-            <div class="table-cell">Граммовка</div>
-            <div class="table-cell">Id единицы измерения</div>
-            <div class="table-cell">Единица измерения</div>
-            <div class="table-cell">Список товаров</div>
-            <div class="table-cell"></div>
+            <div class="table-cell col-100">Название</div>
+            <div class="table-cell col-100">Граммовка</div>
+            <div class="table-cell col-100">Ед измерения</div>
         </div>
-        <div class="table-row" th:each="ingredient:${ingredients}">
-            <div class="table-cell"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientId}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientName}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientWeight}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitId}"></div>
-            <div class="table-cell" th:text="${ingredient.ingredientUnit.unitName}"></div>
-            <div class="table-cell"></div>
-        </div>
-        <form class="table-row form"></form>
-        <form class="table-row form"></form>
+        <form class="table-row" method="post" action="/admin/ingredients/ingredients-update" id="form-update">
+            <div class="table-cell col-100">
+                <input type="text" name="name" minlength="2" maxlength="32" th:value="${ingredient.ingredientName}">
+            </div>
+            <div class="table-cell col-100">
+                <input type="number" name="weight" min="0" max="1000" step="0.001" th:value="${ingredient.ingredientWeight}">
+            </div>
+            <div class="table-cell ul col-100">
+                <th:block th:each="unit:${units}">
+                    <div class="ul-li">
+                        <input name="unitId" type="radio" th:value="${unit.unitId}" th:id="'input-unit-'+${unit.unitId}">
+                        <label th:text="${unit.unitName}" th:for="'input-unit-'+${unit.unitId}"></label>
+                    </div>
+                </th:block>
+            </div>
+            <script th:inline="javascript">
+                let unitInputs = document.querySelectorAll("input[id^='input-unit-']");
+                let ingredient = [[${ingredient}]];
+                unitInputs.forEach(input=>{
+                    if(ingredient.ingredientUnit.unitId == input.value){
+                        input.checked = 'checked';
+                    }
+                });
+            </script>
+        </form>
         <div class="table-row">
-            <div class="table-cell"></div>
+            <div class="table-cell">
+                <button class="button" name="ingredientId" th:value="${ingredient.ingredientId}"
+                        form="form-update">Сохранить</button>
+            </div>
         </div>
     </div>
 </main>

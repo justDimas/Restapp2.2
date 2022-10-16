@@ -19,7 +19,7 @@ public class UnitController {
     UnitService unitService;
 
     @GetMapping("/admin/units")
-    public String showUnits(Model model){
+    public String getUnits(Model model){
         List<Unit> units = unitService.getAll();
         if (units.isEmpty())
             return "redirect:/admin/units/units-add";
