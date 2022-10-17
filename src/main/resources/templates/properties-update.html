@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Restapp properties updating</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/imageScript.js"></script>
 </head>
 <body>
 <nav>
@@ -14,5 +16,30 @@
     <a href="/admin/categories"><h3>Категории</h3></a>
     <a href="/admin/goods"><h3>Товары</h3></a>
 </nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-150">Наименование</div>
+            <div class="table-cell col-150">Изображение</div>
+        </div>
+        <form method="post" id="form-update" class="table-row">
+            <div class="table-cell col-150">
+                <input type="text" th:value="${property.propertyName}" name="name" minlength="2" maxlength="32">
+            </div>
+            <div class="table-cell col-150">
+                <input id="input-image" name="image" type="hidden" th:value="${property.propertyImage}">
+                <input id="input-selector" type="file">
+                <label for="input-selector">
+                    <img class="cell-image" th:src="'/images/'+${property.propertyImage}">
+                </label>
+            </div>
+        </form>
+        <div class="table-row">
+            <div class="table-cell">
+                <button class="button" form="form-update">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

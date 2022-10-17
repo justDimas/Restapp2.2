@@ -89,7 +89,7 @@ main{
 .col-150{width:150px;}
 .col-200{width:200px;}
 
-#selector-image{
+#input-selector{
     display: none;
 }
 
@@ -131,7 +131,7 @@ textarea:hover{
     background-color: #d7c9ff;
 }
 
-.good-image{
+.cell-image{
     width: 100%;
 }
 

@@ -33,7 +33,7 @@
             <div class="table-cell col-150" th:text="${good.goodName}"></div>
             <div class="table-cell col-100" th:text="${good.goodPrice}"></div>
             <div class="table-cell col-150" th:text="${good.goodDescription}"></div>
-            <div class="table-cell col-150"><img class="good-image" th:src="'/images/'+${good.goodImage}"></div>
+            <div class="table-cell col-150"><img class="cell-image" th:src="'/images/'+${good.goodImage}"></div>
             <div class="table-cell col-150" th:text="${good.goodCategory.categoryName}"></div>
             <div class="table-cell ul col-150">
                 <th:block th:each="ingredient:${good.goodIngredients}">
