@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Restapp users</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <nav>
@@ -14,5 +15,40 @@
     <a href="/admin/categories"><h3>Категории</h3></a>
     <a href="/admin/goods"><h3>Товары</h3></a>
 </nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-50">id</div>
+            <div class="table-cell col-150">ник</div>
+            <div class="table-cell col-150">роль</div>
+            <div class="table-cell col-300"></div>
+        </div>
+        <th:block th:each="user:${users}">
+            <div class="table-row">
+                <div class="table-cell col-50" th:text="${user.userId}"></div>
+                <div class="table-cell col-150" th:text="${user.username}"></div>
+                <div class="table-cell ul col-150">
+                    <th:block th:each="role:${user.userRoles}">
+                        <div class="ul-li" th:text="${role.roleName}"></div>
+                    </th:block>
+                </div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="'/admin/users/'+${user.userId}+'/users-password'">Обновить пароль</a>
+                </div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="'/admin/users/'+${user.userId}+'/users-update'">Изменить</a>
+                </div>
+                <div class="table-cell col-100">
+                    <a class="button" th:href="'/admin/users/'+${user.userId}+'/users-delete'">Удалить</a>
+                </div>
+            </div>
+        </th:block>
+        <div class="table-row">
+            <div class="table-cell">
+                <a class="button" href="/admin/users/users-add">Добавить</a>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

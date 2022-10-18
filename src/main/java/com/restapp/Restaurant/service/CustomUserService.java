@@ -1,6 +1,7 @@
 package com.restapp.Restaurant.service;
 
 import com.restapp.Restaurant.dao.CustomUserDAO;
+import com.restapp.Restaurant.model.CustomRole;
 import com.restapp.Restaurant.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,84 +9,90 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class CustomUserService implements UserDetailsService, MyService<CustomUser> {
+public class CustomUserService implements UserDetailsService{
     @Autowired
     private CustomUserDAO userDAO;
 
-    @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         return userDAO.findByUserName(userName)
                 .orElseThrow(()->new UsernameNotFoundException("Unknown user: " + userName));
     }
 
-    @Override
-    public CustomUser getById(CustomUser respUser) throws NoSuchElementException {
-        return userDAO.findById(respUser.getUserId()).orElseThrow();
+    public CustomUser getById(CustomUser reqUser) throws NoSuchElementException {
+        return userDAO.findById(reqUser.getUserId()).orElseThrow();
     }
 
-    @Override
     public List<CustomUser> getAll(){
         return userDAO.findAll();
     }
 
-    @Override
-    public boolean add(CustomUser respUser){
-        boolean matchesLogin = respUser.isValidUsername();
-        boolean passwordIsValid = respUser.isValidPassword();
+    public boolean add(CustomUser reqUser){
+        boolean matchesLogin = reqUser.isValidUsername();
+        boolean passwordIsValid = reqUser.isValidPassword();
         if(!matchesLogin || !passwordIsValid)
             return false;
 
-        boolean exists = userDAO.existsByUserName(respUser.getUsername());
+        boolean exists = userDAO.existsByUserName(reqUser.getUsername());
         if(exists)
             return false;
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-        String encodePassword = encoder.encode(respUser.getPassword());
-        respUser.setUserPassword(encodePassword);
-        userDAO.save(respUser);
+        PasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        String encodePassword = encoder.encode(reqUser.getPassword());
+        reqUser.setUserPassword(encodePassword);
+        userDAO.save(reqUser);
         return true;
     }
 
-    @Override
-    public boolean delete(CustomUser respUser) {
+    public boolean delete(CustomUser reqUser) {
         try{
-            userDAO.deleteById(respUser.getUserId());
+            userDAO.deleteById(reqUser.getUserId());
             return true;
         }catch (EmptyResultDataAccessException e){
             return false;
         }
     }
 
-    @Override
-    public boolean update(CustomUser respUser) {
-        boolean matchesLogin = respUser.isValidUsername();
-        boolean matchesPassword = respUser.isValidPassword();
-        if(!matchesLogin || !matchesPassword) 
+    public boolean updatePassword(CustomUser reqUser) {
+        boolean matchesPassword = reqUser.isValidPassword();
+        if(!matchesPassword)
             return false;
 
-        Optional<CustomUser> optionalUser = userDAO.findById(respUser.getUserId());
+        Optional<CustomUser> optionalUser = userDAO.findById(reqUser.getUserId());
         if(optionalUser.isEmpty())
             return false;
         CustomUser user = optionalUser.get();
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        PasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        boolean equalsPassword = encoder.matches(reqUser.getUserPassword(), user.getPassword());
+        if(!equalsPassword)
+            user.setUserPassword(encoder.encode(reqUser.getUserPassword()));
+        userDAO.save(user);
+        return true;
+    }
 
-        boolean equalsPassword = encoder.matches(respUser.getUserPassword(), user.getPassword());
-        boolean equalsLogin = Objects.equals(user.getUsername(), respUser.getUsername());
-        if(!equalsPassword) 
-            user.setUserPassword(encoder.encode(respUser.getUserPassword()));
+    public boolean updateUser(CustomUser reqUser) {
+        boolean matchesLogin = reqUser.isValidUsername();
+        if(!matchesLogin)
+            return false;
+
+        Optional<CustomUser> optionalUser = userDAO.findById(reqUser.getUserId());
+        if(optionalUser.isEmpty())
+            return false;
+        CustomUser user = optionalUser.get();
+
+        boolean equalsLogin = Objects.equals(user.getUsername(), reqUser.getUsername());
         if(!equalsLogin)
-            user.setUserName(respUser.getUsername());
-        
-        user.setUserRoles(respUser.getUserRoles());
+            user.setUserName(reqUser.getUsername());
+
+        boolean equalsRoles = reqUser.getUserRoles().size() == user.getUserRoles().size();
+        if(!equalsRoles)
+            user.setUserRoles(reqUser.getUserRoles());
         userDAO.save(user);
         return true;
     }

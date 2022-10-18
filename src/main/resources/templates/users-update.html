@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Restapp users updating</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <nav>
@@ -14,5 +15,71 @@
     <a href="/admin/categories"><h3>Категории</h3></a>
     <a href="/admin/goods"><h3>Товары</h3></a>
 </nav>
+<main>
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell col-150">Никнейм</div>
+            <div class="table-cell col-100">Роль</div>
+        </div>
+        <form class="table-row" method="post" id="form-add">
+            <div class="table-cell col-150">
+                <input name="username" th:value="${user.username}" minlength="4" maxlength="32" required>
+            </div>
+            <div class="table-cell ul col-100">
+                <th:block th:each="role:${roles}">
+                    <input class="ul-li" th:id="'input-role-' + ${role.roleId}"
+                           name="roleIds" type="checkbox" th:value="${role.roleId}">
+                    <label th:for="'input-role-' + ${role.roleId}" th:text="${role.roleName}"></label>
+                </th:block>
+                <script th:inline="javascript">
+                    const user = [[${user}]];
+                    const roles = [[${roles}]];
+                    const roleUser = Array.from(roles).find(role=>role.roleName=='USER');
+                    const roleGod = Array.from(roles).find(role=>role.roleName=='GOD');
+                    const roleAdmin = Array.from(roles).find(role=>role.roleName=='ADMIN');
+
+                    const roleInputs = document.querySelectorAll('.ul-li');
+                    const inputRoleUser = Array.from(roleInputs).find(input=>input.value==roleUser.roleId);
+                    const inputRoleAdmin = Array.from(roleInputs).find(input=>input.value==roleAdmin.roleId);
+                    const inputRoleGod = Array.from(roleInputs).find(input=>input.value==roleGod.roleId);
+
+                    function inputUserCheck(){
+                        if(!inputRoleUser.checked)
+                            inputRoleUser.checked = true;
+                    }
+
+                    function inputsEvent(){
+                        inputUserCheck();
+                        if(event.target.value == roleAdmin.roleId && !event.target.checked){
+                            if(inputRoleGod.checked)
+                                inputRoleGod.checked = false;
+                        }
+                        if(event.target.value == roleGod.roleId && event.target.checked){
+                            if(!inputRoleAdmin.checked)
+                                inputRoleAdmin.checked = true;
+                        }
+                    }
+
+                    function ready(){
+                        roleInputs.forEach(input=>{
+                            user.userRoles.forEach(role=>{
+                                if(input.value == role.roleId)
+                                    input.checked = true;
+                            });
+                        });
+                        inputUserCheck();
+                        Array.from(roleInputs).forEach(input=>input.addEventListener('change', inputsEvent));
+                    }
+                    document.addEventListener('DOMContentLoaded', ready);
+                </script>
+            </div>
+        </form>
+        <div class="table-row">
+            <div class="table-cell">
+                <button class="button" form="form-add">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

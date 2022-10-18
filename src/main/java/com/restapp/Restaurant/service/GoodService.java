@@ -12,21 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class GoodService implements MyService<Good> {
+public class GoodService{
     @Autowired
     private GoodDAO goodDAO;
-
-    @Override
+    
     public Good getById(Good respGood) throws NoSuchElementException {
         return goodDAO.findById(respGood.getGoodId()).orElseThrow();
     }
 
-    @Override
     public List<Good> getAll() {
         return goodDAO.findAll();
     }
-
-    @Override
+    
     public boolean add(Good respGood) {
         boolean matchesName = respGood.isValidName();
         boolean matchesPrice = respGood.isValidPrice();
@@ -38,8 +35,7 @@ public class GoodService implements MyService<Good> {
         goodDAO.save(respGood);
         return true;
     }
-
-    @Override
+    
     public boolean delete(Good respGood) {
         try{
             goodDAO.deleteById(respGood.getGoodId());
@@ -48,8 +44,7 @@ public class GoodService implements MyService<Good> {
             return false;
         }
     }
-
-    @Override
+    
     public boolean update(Good respGood) {
         boolean matchesName = respGood.isValidName();
         boolean matchesPrice = respGood.isValidPrice();
@@ -65,7 +60,7 @@ public class GoodService implements MyService<Good> {
 
         boolean equalsName = Objects.equals(respGood.getGoodName(), good.getGoodName());
         boolean equalsPrice = Objects.equals(respGood.getGoodPrice(), good.getGoodPrice());
-        boolean equalsDescription = Objects.equals(respGood.getGoodDescription(), good.getGoodDescription());;
+        boolean equalsDescription = Objects.equals(respGood.getGoodDescription(), good.getGoodDescription());
         boolean equalsImage = Objects.equals(respGood.getGoodImage(), good.getGoodImage());
 
         if(!equalsName)

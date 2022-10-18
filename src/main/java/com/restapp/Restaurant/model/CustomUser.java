@@ -21,6 +21,7 @@ public class CustomUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String userName;
+    @JsonIgnore
     private String userPassword;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",

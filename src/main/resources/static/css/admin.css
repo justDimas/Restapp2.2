@@ -49,11 +49,13 @@ h3{
 }
 
 main{
+    display: flex;
+    justify-content: center;
     width: 100%;
-    overflow-x: auto;
 }
 
 .table{
+    overflow-x: auto;
     width: fit-content;
     margin: 0 50px 50px;
     background: rgba(217, 245, 255, 0.5);
@@ -88,6 +90,7 @@ main{
 .col-100{width:100px;}
 .col-150{width:150px;}
 .col-200{width:200px;}
+.col-300{width:300px;}
 
 #input-selector{
     display: none;
@@ -95,9 +98,6 @@ main{
 
 input{
     text-align: center;
-}
-
-input[type="number"], input[type="text"]{
     width: 100%;
 }
 

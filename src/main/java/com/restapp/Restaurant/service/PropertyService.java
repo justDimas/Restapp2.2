@@ -12,21 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class PropertyService implements MyService<Property> {
+public class PropertyService{
     @Autowired
     private PropertyDAO propertyDAO;
 
-    @Override
     public Property getById(Property respProperty) throws NoSuchElementException {
         return propertyDAO.findById(respProperty.getPropertyId()).orElseThrow();
     }
 
-    @Override
     public List<Property> getAll() {
         return propertyDAO.findAll();
     }
-
-    @Override
+    
     public boolean add(Property respProperty) {
         boolean matchesName = respProperty.isValidName();
         boolean matchesImage = respProperty.isValidImage();
@@ -35,8 +32,7 @@ public class PropertyService implements MyService<Property> {
         propertyDAO.save(respProperty);
         return true;
     }
-
-    @Override
+    
     public boolean delete(Property respProperty) {
         try{
             propertyDAO.deleteById(respProperty.getPropertyId());
@@ -45,8 +41,7 @@ public class PropertyService implements MyService<Property> {
             return false;
         }
     }
-
-    @Override
+    
     public boolean update(Property respProperty) {
         boolean matchesName = respProperty.isValidName();
         boolean matchesImage = respProperty.isValidImage();

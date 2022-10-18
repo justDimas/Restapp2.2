@@ -12,21 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class IngredientService implements MyService<Ingredient> {
+public class IngredientService{
     @Autowired
     private IngredientDAO ingredientDAO;
 
-    @Override
     public Ingredient getById(Ingredient respIngredient) throws NoSuchElementException {
         return ingredientDAO.findById(respIngredient.getIngredientId()).orElseThrow();
     }
-
-    @Override
+    
     public List<Ingredient> getAll(){
         return ingredientDAO.findAll();
     }
-
-    @Override
+    
     public boolean add(Ingredient respIngredient) {
         boolean matchesName = respIngredient.isValidName();
         boolean matchesWeight = respIngredient.isValidPrice();
@@ -36,8 +33,7 @@ public class IngredientService implements MyService<Ingredient> {
         ingredientDAO.save(respIngredient);
         return true;
     }
-
-    @Override
+    
     public boolean delete(Ingredient respIngredient) {
         try{
             ingredientDAO.deleteById(respIngredient.getIngredientId());
@@ -46,8 +42,7 @@ public class IngredientService implements MyService<Ingredient> {
             return false;
         }
     }
-
-    @Override
+    
     public boolean update(Ingredient respIngredient) {
         boolean matchesName = respIngredient.isValidName();
         boolean matchesWeight = respIngredient.isValidPrice();

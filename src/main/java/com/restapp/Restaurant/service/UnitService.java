@@ -12,21 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UnitService implements MyService<Unit>{
+public class UnitService{
     @Autowired
     private UnitDAO unitDAO;
 
-    @Override
     public Unit getById(Unit respUnit) throws NoSuchElementException {
         return unitDAO.findById(respUnit.getUnitId()).orElseThrow();
     }
-
-    @Override
+    
     public List<Unit> getAll() {
         return unitDAO.findAll();
     }
-
-    @Override
+    
     public boolean add(Unit respUnit) {
         boolean matchesName = respUnit.isValidName();
         if(!matchesName)
@@ -34,8 +31,7 @@ public class UnitService implements MyService<Unit>{
         unitDAO.save(respUnit);
         return true;
     }
-
-    @Override
+    
     public boolean delete(Unit respUnit) {
         try{
             unitDAO.deleteById(respUnit.getUnitId());
@@ -45,7 +41,6 @@ public class UnitService implements MyService<Unit>{
         }
     }
 
-    @Override
     public boolean update(Unit respUnit) {
         boolean matchesName = respUnit.isValidName();
         if(!matchesName)

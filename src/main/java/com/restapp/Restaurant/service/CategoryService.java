@@ -12,21 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class CategoryService implements MyService<Category> {
+public class CategoryService{
     @Autowired
     private CategoryDAO categoryDAO;
-
-    @Override
+    
     public Category getById(Category respCategory) throws NoSuchElementException{
         return categoryDAO.findById(respCategory.getCategoryId()).orElseThrow();
     }
-
-    @Override
+    
     public List<Category> getAll(){
         return categoryDAO.findAll();
     }
-
-    @Override
+    
     public boolean add(Category respCategory) {
         boolean matchesName = respCategory.isValidName();
         if(!matchesName)
@@ -34,8 +31,7 @@ public class CategoryService implements MyService<Category> {
         categoryDAO.save(respCategory);
         return true;
     }
-
-    @Override
+    
     public boolean delete(Category respCategory) {
         try{
             categoryDAO.deleteById(respCategory.getCategoryId());
@@ -44,8 +40,7 @@ public class CategoryService implements MyService<Category> {
             return false;
         }
     }
-
-    @Override
+    
     public boolean update(Category respCategory) {
         boolean matchesName = respCategory.isValidName();
         if(!matchesName)
